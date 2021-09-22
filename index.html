@@ -34,7 +34,7 @@
         </div>
       </div>
     </form>
-    <form id="day-form" class="hidden">
+    <form id="day-form" class="">
       <div class="row card-white mt-two-rem">
         <div class="column-full justify-center">
           <h2>Day Trip</h2>
@@ -44,47 +44,68 @@
           <input required id="destination" name="destination" type="text" placeholder="City, State"
             class="pad-half-rem mb-one-rem">
           <label for="transport">Transport</label>
-          <input required id="transport" name="transport" type="text" placeholder="Budget"
+          <input required id="transport" name="transport" type="number" placeholder="Budget"
             class="pad-half-rem mb-one-rem">
           <label for="food">Food</label>
-          <input required id="food" name="food" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <input required id="food" name="food" type="number" placeholder="Budget" class="pad-half-rem mb-one-rem">
           <label for="activities">Activities</label>
-          <input required id="activities" name="activities" type="text" placeholder="Budget"
+          <input required id="activities" name="activities" type="number" placeholder="Budget"
             class="pad-half-rem mb-one-rem">
           <label for="souvenirs">Souvenirs</label>
-          <input required id="souvenirs" name="souvenirs" type="text" placeholder="Budget"
+          <input required id="souvenirs" name="souvenirs" type="number" placeholder="Budget"
             class="pad-half-rem mb-one-rem">
           <label for="reserve">Reserve</label>
-          <input required id="reserve" name="reserve" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <input required id="reserve" name="reserve" type="number" placeholder="Budget"
+            class="pad-half-rem mb-one-rem">
         </div>
         <div class="column-full justify-end">
           <button class="pad-half-rem mb-one-rem btn blue-btn" type="submit">Submit</button>
         </div>
       </div>
     </form>
+  </div>
 
-    <div class="row mt-two-rem card-sky plr-two-rem">
-      <div class="column-full ">
-        <div class="column-full justify-center">
-          <h3 class="mb-none">Irvine, CA</h3>
-        </div>
-        <div class="column-full justify-center">
-          <p class="rm-margin">Wednesday, September 22</p>
-        </div>
-      </div>
-      <div class="column-half justify-center">
-        <img src="images/icons/a01d.png" alt="weather-icon">
-      </div>
-      <div class="column-half">
-        <div class="column-full">
-          <h1 class="degrees rm-margin justify-center">64&deg;F</h1>
-        </div>
-        <div class="column-full justify-center">
-          <p class="rm-margin">Few Clouds</p>
-        </div>
-      </div>
+  <div class="container" id="day-trip">
+    <div class="row card-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Categories</th>
+            <th>Budget</th>
+            <!-- <th>Spent</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Transport</td>
+            <td id="transport-budget"></td>
+            <!-- <td></td> -->
+          </tr>
+          <tr>
+            <td>Food</td>
+            <td id="food-budget"></td>
+            <!-- <td></td> -->
+          </tr>
+          <tr>
+            <td>Activities</td>
+            <td id="activities-budget"></td>
+            <!-- <td></td> -->
+          </tr>
+          <tr>
+            <td>Souvenirs</td>
+            <td id="souvenirs-budget"></td>
+            <!-- <td></td> -->
+          </tr>
+          <tr>
+            <td>Reserve</td>
+            <td id="reserve-budget"></td>
+            <!-- <td></td> -->
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

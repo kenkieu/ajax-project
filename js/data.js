@@ -1,10 +1,15 @@
 /* exported data */
+
+var dateObj = new Date();
+var options = { weekday: 'long', month: 'long', day: 'numeric' };
+var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
+
 var data = {
   view: '',
   entry: [],
   editing: null,
-  currentWeather: {},
-  forecastWeather: [],
-}
+  currentWeather: { date: currentDate },
+  forecastWeather: []
+};
 
-console.log(data)
+console.log(data);
