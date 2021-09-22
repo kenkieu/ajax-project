@@ -3,18 +3,20 @@ body, input {
 }
 
 .trip-type{
-  border-radius: 3px;
-  border: 1px solid #CED4DA;
   padding: 0.5rem
 }
 
-input, select{
-  border-radius: 5px;
+input, select, .trip-type{
+  border-radius: 3px;
   border: 1px solid #CED4DA;
 }
 
 h1, h2 {
   color: #1A4A5D;
+}
+
+h3{
+  font-weight: 500;
 }
 
 .nav {
@@ -26,6 +28,12 @@ h1, h2 {
   background-color: white;
   border-radius: 5px;
   padding: 3rem;
+}
+
+.card-sky {
+  background-color: #7CBBE8;
+  color: white;
+  border-radius: 5px;
 }
 
 .background-image {
@@ -47,9 +55,20 @@ h1, h2 {
   color: white;
 }
 
+.degrees{
+  margin-top: 8px;
+  font-size: 3rem;
+  color: white;
+  font-weight: 500;
+}
+
 .w-50 {
   width: 50%;
 
+}
+
+.mb-none{
+margin-bottom: 0;
 }
 
 .mb-one-rem{
@@ -67,13 +86,20 @@ h1, h2 {
 .pad-one-rem{
    padding: 1rem;
 }
+.plr-two-rem{
+  padding: 0 2rem
+}
 
 .mtb-four-rem {
   margin: 4rem 0;
 }
 
-.mr-half-rem{
+.mr-one-rem{
   margin-right: 1rem;
+}
+
+.ml-one-rem{
+  margin-left: 1rem;
 }
 
 .justify-center {
