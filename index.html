@@ -12,22 +12,47 @@
 </head>
 
 <body class="background-image">
-  <div class="container">
-    <nav class="nav">
-      <div class="row">
-        <div class="column-full">
-          <h1>tripify</h1>
-        </div>
+  <nav class="nav">
+    <div class="row">
+      <div class="column-full">
+        <h1 class="nav">tripify</h1>
       </div>
-    </nav>
-    <form action="">
+    </div>
+  </nav>
+  <div class="container">
+    <form class="">
       <div class="row">
-        <div class="column-full justify-center">
-          <select name="trip-type" id="trip-type" class="trip-type">
+        <div class="column-full justify-center mtb-four-rem">
+          <select name="trip-type" id="trip-type" class="w-50 pad-half-rem mr-half-rem">
             <option value="select">Select</option>
             <option value="day">Day Trip</option>
             <option value="extended">Extended Trip</option>
           </select>
+          <div>
+            <button class="btn blue-btn" type="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form>
+      <div class="row card-white mt-two-rem">
+        <div class="column-full justify-center">
+          <h2>Day Trip</h2>
+        </div>
+        <div class="column-full justify-center flex-column">
+          <label for="">Transport</label>
+          <input id="" name="" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <label for="">Food</label>
+          <input id="" name="" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <label for="">Activities</label>
+          <input id="" name="" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <label for="">Souvenirs</label>
+          <input id="" name="" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <label for="">Reserve</label>
+          <input id="" name="" type="text" placeholder="Budget" class="pad-half-rem mb-one-rem">
+        </div>
+        <div class="column-full justify-end">
+          <button class="pad-half-rem mb-one-rem btn blue-btn" type="submit">Submit</button>
         </div>
       </div>
     </form>

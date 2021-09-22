@@ -1,10 +1,31 @@
-body {
+body, input {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.trip-type{
+  border-radius: 3px;
+  border: 1px solid #CED4DA;
+  padding: 0.5rem
+}
+
+input, select{
+  border-radius: 5px;
+  border: 1px solid #CED4DA;
+}
+
+h1, h2 {
+  color: #1A4A5D;
 }
 
 .nav {
   background-color: #9ccbde;
   color: white;
+}
+
+.card-white{
+  background-color: white;
+  border-radius: 5px;
+  padding: 3rem;
 }
 
 .background-image {
@@ -15,13 +36,66 @@ body {
   background-position: center;
 }
 
-.trip-type {
+.btn{
+  border: none;
+  border-radius: 3px;
+  padding: 0.5rem;
+}
+
+.blue-btn{
+  background-color: #007BFF;
+  color: white;
+}
+
+.w-50 {
   width: 50%;
-  padding: 0.75rem;
+
+}
+
+.mb-one-rem{
+  margin-bottom: 1rem;
+}
+
+.mt-two-rem{
+  margin-top: 2rem;
+}
+
+.pad-half-rem{
+  padding: 0.5rem;
+}
+
+.pad-one-rem{
+   padding: 1rem;
+}
+
+.mtb-four-rem {
   margin: 4rem 0;
+}
+
+.mr-half-rem{
+  margin-right: 1rem;
 }
 
 .justify-center {
   display: flex;
   justify-content: center;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-between{
+  display: flex;
+ justify-content: space-between;
+}
+
+.align-between{
+  align-content: space-between;
+}
+
+.justify-end{
+  display: flex;
+  justify-content: flex-end;
 }
