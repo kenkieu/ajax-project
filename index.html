@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,32 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
+
+<body class="background-image">
+  <div class="container">
+    <nav class="nav">
+      <div class="row">
+        <div class="column-full">
+          <h1>tripify</h1>
+        </div>
+      </div>
+    </nav>
+    <form action="">
+      <div class="row">
+        <div class="column-full justify-center">
+          <select name="trip-type" id="trip-type" class="trip-type">
+            <option value="select">Select</option>
+            <option value="day">Day Trip</option>
+            <option value="extended">Extended Trip</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <main>
+    </main>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
