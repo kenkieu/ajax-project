@@ -18,7 +18,8 @@
         <h1 class="logo">tripify</h1>
       </div>
       <div class="column-half align-center justify-end">
-        <a href="#" class="nav-links" id="nav-planner">Planner</a>
+        <a href="#" class="nav-links" id="day-planner">Day</a>
+        <a href="#" class="nav-links" id="extended-planner">Extended</a>
       </div>
     </div>
   </nav>
@@ -43,18 +44,18 @@
           <h2 class="blue-heading">Day Trip</h2>
         </div>
         <div class="column-full justify-center flex-column">
-          <label for="destination">Destination</label>
-          <input required id="destination" name="destination" type="text" placeholder="City, State">
-          <label for="transport">Transport</label>
-          <input required id="transport" name="transport" type="number" placeholder="Budget">
-          <label for="food">Food</label>
-          <input required id="food" name="food" type="number" placeholder="Budget">
-          <label for="activities">Activities</label>
-          <input required id="activities" name="activities" type="number" placeholder="Budget">
-          <label for="souvenirs">Souvenirs</label>
-          <input required id="souvenirs" name="souvenirs" type="number" placeholder="Budget">
-          <label for="reserve">Reserve</label>
-          <input required id="reserve" name="reserve" type="number" placeholder="Budget">
+          <label for="day-destination">Destination</label>
+          <input required id="day-destination" name="day-destination" type="text" placeholder="City, State">
+          <label for="day-transport">Transport</label>
+          <input required id="day-transport" name="day-transport" type="number" placeholder="Budget">
+          <label for="day-food">Food</label>
+          <input required id="day-food" name="day-food" type="number" placeholder="Budget">
+          <label for="day-activities">Activities</label>
+          <input required id="day-activities" name="day-activities" type="number" placeholder="Budget">
+          <label for="day-souvenirs">Souvenirs</label>
+          <input required id="day-souvenirs" name="day-souvenirs" type="number" placeholder="Budget">
+          <label for="day-reserve">Reserve</label>
+          <input required id="day-reserve" name="day-reserve" type="number" placeholder="Budget">
           <div class="column-full justify-end">
             <button class="btn blue-btn day-summary-btn" type="submit" data-view="day-summary">Submit</button>
           </div>
@@ -67,19 +68,19 @@
           <h2 class="blue-heading">Extended Trip</h2>
         </div>
         <div class="column-full justify-center flex-column">
-          <label for="destination">Destination</label>
+          <label for="extended-destination">Destination</label>
           <input required id="extended-destination" name="extended-destination" type="text" placeholder="City, State">
           <label for="extended-transport">Transport</label>
           <input required id="extended-transport" name="extended-transport" type="number" placeholder="Budget">
           <label for="extended-lodging">Lodging</label>
           <input required id="extended-lodging" name="extended-lodging" type="number" placeholder="Budget">
-          <label for="food">Food</label>
+          <label for="extended-food">Food</label>
           <input required id="extended-food" name="extended-food" type="number" placeholder="Budget">
-          <label for="activities">Activities</label>
+          <label for="extended-activities">Activities</label>
           <input required id="extended-activities" name="extended-activities" type="number" placeholder="Budget">
-          <label for="souvenirs">Souvenirs</label>
+          <label for="extended-souvenirs">Souvenirs</label>
           <input required id="extended-souvenirs" name="extended-souvenirs" type="number" placeholder="Budget">
-          <label for="reserve">Reserve</label>
+          <label for="extended-reserve">Reserve</label>
           <input required id="extended-reserve" name="extended-reserve" type="number" placeholder="Budget">
           <div class="column-full justify-end">
             <button class="btn blue-btn extended-summary-btn" type="submit" data-view="extended-summary">Submit</button>
@@ -101,27 +102,73 @@
         <tbody>
           <tr>
             <td>Transport</td>
-            <td id="transport-budget"></td>
+            <td id="day-transport-budget"></td>
             <td></td>
           </tr>
           <tr>
             <td>Food</td>
-            <td id="food-budget"></td>
+            <td id="day-food-budget"></td>
             <td></td>
           </tr>
           <tr>
             <td>Activities</td>
-            <td id="activities-budget"></td>
+            <td id="day-activities-budget"></td>
             <td></td>
           </tr>
           <tr>
             <td>Souvenirs</td>
-            <td id="souvenirs-budget"></td>
+            <td id="day-souvenirs-budget"></td>
             <td></td>
           </tr>
           <tr>
             <td>Reserve</td>
-            <td id="reserve-budget"></td>
+            <td id="day-reserve-budget"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container view hidden" id="extended-summary" data-view="extended-summary">
+    <div class="row card-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Categories</th>
+            <th>Budget</th>
+            <th>Spent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Transport</td>
+            <td id="extended-transport-budget"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Lodging</td>
+            <td id="extended-lodging-budget"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Food</td>
+            <td id="extended-food-budget"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Activities</td>
+            <td id="extended-activities-budget"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Souvenirs</td>
+            <td id="extended-souvenirs-budget"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Reserve</td>
+            <td id="extended-reserve-budget"></td>
             <td></td>
           </tr>
         </tbody>

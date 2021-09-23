@@ -1,29 +1,57 @@
 var $home = document.querySelector('#home');
+
 var $dayForm = document.querySelector('#day-form');
 var $dayTripContainer = document.querySelector('#day-summary');
-var $transportBudget = document.querySelector('#transport-budget');
-var $foodBudget = document.querySelector('#food-budget');
-var $activitiesBudget = document.querySelector('#activities-budget');
-var $souvenirsBudget = document.querySelector('#souvenirs-budget');
-var $reserveBudget = document.querySelector('#reserve-budget');
+var $dayTransportBudget = document.querySelector('#day-transport-budget');
+var $dayFoodBudget = document.querySelector('#day-food-budget');
+var $dayActivitiesBudget = document.querySelector('#day-activities-budget');
+var $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
+var $dayReserveBudget = document.querySelector('#day-reserve-budget');
+
+var $extendedForm = document.querySelector('#extended-form');
+var $extendedTripContainer = document.querySelector('#extended-summary');
+var $extendedTransportBudget = document.querySelector('#extended-transport-budget');
+var $extendedLodgingBudget = document.querySelector('#extended-lodging-budget');
+var $extendedFoodBudget = document.querySelector('#extended-food-budget');
+var $extendedActivitiesBudget = document.querySelector('#extended-activities-budget');
+var $extendedSouvenirsBudget = document.querySelector('#extended-souvenirs-budget');
+var $extendedReserveBudget = document.querySelector('#extended-reserve-budget');
+
 var $view = document.querySelectorAll('.view');
 var $daySummaryButton = document.querySelector('.day-summary-btn');
+var $extendedSummaryButton = document.querySelector('.extended-summary-btn');
 var $tripSelect = document.querySelector('#trip-type');
 var $tripTypeButton = document.querySelector('.trip-type-button');
-var $navPlanner = document.querySelector('#nav-planner');
+var $dayPlanner = document.querySelector('#day-planner');
+var $extendedPlanner = document.querySelector('#extended-planner');
 
 function handleDayForm(event) {
   event.preventDefault();
   var dayBudget = {};
-  data.currentWeather.destination = $dayForm.elements.destination.value;
+  data.currentWeather.destination = $dayForm.elements['day-destination'].value;
   getCurrentWeather(data.currentWeather.destination);
-  dayBudget.transport = $dayForm.elements.transport.value;
-  dayBudget.food = $dayForm.elements.food.value;
-  dayBudget.activities = $dayForm.elements.activities.value;
-  dayBudget.souvenirs = $dayForm.elements.souvenirs.value;
-  dayBudget.reserve = $dayForm.elements.reserve.value;
+  dayBudget.transport = $dayForm.elements['day-transport'].value;
+  dayBudget.food = $dayForm.elements['day-food'].value;
+  dayBudget.activities = $dayForm.elements['day-activities'].value;
+  dayBudget.souvenirs = $dayForm.elements['day-souvenirs'].value;
+  dayBudget.reserve = $dayForm.elements['day-reserve'].value;
   data.dayBudget = dayBudget;
   populateDayBudget();
+}
+
+function handleExtendedForm(event) {
+  event.preventDefault();
+  var extendedBudget = {};
+  // data.currentWeather.destination = $extendedForm.elements['extended-destination'].value;
+  // getCurrentWeather(data.currentWeather.destination);
+  extendedBudget.transport = $extendedForm.elements['extended-transport'].value;
+  extendedBudget.lodging = $extendedForm.elements['extended-lodging'].value;
+  extendedBudget.food = $extendedForm.elements['extended-food'].value;
+  extendedBudget.activities = $extendedForm.elements['extended-activities'].value;
+  extendedBudget.souvenirs = $extendedForm.elements['extended-souvenirs'].value;
+  extendedBudget.reserve = $extendedForm.elements['extended-reserve'].value;
+  data.extendedBudget = extendedBudget;
+  populateExtendedBudget();
 }
 
 function getCurrentWeather(name) {
@@ -105,21 +133,21 @@ function createCurrentWeather() {
 }
 
 function populateDayBudget() {
-  $transportBudget.textContent = data.dayBudget.transport;
-  $foodBudget.textContent = data.dayBudget.food;
-  $activitiesBudget.textContent = data.dayBudget.activities;
-  $souvenirsBudget.textContent = data.dayBudget.souvenirs;
-  $reserveBudget.textContent = data.dayBudget.reserve;
+  $dayTransportBudget.textContent = data.dayBudget.transport;
+  $dayFoodBudget.textContent = data.dayBudget.food;
+  $dayActivitiesBudget.textContent = data.dayBudget.activities;
+  $daySouvenirsBudget.textContent = data.dayBudget.souvenirs;
+  $dayReserveBudget.textContent = data.dayBudget.reserve;
 }
 
-// function populateExtendedBudget() {
-//   $transportBudget.textContent = data.extendedBudget.transport;
-//   $lodgingBudget.textContent = data.extendedBudget.lodging;
-//   $foodBudget.textContent = data.extendedBudget.food;
-//   $activitiesBudget.textContent = data.extendedBudget.activities;
-//   $souvenirsBudget.textContent = data.extendedBudget.souvenirs;
-//   $reserveBudget.textContent = data.extendedBudget.reserve;
-// }
+function populateExtendedBudget() {
+  $extendedTransportBudget.textContent = data.extendedBudget.transport;
+  $extendedLodgingBudget.textContent = data.extendedBudget.lodging;
+  $extendedFoodBudget.textContent = data.extendedBudget.food;
+  $extendedActivitiesBudget.textContent = data.extendedBudget.activities;
+  $extendedSouvenirsBudget.textContent = data.extendedBudget.souvenirs;
+  $extendedReserveBudget.textContent = data.extendedBudget.reserve;
+}
 
 function handleTripSelection(event) {
   event.preventDefault();
@@ -150,8 +178,18 @@ function handleNavDayPlanner(event) {
   switchView('day-summary');
 }
 
+function handleNavExtendedPlanner(event) {
+  event.preventDefault();
+  // getCurrentWeather(data.currentWeather.destination);
+  populateExtendedBudget();
+  switchView('extended-summary');
+}
+
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
+$extendedForm.addEventListener('submit', handleExtendedForm);
 $tripTypeButton.addEventListener('click', handleSwap);
 $daySummaryButton.addEventListener('click', handleSwap);
-$navPlanner.addEventListener('click', handleNavDayPlanner);
+$extendedSummaryButton.addEventListener('click', handleSwap);
+$dayPlanner.addEventListener('click', handleNavDayPlanner);
+$extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
