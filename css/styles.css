@@ -1,26 +1,31 @@
 body,
-input {
+input, select {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.trip-type {
-  padding: 0.5rem;
+h1, h2, h3 {
+  font-weight: 500;
+}
+
+input{
+  margin-bottom: 1rem;
 }
 
 input,
-select,
-.trip-type {
+select {
   border-radius: 3px;
   border: 1px solid #ced4da;
+   padding: 0.5rem;
 }
 
-h1,
-h2 {
-  color: #1a4a5d;
+select{
+  width: 50%;
+  margin-right:1rem;
 }
 
-h3 {
-  font-weight: 500;
+select:focus, input:focus{
+  outline: none;
+  border-color: #1a4a5d;
 }
 
 table {
@@ -32,36 +37,49 @@ table {
 td,
 th {
   padding: 1rem;
-}
-
-tr {
-  margin: 1rem 0;
+  text-align: left;
   border-bottom: solid 1px #ced4da;
 }
 
 .nav {
   background-color: #9ccbde;
-  color: white;
+  color: #FFFFFF;
+}
+
+.logo {
+  color:white;
+  margin-left: 1rem;
+}
+
+.blue-heading {
+  color: #1a4a5d;
+}
+
+.home-page{
+  margin: 4rem 1rem 0;
 }
 
 .card-white {
-  background-color: white;
+  margin-top: 2rem;
+  background-color: #FFFFFF;
   border-radius: 5px;
   padding: 3rem;
 }
 
 .card-table {
-  background-color: white;
-  padding: 3rem;
+  background-color: #FFFFFF;
+  padding: 1rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
 .card-sky {
+  margin-top: 2rem;
   background-color: #7cbbe8;
-  color: white;
+  color: #FFFFFF;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  padding: 0 2rem;
 }
 
 .background-image {
@@ -81,54 +99,18 @@ tr {
 
 .blue-btn {
   background-color: #007bff;
-  color: white;
+  color: #FFFFFF;
 }
 
 .degrees {
   margin-top: 8px;
   font-size: 3rem;
-  color: white;
+  color: #FFFFFF;
   font-weight: 500;
 }
 
-.w-50 {
-  width: 50%;
-}
-
-.mb-none {
+.mb-zero {
   margin-bottom: 0;
-}
-
-.mb-one-rem {
-  margin-bottom: 1rem;
-}
-
-.mt-two-rem {
-  margin-top: 2rem;
-}
-
-.pad-half-rem {
-  padding: 0.5rem;
-}
-
-.pad-one-rem {
-  padding: 1rem;
-}
-
-.plr-two-rem {
-  padding: 0 2rem;
-}
-
-.mtb-four-rem {
-  margin: 4rem 0;
-}
-
-.mr-one-rem {
-  margin-right: 1rem;
-}
-
-.ml-one-rem {
-  margin-left: 1rem;
 }
 
 .justify-center {
@@ -146,8 +128,9 @@ tr {
   justify-content: space-between;
 }
 
-.align-between {
-  align-content: space-between;
+.align-center {
+  display:flex;
+  align-items: center;
 }
 
 .justify-end {

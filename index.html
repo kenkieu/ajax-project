@@ -15,57 +15,50 @@
   <nav class="nav">
     <div class="row">
       <div class="column-full">
-        <h1 class="nav ml-one-rem">tripify</h1>
+        <h1 class="logo">tripify</h1>
       </div>
     </div>
   </nav>
   <div class="container" id="btn-container">
-    <form id="home" class="view" data-view="home">
+    <form id="home" class="view home-page" data-view="home">
       <div class="row">
-        <div class="column-full justify-center mtb-four-rem">
-          <select class="w-50 pad-half-rem mr-one-rem">
-            <option class="trip-type" value="select" name="select">Select</option>
-            <option class="trip-type" value="day" name="day">Day Trip</option>
-            <option class="trip-type" value="extended" name="extended">Extended Trip</option>
+        <div class="column-full justify-center">
+          <select id="trip-type">
+            <option>Select</option>
+            <option value="day-form" name="day-form">Day Trip</option>
+            <option value="extended-form" name="extended-form">Extended Trip</option>
           </select>
-          <div>
-            <button class="btn blue-btn day-form-btn trip-type-button" type="submit" data-view="">Submit</button>
+          <div class="align-center">
+            <button class="btn blue-btn trip-type-button" type="submit" data-view="">Submit</button>
           </div>
         </div>
       </div>
     </form>
     <form id="day-form" class="view hidden" data-view="day-form">
-      <div class="row card-white mt-two-rem">
+      <div class="row card-white">
         <div class="column-full justify-center">
-          <h2>Day Trip</h2>
+          <h2 class="blue-heading">Day Trip</h2>
         </div>
         <div class="column-full justify-center flex-column">
           <label for="destination">Destination</label>
-          <input required id="destination" name="destination" type="text" placeholder="City, State"
-            class="pad-half-rem mb-one-rem">
+          <input required id="destination" name="destination" type="text" placeholder="City, State">
           <label for="transport">Transport</label>
-          <input required id="transport" name="transport" type="number" placeholder="Budget"
-            class="pad-half-rem mb-one-rem">
+          <input required id="transport" name="transport" type="number" placeholder="Budget">
           <label for="food">Food</label>
-          <input required id="food" name="food" type="number" placeholder="Budget" class="pad-half-rem mb-one-rem">
+          <input required id="food" name="food" type="number" placeholder="Budget">
           <label for="activities">Activities</label>
-          <input required id="activities" name="activities" type="number" placeholder="Budget"
-            class="pad-half-rem mb-one-rem">
+          <input required id="activities" name="activities" type="number" placeholder="Budget">
           <label for="souvenirs">Souvenirs</label>
-          <input required id="souvenirs" name="souvenirs" type="number" placeholder="Budget"
-            class="pad-half-rem mb-one-rem">
+          <input required id="souvenirs" name="souvenirs" type="number" placeholder="Budget">
           <label for="reserve">Reserve</label>
-          <input required id="reserve" name="reserve" type="number" placeholder="Budget"
-            class="pad-half-rem mb-one-rem">
+          <input required id="reserve" name="reserve" type="number" placeholder="Budget">
           <div class="column-full justify-end">
-            <button class="pad-half-rem mb-one-rem btn blue-btn day-summary-btn" type="submit"
-              data-view="day-summary">Submit</button>
+            <button class="btn blue-btn day-summary-btn" type="submit" data-view="day-summary">Submit</button>
           </div>
         </div>
       </div>
     </form>
   </div>
-
   <div class="container view hidden" id="day-summary" data-view="day-summary">
     <div class="row card-table">
       <table>

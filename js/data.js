@@ -13,4 +13,14 @@ var data = {
   forecastWeather: []
 };
 
-// console.log(data);
+var previousJSONData = localStorage.getItem('trip');
+if (previousJSONData !== null) {
+  data = JSON.parse(previousJSONData);
+}
+
+function handleBeforeUnload() {
+  var dataJSON = JSON.stringify(data);
+  localStorage.setItem('trip', dataJSON)
+}
+
+window.addEventListener('beforeunload', handleBeforeUnload)

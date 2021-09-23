@@ -1,5 +1,4 @@
 var $home = document.querySelector('#home');
-var $tripType = document.querySelectorAll('.trip-type');
 var $dayForm = document.querySelector('#day-form');
 var $dayTripContainer = document.querySelector('#day-summary');
 var $transportBudget = document.querySelector('#transport-budget');
@@ -7,9 +6,9 @@ var $foodBudget = document.querySelector('#food-budget');
 var $activitiesBudget = document.querySelector('#activities-budget');
 var $souvenirsBudget = document.querySelector('#souvenirs-budget');
 var $reserveBudget = document.querySelector('#reserve-budget');
-var $buttonContainer = document.querySelector('#btn-container');
 var $view = document.querySelectorAll('.view');
 var $daySummaryButton = document.querySelector('.day-summary-btn');
+var $tripSelect = document.querySelector('#trip-type')
 var $tripTypeButton = document.querySelector('.trip-type-button');
 
 function handleDayForm(event) {
@@ -25,8 +24,6 @@ function handleDayForm(event) {
   data.entry.push(budget);
   populateBudget();
 }
-
-$dayForm.addEventListener('submit', handleDayForm);
 
 function getCurrentWeather(name) {
   var xhr = new XMLHttpRequest();
@@ -46,7 +43,7 @@ function getCurrentWeather(name) {
 
 function createCurrentWeather() {
   var $currentWeatherRow = document.createElement('div');
-  $currentWeatherRow.className = 'row mt-two-rem card-sky plr-two-rem';
+  $currentWeatherRow.className = 'row card-sky';
 
   var $cityDateColumn = document.createElement('div');
   $cityDateColumn.className = 'column-full';
@@ -55,7 +52,7 @@ function createCurrentWeather() {
   $headerColumn.className = 'column-full justify-center';
 
   var $cityHeader = document.createElement('h3');
-  $cityHeader.className = 'mb-none';
+  $cityHeader.className = 'mb-zero';
   $cityHeader.textContent = data.currentWeather.destination;
 
   var $dateColumn = document.createElement('div');
@@ -89,7 +86,6 @@ function createCurrentWeather() {
   $descriptionParagraph.className = 'rm-margin';
   $descriptionParagraph.textContent = data.currentWeather.description;
 
-  // Append
   $currentWeatherRow.append($cityDateColumn);
   $cityDateColumn.appendChild($headerColumn);
   $headerColumn.appendChild($cityHeader);
@@ -118,6 +114,15 @@ function populateBudget() {
   $reserveBudget.textContent = data.entry[0].reserve;
 }
 
+function handleTripSelection(event) {
+  event.preventDefault();
+  if ($tripSelect.value === "Select") {
+    switchView('home');
+  } else {
+    switchView($tripSelect.value)
+  }
+}
+
 function switchView(string) {
   for (var i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {
@@ -135,18 +140,7 @@ function handleSwap(event) {
   switchView(currentView);
 }
 
+$home.addEventListener('submit', handleTripSelection);
+$dayForm.addEventListener('submit', handleDayForm);
 $tripTypeButton.addEventListener('click', handleSwap);
 $daySummaryButton.addEventListener('click', handleSwap);
-
-function handleTripSelection(event) {
-  event.preventDefault();
-  for (var i = 0; i < $tripType.length; i++) {
-    if ($tripType[i].value === 'day') {
-      data.view = 'day-form';
-      switchView(data.view);
-    }
-    // make the name attr of the same as the view
-  }
-}
-
-$home.addEventListener('submit', handleTripSelection);
