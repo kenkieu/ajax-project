@@ -67,7 +67,46 @@ function getCurrentWeather(name) {
   xhr.send();
 }
 
+function getForecastWeather(name) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    console.log(xhr.response);
+    // data.forecastWeather.temp = xhr.response.data[0].temp + '°F';
+    // data.forecastWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
+    // data.forecastWeather.description = xhr.response.data[0].weather.description;
+    // $dayTripContainer.prepend(createForecastWeather());
+  });
+  xhr.send();
+}
+
+getForecastWeather('Garden Grove, CA');
+
 function createCurrentWeather() {
+
+  /*
+<div class="column-full">
+  <div class="column-full justify-center">
+    <h3 class="mb-none">Irvine, CA</h3>
+  </div>
+  <div class="column-full justify-center">
+    <p class="rm-margin">Wednesday, September 22</p>
+  </div>
+</div>
+<div class="column-half justify-center">
+  <img src="images/icons/a01d.png" alt="weather-icon">
+</div>
+<div class="column-half">
+  <div class="column-full"> //tempColumn
+    <h1 class="degrees rm-margin justify-center">64&deg;F</h1>
+  </div>
+  <div class="column-full justify-center">
+    <p class="rm-margin">Few Clouds</p>
+  </div>
+</div>
+*/
+
   var $currentWeatherRow = document.createElement('div');
   $currentWeatherRow.className = 'row card-sky';
 

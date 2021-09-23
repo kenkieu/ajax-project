@@ -87,6 +87,10 @@ th {
   padding: 0 2rem;
 }
 
+.forecast-icon {
+  width: 100%;
+}
+
 .background-image {
   background-image: url('../images/bg-mountain.png');
   background-repeat: no-repeat;
