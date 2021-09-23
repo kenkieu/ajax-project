@@ -61,6 +61,32 @@
         </div>
       </div>
     </form>
+    <form id="extended-form" class="view hidden" data-view="extended-form">
+      <div class="row card-white">
+        <div class="column-full justify-center">
+          <h2 class="blue-heading">Extended Trip</h2>
+        </div>
+        <div class="column-full justify-center flex-column">
+          <label for="destination">Destination</label>
+          <input required id="extended-destination" name="extended-destination" type="text" placeholder="City, State">
+          <label for="extended-transport">Transport</label>
+          <input required id="extended-transport" name="extended-transport" type="number" placeholder="Budget">
+          <label for="extended-lodging">Lodging</label>
+          <input required id="extended-lodging" name="extended-lodging" type="number" placeholder="Budget">
+          <label for="food">Food</label>
+          <input required id="extended-food" name="extended-food" type="number" placeholder="Budget">
+          <label for="activities">Activities</label>
+          <input required id="extended-activities" name="extended-activities" type="number" placeholder="Budget">
+          <label for="souvenirs">Souvenirs</label>
+          <input required id="extended-souvenirs" name="extended-souvenirs" type="number" placeholder="Budget">
+          <label for="reserve">Reserve</label>
+          <input required id="extended-reserve" name="extended-reserve" type="number" placeholder="Budget">
+          <div class="column-full justify-end">
+            <button class="btn blue-btn extended-summary-btn" type="submit" data-view="extended-summary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="container view hidden" id="day-summary" data-view="day-summary">
     <div class="row card-table">

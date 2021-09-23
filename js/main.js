@@ -14,16 +14,16 @@ var $navPlanner = document.querySelector('#nav-planner');
 
 function handleDayForm(event) {
   event.preventDefault();
-  var budget = {};
+  var dayBudget = {};
   data.currentWeather.destination = $dayForm.elements.destination.value;
   getCurrentWeather(data.currentWeather.destination);
-  budget.transport = $dayForm.elements.transport.value;
-  budget.food = $dayForm.elements.food.value;
-  budget.activities = $dayForm.elements.activities.value;
-  budget.souvenirs = $dayForm.elements.souvenirs.value;
-  budget.reserve = $dayForm.elements.reserve.value;
-  data.budget = budget;
-  populateBudget();
+  dayBudget.transport = $dayForm.elements.transport.value;
+  dayBudget.food = $dayForm.elements.food.value;
+  dayBudget.activities = $dayForm.elements.activities.value;
+  dayBudget.souvenirs = $dayForm.elements.souvenirs.value;
+  dayBudget.reserve = $dayForm.elements.reserve.value;
+  data.dayBudget = dayBudget;
+  populateDayBudget();
 }
 
 function getCurrentWeather(name) {
@@ -104,13 +104,22 @@ function createCurrentWeather() {
   return $currentWeatherRow;
 }
 
-function populateBudget() {
-  $transportBudget.textContent = data.budget.transport;
-  $foodBudget.textContent = data.budget.food;
-  $activitiesBudget.textContent = data.budget.activities;
-  $souvenirsBudget.textContent = data.budget.souvenirs;
-  $reserveBudget.textContent = data.budget.reserve;
+function populateDayBudget() {
+  $transportBudget.textContent = data.dayBudget.transport;
+  $foodBudget.textContent = data.dayBudget.food;
+  $activitiesBudget.textContent = data.dayBudget.activities;
+  $souvenirsBudget.textContent = data.dayBudget.souvenirs;
+  $reserveBudget.textContent = data.dayBudget.reserve;
 }
+
+// function populateExtendedBudget() {
+//   $transportBudget.textContent = data.extendedBudget.transport;
+//   $lodgingBudget.textContent = data.extendedBudget.lodging;
+//   $foodBudget.textContent = data.extendedBudget.food;
+//   $activitiesBudget.textContent = data.extendedBudget.activities;
+//   $souvenirsBudget.textContent = data.extendedBudget.souvenirs;
+//   $reserveBudget.textContent = data.extendedBudget.reserve;
+// }
 
 function handleTripSelection(event) {
   event.preventDefault();
@@ -134,10 +143,10 @@ function handleSwap(event) {
   switchView(currentView);
 }
 
-function handleNavPlanner(event) {
+function handleNavDayPlanner(event) {
   event.preventDefault();
   getCurrentWeather(data.currentWeather.destination);
-  populateBudget();
+  populateDayBudget();
   switchView('day-summary');
 }
 
@@ -145,4 +154,4 @@ $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $tripTypeButton.addEventListener('click', handleSwap);
 $daySummaryButton.addEventListener('click', handleSwap);
-$navPlanner.addEventListener('click', handleNavPlanner);
+$navPlanner.addEventListener('click', handleNavDayPlanner);
