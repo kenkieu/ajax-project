@@ -22,4 +22,4 @@ function handleBeforeUnload() {
   localStorage.setItem('trip', dataJSON);
 }
 
-window.addEventListener('beforeunload', handleBeforeUnload)
+window.addEventListener('beforeunload', handleBeforeUnload);

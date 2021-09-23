@@ -8,7 +8,7 @@ var $souvenirsBudget = document.querySelector('#souvenirs-budget');
 var $reserveBudget = document.querySelector('#reserve-budget');
 var $view = document.querySelectorAll('.view');
 var $daySummaryButton = document.querySelector('.day-summary-btn');
-var $tripSelect = document.querySelector('#trip-type')
+var $tripSelect = document.querySelector('#trip-type');
 var $tripTypeButton = document.querySelector('.trip-type-button');
 var $navPlanner = document.querySelector('#nav-planner');
 
@@ -114,10 +114,9 @@ function populateBudget() {
 
 function handleTripSelection(event) {
   event.preventDefault();
-  if ($tripSelect.value === "Select") {
-    switchView('home');
-  } else {
-    switchView($tripSelect.value)
+  switchView('home');
+  if ($tripSelect.value !== 'Select') {
+    switchView($tripSelect.value);
   }
 }
 
@@ -145,9 +144,8 @@ function handleNavPlanner(event) {
   switchView('day-summary');
 }
 
-
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $tripTypeButton.addEventListener('click', handleSwap);
 $daySummaryButton.addEventListener('click', handleSwap);
-$navPlanner.addEventListener('click', handleNavPlanner)
+$navPlanner.addEventListener('click', handleNavPlanner);
