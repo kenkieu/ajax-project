@@ -6,10 +6,11 @@ var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
 
 var data = {
   view: '',
+  tripType: '',
   entry: [],
   editing: null,
   currentWeather: { date: currentDate },
   forecastWeather: []
 };
 
-console.log(data);
+// console.log(data);

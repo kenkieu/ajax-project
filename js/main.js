@@ -1,10 +1,16 @@
+var $home = document.querySelector('#home');
+var $tripType = document.querySelectorAll('.trip-type');
 var $dayForm = document.querySelector('#day-form');
-var $dayTripContainer = document.querySelector('#day-trip');
-var $transportBudget = document.querySelector('#transportBudget');
+var $dayTripContainer = document.querySelector('#day-summary');
+var $transportBudget = document.querySelector('#transport-budget');
 var $foodBudget = document.querySelector('#food-budget');
 var $activitiesBudget = document.querySelector('#activities-budget');
 var $souvenirsBudget = document.querySelector('#souvenirs-budget');
 var $reserveBudget = document.querySelector('#reserve-budget');
+var $buttonContainer = document.querySelector('#btn-container');
+var $view = document.querySelectorAll('.view');
+var $daySummaryButton = document.querySelector('.day-summary-btn');
+var $tripTypeButton = document.querySelector('.trip-type-button');
 
 function handleDayForm(event) {
   event.preventDefault();
@@ -17,6 +23,7 @@ function handleDayForm(event) {
   budget.souvenirs = $dayForm.elements.souvenirs.value;
   budget.reserve = $dayForm.elements.reserve.value;
   data.entry.push(budget);
+  populateBudget();
 }
 
 $dayForm.addEventListener('submit', handleDayForm);
@@ -38,7 +45,6 @@ function getCurrentWeather(name) {
 }
 
 function createCurrentWeather() {
-  console.log(data.entry[0].transport);
   var $currentWeatherRow = document.createElement('div');
   $currentWeatherRow.className = 'row mt-two-rem card-sky plr-two-rem';
 
@@ -105,10 +111,42 @@ function createCurrentWeather() {
 }
 
 function populateBudget() {
-  console.log(data.entry[0].transport);
-  // $transportBudget.textContent = data.entry[0].transport;
-  // $foodBudget.textContent = data.entry[0].food;
-  // $activitiesBudget.textContent = data.entry[0].activities;
-  // $souvenirsBudget.textContent = data.entry[0].souvenirs;
-  // $reserveBudget.textContent = data.entry[0].reserve;
+  $transportBudget.textContent = data.entry[0].transport;
+  $foodBudget.textContent = data.entry[0].food;
+  $activitiesBudget.textContent = data.entry[0].activities;
+  $souvenirsBudget.textContent = data.entry[0].souvenirs;
+  $reserveBudget.textContent = data.entry[0].reserve;
 }
+
+function switchView(string) {
+  for (var i = 0; i < $view.length; i++) {
+    if ($view[i].dataset.view === string) {
+      $view[i].classList.remove('hidden');
+      data.view = $view[i].dataset.view;
+    } else {
+      $view[i].classList.add('hidden');
+    }
+  }
+}
+
+function handleSwap(event) {
+  var currentView = event.target.getAttribute('data-view');
+  data.view = currentView;
+  switchView(currentView);
+}
+
+$tripTypeButton.addEventListener('click', handleSwap);
+$daySummaryButton.addEventListener('click', handleSwap);
+
+function handleTripSelection(event) {
+  event.preventDefault();
+  for (var i = 0; i < $tripType.length; i++) {
+    if ($tripType[i].value === 'day') {
+      data.view = 'day-form';
+      switchView(data.view);
+    }
+    // make the name attr of the same as the view
+  }
+}
+
+$home.addEventListener('submit', handleTripSelection);

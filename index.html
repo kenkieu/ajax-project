@@ -19,22 +19,22 @@
       </div>
     </div>
   </nav>
-  <div class="container">
-    <form class="hidden">
+  <div class="container" id="btn-container">
+    <form id="home" class="view" data-view="home">
       <div class="row">
         <div class="column-full justify-center mtb-four-rem">
-          <select name="trip-type" id="trip-type" class="w-50 pad-half-rem mr-one-rem">
-            <option value="select">Select</option>
-            <option value="day">Day Trip</option>
-            <option value="extended">Extended Trip</option>
+          <select class="w-50 pad-half-rem mr-one-rem">
+            <option class="trip-type" value="select" name="select">Select</option>
+            <option class="trip-type" value="day" name="day">Day Trip</option>
+            <option class="trip-type" value="extended" name="extended">Extended Trip</option>
           </select>
           <div>
-            <button class="btn blue-btn" type="submit">Submit</button>
+            <button class="btn blue-btn day-form-btn trip-type-button" type="submit" data-view="">Submit</button>
           </div>
         </div>
       </div>
     </form>
-    <form id="day-form" class="">
+    <form id="day-form" class="view hidden" data-view="day-form">
       <div class="row card-white mt-two-rem">
         <div class="column-full justify-center">
           <h2>Day Trip</h2>
@@ -57,49 +57,50 @@
           <label for="reserve">Reserve</label>
           <input required id="reserve" name="reserve" type="number" placeholder="Budget"
             class="pad-half-rem mb-one-rem">
-        </div>
-        <div class="column-full justify-end">
-          <button class="pad-half-rem mb-one-rem btn blue-btn" type="submit">Submit</button>
+          <div class="column-full justify-end">
+            <button class="pad-half-rem mb-one-rem btn blue-btn day-summary-btn" type="submit"
+              data-view="day-summary">Submit</button>
+          </div>
         </div>
       </div>
     </form>
   </div>
 
-  <div class="container" id="day-trip">
+  <div class="container view hidden" id="day-summary" data-view="day-summary">
     <div class="row card-table">
       <table>
         <thead>
           <tr>
             <th>Categories</th>
             <th>Budget</th>
-            <!-- <th>Spent</th> -->
+            <th>Spent</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Transport</td>
             <td id="transport-budget"></td>
-            <!-- <td></td> -->
+            <td></td>
           </tr>
           <tr>
             <td>Food</td>
             <td id="food-budget"></td>
-            <!-- <td></td> -->
+            <td></td>
           </tr>
           <tr>
             <td>Activities</td>
             <td id="activities-budget"></td>
-            <!-- <td></td> -->
+            <td></td>
           </tr>
           <tr>
             <td>Souvenirs</td>
             <td id="souvenirs-budget"></td>
-            <!-- <td></td> -->
+            <td></td>
           </tr>
           <tr>
             <td>Reserve</td>
             <td id="reserve-budget"></td>
-            <!-- <td></td> -->
+            <td></td>
           </tr>
         </tbody>
       </table>

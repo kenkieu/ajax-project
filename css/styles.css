@@ -76,6 +76,7 @@ tr {
   border: none;
   border-radius: 3px;
   padding: 0.5rem;
+  cursor: pointer;
 }
 
 .blue-btn {
