@@ -7,7 +7,6 @@ var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
 var data = {
   view: '',
   tripType: '',
-  entry: [],
   editing: null,
   currentWeather: { date: currentDate },
   forecastWeather: []
@@ -20,7 +19,7 @@ if (previousJSONData !== null) {
 
 function handleBeforeUnload() {
   var dataJSON = JSON.stringify(data);
-  localStorage.setItem('trip', dataJSON)
+  localStorage.setItem('trip', dataJSON);
 }
 
 window.addEventListener('beforeunload', handleBeforeUnload)

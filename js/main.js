@@ -10,6 +10,7 @@ var $view = document.querySelectorAll('.view');
 var $daySummaryButton = document.querySelector('.day-summary-btn');
 var $tripSelect = document.querySelector('#trip-type')
 var $tripTypeButton = document.querySelector('.trip-type-button');
+var $navPlanner = document.querySelector('#nav-planner');
 
 function handleDayForm(event) {
   event.preventDefault();
@@ -21,7 +22,7 @@ function handleDayForm(event) {
   budget.activities = $dayForm.elements.activities.value;
   budget.souvenirs = $dayForm.elements.souvenirs.value;
   budget.reserve = $dayForm.elements.reserve.value;
-  data.entry.push(budget);
+  data.budget = budget;
   populateBudget();
 }
 
@@ -34,9 +35,6 @@ function getCurrentWeather(name) {
     data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
     data.currentWeather.description = xhr.response.data[0].weather.description;
     $dayTripContainer.prepend(createCurrentWeather());
-    console.log('xhr.status (current):', xhr.status);
-    console.log('xhr.response (current):', xhr.response);
-    console.log(data.currentWeather);
   });
   xhr.send();
 }
@@ -107,11 +105,11 @@ function createCurrentWeather() {
 }
 
 function populateBudget() {
-  $transportBudget.textContent = data.entry[0].transport;
-  $foodBudget.textContent = data.entry[0].food;
-  $activitiesBudget.textContent = data.entry[0].activities;
-  $souvenirsBudget.textContent = data.entry[0].souvenirs;
-  $reserveBudget.textContent = data.entry[0].reserve;
+  $transportBudget.textContent = data.budget.transport;
+  $foodBudget.textContent = data.budget.food;
+  $activitiesBudget.textContent = data.budget.activities;
+  $souvenirsBudget.textContent = data.budget.souvenirs;
+  $reserveBudget.textContent = data.budget.reserve;
 }
 
 function handleTripSelection(event) {
@@ -140,7 +138,16 @@ function handleSwap(event) {
   switchView(currentView);
 }
 
+function handleNavPlanner(event) {
+  event.preventDefault();
+  getCurrentWeather(data.currentWeather.destination);
+  populateBudget();
+  switchView('day-summary');
+}
+
+
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $tripTypeButton.addEventListener('click', handleSwap);
 $daySummaryButton.addEventListener('click', handleSwap);
+$navPlanner.addEventListener('click', handleNavPlanner)

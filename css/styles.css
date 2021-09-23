@@ -49,6 +49,7 @@ th {
 .logo {
   color:white;
   margin-left: 1rem;
+  letter-spacing: 0.05rem;
 }
 
 .blue-heading {
@@ -116,6 +117,18 @@ th {
 .justify-center {
   display: flex;
   justify-content: center;
+}
+
+.flex-end{
+  display: flex;;
+  justify-content: flex-end;
+}
+
+.nav-links, .nav-links:visited{
+  margin: 0 0.75rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 400;
 }
 
 .flex-column {
