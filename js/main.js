@@ -114,10 +114,7 @@ function populateBudget() {
 
 function handleTripSelection(event) {
   event.preventDefault();
-  switchView('home');
-  if ($tripSelect.value !== 'Select') {
-    switchView($tripSelect.value);
-  }
+  switchView($tripSelect.value);
 }
 
 function switchView(string) {
