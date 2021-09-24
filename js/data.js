@@ -7,8 +7,7 @@ var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
 var data = {
   view: '',
   editing: null,
-  currentWeather: { date: currentDate },
-  forecastWeather: []
+  currentWeather: { date: currentDate }
 };
 
 var previousJSONData = localStorage.getItem('trip');

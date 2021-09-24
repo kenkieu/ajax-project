@@ -1,5 +1,4 @@
 var $home = document.querySelector('#home');
-
 var $dayForm = document.querySelector('#day-form');
 var $dayTripContainer = document.querySelector('#day-summary');
 var $dayTransportBudget = document.querySelector('#day-transport-budget');
@@ -7,7 +6,6 @@ var $dayFoodBudget = document.querySelector('#day-food-budget');
 var $dayActivitiesBudget = document.querySelector('#day-activities-budget');
 var $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
 var $dayReserveBudget = document.querySelector('#day-reserve-budget');
-
 var $extendedForm = document.querySelector('#extended-form');
 var $extendedTripContainer = document.querySelector('#extended-summary');
 var $extendedTransportBudget = document.querySelector('#extended-transport-budget');
@@ -16,7 +14,6 @@ var $extendedFoodBudget = document.querySelector('#extended-food-budget');
 var $extendedActivitiesBudget = document.querySelector('#extended-activities-budget');
 var $extendedSouvenirsBudget = document.querySelector('#extended-souvenirs-budget');
 var $extendedReserveBudget = document.querySelector('#extended-reserve-budget');
-
 var $view = document.querySelectorAll('.view');
 var $daySummaryButton = document.querySelector('.day-summary-btn');
 var $extendedSummaryButton = document.querySelector('.extended-summary-btn');
@@ -28,22 +25,22 @@ var $extendedPlanner = document.querySelector('#extended-planner');
 function handleDayForm(event) {
   event.preventDefault();
   var dayBudget = {};
-  data.currentWeather.destination = $dayForm.elements['day-destination'].value;
-  getCurrentWeather(data.currentWeather.destination);
+  dayBudget.destination = $dayForm.elements['day-destination'].value;
   dayBudget.transport = $dayForm.elements['day-transport'].value;
   dayBudget.food = $dayForm.elements['day-food'].value;
   dayBudget.activities = $dayForm.elements['day-activities'].value;
   dayBudget.souvenirs = $dayForm.elements['day-souvenirs'].value;
   dayBudget.reserve = $dayForm.elements['day-reserve'].value;
   data.dayBudget = dayBudget;
+  getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
 }
 
 function handleExtendedForm(event) {
   event.preventDefault();
   var extendedBudget = {};
-  // data.currentWeather.destination = $extendedForm.elements['extended-destination'].value;
-  // getCurrentWeather(data.currentWeather.destination);
+  getForecastWeather($extendedForm.elements['extended-destination'].value);
+  extendedBudget.destination = $extendedForm.elements['extended-destination'].value;
   extendedBudget.transport = $extendedForm.elements['extended-transport'].value;
   extendedBudget.lodging = $extendedForm.elements['extended-lodging'].value;
   extendedBudget.food = $extendedForm.elements['extended-food'].value;
@@ -59,9 +56,13 @@ function getCurrentWeather(name) {
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    var $currentWeatherCard = document.querySelector('#current-weather-card');
     data.currentWeather.temp = xhr.response.data[0].temp + '°F';
     data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
     data.currentWeather.description = xhr.response.data[0].weather.description;
+    if ($currentWeatherCard) {
+      $currentWeatherCard.remove();
+    }
     $dayTripContainer.prepend(createCurrentWeather());
   });
   xhr.send();
@@ -72,16 +73,23 @@ function getForecastWeather(name) {
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.response);
-    // data.forecastWeather.temp = xhr.response.data[0].temp + '°F';
-    // data.forecastWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-    // data.forecastWeather.description = xhr.response.data[0].weather.description;
-    // $dayTripContainer.prepend(createForecastWeather());
+    var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
+    var forecastArr = [];
+    for (var i = 0; i < xhr.response.data.length; i++) {
+      var dailyForecast = {};
+      dailyForecast.temp = xhr.response.data[i].temp;
+      dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
+      dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
+      forecastArr.push(dailyForecast);
+    }
+    data.forecastWeather = forecastArr;
+    if ($forecastWeatherCard) {
+      $forecastWeatherCard.remove();
+    }
+    $extendedTripContainer.prepend(createForecastWeather());
   });
   xhr.send();
 }
-
-getForecastWeather('Garden Grove, CA');
 
 function createCurrentWeather() {
 
@@ -109,6 +117,7 @@ function createCurrentWeather() {
 
   var $currentWeatherRow = document.createElement('div');
   $currentWeatherRow.className = 'row card-sky';
+  $currentWeatherRow.setAttribute('id', 'current-weather-card');
 
   var $cityDateColumn = document.createElement('div');
   $cityDateColumn.className = 'column-full';
@@ -118,7 +127,7 @@ function createCurrentWeather() {
 
   var $cityHeader = document.createElement('h3');
   $cityHeader.className = 'mb-zero';
-  $cityHeader.textContent = data.currentWeather.destination;
+  $cityHeader.textContent = data.dayBudget.destination;
 
   var $dateColumn = document.createElement('div');
   $dateColumn.className = 'column-full justify-center';
@@ -171,6 +180,84 @@ function createCurrentWeather() {
   return $currentWeatherRow;
 }
 
+function createForecastWeather() {
+/*
+  <div div class="row card-sky justify-center" >
+    <div class="column-full justify-center">
+      <h3 class="mb-half-rem">City, ST</h3>
+    </div>
+    <div class="row">
+      <div class="column-fifth">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <p class="rm-margin">09/23</p>
+        <p>63.5&deg;F</p>
+      </div>
+      <div class="column-fifth">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <p class="rm-margin">09/23</p>
+        <p>63.5&deg;F</p>
+      </div>
+      <div class="column-fifth">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <p class="rm-margin">09/23</p>
+        <p>63.5&deg;F</p>
+      </div>
+      <div class="column-fifth">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <p class="rm-margin">09/23</p>
+        <p>63.5&deg;F</p>
+      </div>
+      <div class="column-fifth">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <p class="rm-margin">09/23</p>
+        <p>63.5&deg;F</p>
+      </div>
+    </div>
+  </div >
+*/
+  var $forecastWeatherRow = document.createElement('div');
+  $forecastWeatherRow.className = 'row card-sky justify-center';
+  $forecastWeatherRow.setAttribute('id', 'forecast-weather-card');
+
+  var $forecastHeaderColumn = document.createElement('div');
+  $forecastHeaderColumn.className = 'column-full justify-center';
+
+  var $forecastCityHeader = document.createElement('h3');
+  $forecastCityHeader.className = 'mb-half-rem';
+  $forecastCityHeader.textContent = data.extendedBudget.destination;
+
+  var $innerForecastRow = document.createElement('div');
+  $innerForecastRow.className = 'row text-center';
+
+  for (var i = 0; i < data.forecastWeather.length; i++) {
+    var $weatherInfoColumn = document.createElement('div');
+    $weatherInfoColumn.className = 'column-fifth';
+
+    var $forecastIcon = document.createElement('img');
+    $forecastIcon.setAttribute('src', data.forecastWeather[i].icon);
+    $forecastIcon.setAttribute('alt', 'weather-icon');
+    $forecastIcon.className = 'forecast-icon';
+
+    var $forecastDate = document.createElement('p');
+    $forecastDate.textContent = data.forecastWeather[i].date;
+
+    var $forecastTemp = document.createElement('p');
+    $forecastTemp.textContent = data.forecastWeather[i].temp + '°F';
+
+    $innerForecastRow.appendChild($weatherInfoColumn);
+    $weatherInfoColumn.appendChild($forecastIcon);
+    $weatherInfoColumn.appendChild($forecastDate);
+    $weatherInfoColumn.appendChild($forecastTemp);
+  }
+
+  $extendedTripContainer.appendChild($forecastWeatherRow);
+  $forecastWeatherRow.appendChild($forecastHeaderColumn);
+  $forecastHeaderColumn.appendChild($forecastCityHeader);
+  $forecastWeatherRow.appendChild($innerForecastRow);
+
+  return $forecastWeatherRow;
+}
+
 function populateDayBudget() {
   $dayTransportBudget.textContent = data.dayBudget.transport;
   $dayFoodBudget.textContent = data.dayBudget.food;
@@ -212,14 +299,15 @@ function handleSwap(event) {
 
 function handleNavDayPlanner(event) {
   event.preventDefault();
-  getCurrentWeather(data.currentWeather.destination);
+  getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
   switchView('day-summary');
+
 }
 
 function handleNavExtendedPlanner(event) {
   event.preventDefault();
-  // getCurrentWeather(data.currentWeather.destination);
+  getForecastWeather(data.extendedBudget.destination);
   populateExtendedBudget();
   switchView('extended-summary');
 }
