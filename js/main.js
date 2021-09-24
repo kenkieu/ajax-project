@@ -22,6 +22,8 @@ var $tripTypeButton = document.querySelector('.trip-type-button');
 var $dayPlanner = document.querySelector('#day-planner');
 var $extendedPlanner = document.querySelector('#extended-planner');
 
+var $dayRowTransport = document.querySelector('#day-row-transport');
+
 function handleDayForm(event) {
   event.preventDefault();
   var dayBudget = {};
