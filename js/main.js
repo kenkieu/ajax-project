@@ -106,7 +106,7 @@ function createCurrentWeather() {
   <img src="images/icons/a01d.png" alt="weather-icon">
 </div>
 <div class="column-half">
-  <div class="column-full"> //tempColumn
+  <div class="column-full">
     <h1 class="degrees rm-margin justify-center">64&deg;F</h1>
   </div>
   <div class="column-full justify-center">

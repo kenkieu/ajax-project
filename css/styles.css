@@ -17,7 +17,9 @@ h3 {
 }
 
 input {
-  margin-bottom: 1rem;
+  width: 100%;
+
+  /* margin-bottom: 1rem; */
 }
 
 input,
@@ -46,6 +48,7 @@ table {
 
 td,
 th {
+  width: calc(100% / 3);
   padding: 1rem;
   text-align: left;
   border-bottom: solid 1px #ced4da;
@@ -174,4 +177,11 @@ th {
 
 .text-center {
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  td,
+  th {
+    padding: 1rem 4rem;
+  }
 }
