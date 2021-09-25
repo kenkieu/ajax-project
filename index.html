@@ -108,35 +108,35 @@
             <tr>
               <td>Transport</td>
               <td id="day-transport-budget"></td>
-              <td id="day-transport-spent">
+              <td>
                 <input type="number" placeholder="Amount" id="day-spent-transport-input">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td id="day-food-budget"></td>
-              <td id="day-food-spent">
+              <td>
                 <input type="number" placeholder="Amount" id="day-spent-food-input">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td id="day-activities-budget"></td>
-              <td id="day-activities-spent">
+              <td>
                 <input type="number" placeholder="Amount" id="day-spent-activities-input">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td id="day-souvenirs-budget"></td>
-              <td id="day-souvenirs-spent">
+              <td>
                 <input type="number" placeholder="Amount" id="day-spent-souvenirs-input">
               </td>
             </tr>
             <tr id="day-row-reserve">
               <td>Reserve</td>
               <td id="day-reserve-budget"></td>
-              <td id="day-reserve-spent">
+              <td>
                 <input type="number" placeholder="Amount" id="day-spent-reserve-input">
               </td>
             </tr>
@@ -144,7 +144,7 @@
               <td class="edit-save-row"><a href="#" class="">Edit Entry</a></td>
               <td class="edit-save-row">&nbsp;</td>
               <td class="edit-save-row">
-                <button type="submit" class="btn blue-btn" id="day-save-btn">Save</button>
+                <button type="submit" class="btn blue-btn">Save</button>
               </td>
             </tr>
           </tbody>
@@ -153,56 +153,70 @@
     </form>
   </div>
   <div class="container view hidden" id="extended-summary" data-view="extended-summary">
-    <div class="row card-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Categories</th>
-            <th>Budget</th>
-            <th>Spent</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Transport</td>
-            <td id="extended-transport-budget"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Lodging</td>
-            <td id="extended-lodging-budget"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Food</td>
-            <td id="extended-food-budget"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Activities</td>
-            <td id="extended-activities-budget"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Souvenirs</td>
-            <td id="extended-souvenirs-budget"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Reserve</td>
-            <td id="extended-reserve-budget"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="edit-save-row"><a href="#" class="">Edit Entry</a></td>
-            <td class="edit-save-row"></td>
-            <td class="edit-save-row">
-              <button type="submit" class="btn blue-btn save-btn" id="extended-save-btn">Save</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <form id="extended-spent-form">
+      <div class="row card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Categories</th>
+              <th>Budget</th>
+              <th>Spent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Transport</td>
+              <td id="extended-transport-budget"></td>
+              <td>
+                <input type="number" placeholder="Amount" id="extended-spent-transport-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Lodging</td>
+              <td id="extended-lodging-budget"></td>
+              <td>
+                <input type="number" placeholder="Amount" id="extended-spent-lodging-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Food</td>
+              <td id="extended-food-budget"></td>
+              <td>
+                <input type="number" placeholder="Amount" id="extended-spent-food-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Activities</td>
+              <td id="extended-activities-budget"></td>
+              <td>
+                <input type="number" placeholder="Amount" id="extended-spent-activities-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Souvenirs</td>
+              <td id="extended-souvenirs-budget"></td>
+              <td>
+                <input type="number" placeholder="Amount" id="extended-spent-souvenirs-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Reserve</td>
+              <td id="extended-reserve-budget"></td>
+              <td>
+                <input type="number" placeholder="Amount" id="extended-spent-reserve-input">
+              </td>
+            </tr>
+            <tr>
+              <td class="edit-save-row"><a href="#" class="">Edit Entry</a></td>
+              <td class="edit-save-row">&nbsp;</td>
+              <td class="edit-save-row">
+                <button type="submit" class="btn blue-btn">Save</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
   </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
