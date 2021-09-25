@@ -17,6 +17,7 @@ h3 {
 }
 
 input {
+  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -46,8 +47,9 @@ table {
 
 td,
 th {
+  width: calc(100% / 3);
   padding: 1rem;
-  text-align: left;
+  text-align: center;
   border-bottom: solid 1px #ced4da;
 }
 
@@ -118,6 +120,12 @@ th {
   color: #fff;
 }
 
+.edit-save-row {
+  padding: 1rem;
+  text-align: center;
+  border: none;
+}
+
 .degrees {
   margin-top: 8px;
   font-size: 3rem;
@@ -174,4 +182,11 @@ th {
 
 .text-center {
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  td,
+  th {
+    padding: 1rem 4rem;
+  }
 }
