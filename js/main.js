@@ -22,20 +22,31 @@ var $tripTypeButton = document.querySelector('.trip-type-button');
 var $dayPlanner = document.querySelector('#day-planner');
 var $extendedPlanner = document.querySelector('#extended-planner');
 
-var $dayRowTransport = document.querySelector('#day-row-transport');
+var $dayTransportSpent = document.querySelector('#day-transport-spent');
+var $dayFoodSpent = document.querySelector('#day-food-spent');
+var $dayActivitiesSpent = document.querySelector('#day-activities-spent');
+var $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
+var $dayReserveSpent = document.querySelector('#day-reserve-spent');
+
+var $daySaveButton = document.querySelector('#day-save-button');
+var $extendedSaveButton = document.querySelector('#extended-save-button');
+var $daySpentForm = document.querySelector('#day-spent-form');
+
+// var $daySpentTransportValue = document.querySelector('#day-spent-transport-input');
 
 function handleDayForm(event) {
   event.preventDefault();
   var dayBudget = {};
   dayBudget.destination = $dayForm.elements['day-destination'].value;
-  dayBudget.transport = $dayForm.elements['day-transport'].value;
-  dayBudget.food = $dayForm.elements['day-food'].value;
-  dayBudget.activities = $dayForm.elements['day-activities'].value;
-  dayBudget.souvenirs = $dayForm.elements['day-souvenirs'].value;
-  dayBudget.reserve = $dayForm.elements['day-reserve'].value;
+  dayBudget.transport = $dayForm.elements['day-budget-transport'].value;
+  dayBudget.food = $dayForm.elements['day-budget-food'].value;
+  dayBudget.activities = $dayForm.elements['day-budget-activities'].value;
+  dayBudget.souvenirs = $dayForm.elements['day-budget-souvenirs'].value;
+  dayBudget.reserve = $dayForm.elements['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
+  createDaySpentInput();
 }
 
 function handleExtendedForm(event) {
@@ -282,6 +293,108 @@ function handleTripSelection(event) {
   switchView($tripSelect.value);
 }
 
+// Day Spent
+var $dayTransportSpentInput = document.createElement('input');
+var $dayFoodSpentInput = document.createElement('input');
+var $dayActivitiesSpentInput = document.createElement('input');
+var $daySouvenirsSpentInput = document.createElement('input');
+var $dayReserveSpentInput = document.createElement('input');
+
+function createDaySpentInput() {
+  $dayTransportSpentInput.setAttribute('type', 'number');
+  $dayTransportSpentInput.setAttribute('placeholder', 'Amount');
+  $dayTransportSpentInput.setAttribute('id', 'day-spent-transport-input');
+  // $dayTransportSpentValue
+
+  $dayFoodSpentInput.setAttribute('type', 'number');
+  $dayFoodSpentInput.setAttribute('placeholder', 'Amount');
+  $dayFoodSpentInput.setAttribute('id', 'day-spent-food');
+
+  $dayActivitiesSpentInput.setAttribute('type', 'number');
+  $dayActivitiesSpentInput.setAttribute('placeholder', 'Amount');
+  $dayActivitiesSpentInput.setAttribute('id', 'day-spent-activities');
+
+  $daySouvenirsSpentInput.setAttribute('type', 'number');
+  $daySouvenirsSpentInput.setAttribute('placeholder', 'Amount');
+  $daySouvenirsSpentInput.setAttribute('id', 'day-spent-souvenirs');
+
+  $dayReserveSpentInput.setAttribute('type', 'number');
+  $dayReserveSpentInput.setAttribute('placeholder', 'Amount');
+  $dayReserveSpentInput.setAttribute('id', 'day-spent-reserve');
+
+  $dayTransportSpent.appendChild($dayTransportSpentInput);
+  $dayFoodSpent.appendChild($dayFoodSpentInput);
+  $dayActivitiesSpent.appendChild($dayActivitiesSpentInput);
+  $daySouvenirsSpent.appendChild($daySouvenirsSpentInput);
+  $dayReserveSpent.appendChild($dayReserveSpentInput);
+}
+
+function replaceDaySpent() {
+  var daySpent = {};
+  daySpent.transport = $dayTransportSpentInput.value;
+  daySpent.food = $dayFoodSpentInput.value;
+  daySpent.activities = $dayActivitiesSpentInput.value;
+  daySpent.souvenirs = $daySouvenirsSpentInput.value;
+  daySpent.reserve = $dayReserveSpentInput.value;
+  data.daySpent = daySpent;
+
+  if (!(daySpent.transport === '')) {
+    $dayTransportSpentInput.replaceWith($dayTransportSpentInput.value);
+  }
+  if (!(daySpent.food === '')) {
+    $dayFoodSpentInput.replaceWith($dayFoodSpentInput.value);
+  }
+  if (!(daySpent.activities === '')) {
+    $dayActivitiesSpentInput.replaceWith($dayActivitiesSpentInput.value);
+  }
+  if (!(daySpent.souvenirs === '')) {
+    $daySouvenirsSpentInput.replaceWith($daySouvenirsSpentInput.value);
+  }
+  if (!(daySpent.reserve === '')) {
+    $dayReserveSpentInput.replaceWith($dayReserveSpentInput.value);
+  }
+}
+
+function createDayInput(inputName, inputContainer) {
+  var inputName = document.createElement('input');
+  inputName.setAttribute('type', 'number');
+  inputName.setAttribute('placeholder', 'Amount');
+  inputName.setAttribute('id', 'day-spent-activities');
+  inputContainer.appendChild(inputName);
+}
+
+function populateDaySpent() {
+  if (data.daySpent.transport !== '') {
+    $dayTransportSpent.textContent = data.daySpent.transport;
+  }
+  if (data.daySpent.food !== '') {
+    $dayFoodSpent.textContent = data.daySpent.food;
+  }
+  if (data.daySpent.activities !== '') {
+    $dayActivitiesSpent.textContent = data.daySpent.activities;
+  } else {
+    createDayInput('$dayActivitiesSpentInput', $dayActivitiesSpent);
+  }
+  // var $dayActivitiesSpentInput = document.createElement('input');
+  // $dayActivitiesSpentInput.setAttribute('type', 'number');
+  // $dayActivitiesSpentInput.setAttribute('placeholder', 'Amount');
+  // $dayActivitiesSpentInput.setAttribute('id', 'day-spent-activities');
+  // $dayActivitiesSpent.appendChild($dayActivitiesSpentInput);
+  if (data.daySpent.souvenirs) {
+//work here
+  }
+  if (data.daySpent.) {
+
+  }
+  $daySouvenirsSpent.textContent = data.daySpent.souvenirs;
+  $dayReserveSpent.textContent = data.daySpent.reserve;
+}
+
+function handleSpentForm(event) {
+  event.preventDefault();
+  replaceDaySpent();
+}
+
 function switchView(string) {
   for (var i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {
@@ -300,9 +413,12 @@ function handleSwap(event) {
 }
 
 function handleNavDayPlanner(event) {
+  // debugger;
   event.preventDefault();
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
+  populateDaySpent();
+  // replaceDaySpent();
   switchView('day-summary');
 
 }
@@ -322,3 +438,5 @@ $daySummaryButton.addEventListener('click', handleSwap);
 $extendedSummaryButton.addEventListener('click', handleSwap);
 $dayPlanner.addEventListener('click', handleNavDayPlanner);
 $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
+
+$daySpentForm.addEventListener('submit', handleSpentForm);
