@@ -26,7 +26,8 @@
       </div>
     </div>
   </nav>
-  <div class="container" id="btn-container">
+  <!-- temp hidden -->
+  <div class="container hidden" id="btn-container">
     <form id="home" class="view home-page" data-view="home">
       <div class="row">
         <div class="column-full justify-center">
@@ -152,6 +153,81 @@
       </div>
     </form>
   </div>
+
+  <!-- Editing Day -->
+  <div class="container view" data-view="edit-day-summary">
+    <form>
+      <div class="row card-table mtb-two-rem">
+        <div class="column-full">
+          <h1 class="text-center mtb-two-rem blue-heading">Edit Trip</h1>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Categories</th>
+              <th>Budget</th>
+              <th>Spent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Transport</td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-budget-transport-input">
+              </td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-spent-transport-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Food</td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-budget-food-input">
+              </td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-spent-food-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Activities</td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-budget-activities-input">
+              </td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-spent-activities-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Souvenirs</td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-budget-souvenirs-input">
+              </td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-spent-souvenirs-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Reserve</td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-budget-reserve-input">
+              </td>
+              <td>
+                <input type="number" placeholder="Amount" id="edit-day-spent-reserve-input">
+              </td>
+            </tr>
+            <tr>
+              <td class="edit-save-row">&nbsp;</td>
+              <td class="edit-save-row">&nbsp;</td>
+              <td class="edit-save-row">
+                <button type="submit" class="btn blue-btn">Submit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+
   <div class="container view hidden" id="extended-summary" data-view="extended-summary">
     <form id="extended-spent-form">
       <div class="row card-table">
