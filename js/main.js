@@ -1,7 +1,7 @@
 var $home = document.querySelector('#home');
-var $view = document.querySelectorAll('.view');
 var $tripSelect = document.querySelector('#trip-type');
 var $tripTypeButton = document.querySelector('.trip-type-button');
+
 var $dayForm = document.querySelector('#day-form');
 var $dayTripContainer = document.querySelector('#day-summary');
 var $dayTransportBudget = document.querySelector('#day-transport-budget');
@@ -17,6 +17,7 @@ var $daySpentFoodInput = document.querySelector('#day-spent-food-input');
 var $daySpentActivitiesInput = document.querySelector('#day-spent-activities-input');
 var $daySpentSouvenirsInput = document.querySelector('#day-spent-souvenirs-input');
 var $daySpentReserveInput = document.querySelector('#day-spent-reserve-input');
+
 var $extendedForm = document.querySelector('#extended-form');
 var $extendedTripContainer = document.querySelector('#extended-summary');
 var $extendedSummaryButton = document.querySelector('.extended-summary-btn');
@@ -34,6 +35,33 @@ var $extendedSpentSouvenirsInput = document.querySelector('#extended-spent-souve
 var $extendedSpentReserveInput = document.querySelector('#extended-spent-reserve-input');
 var $extendedPlanner = document.querySelector('#extended-planner');
 var $extendedSpentForm = document.querySelector('#extended-spent-form');
+
+var $editDaySummaryLink = document.querySelector('#edit-day-summary-link');
+var $editExtendedSummaryLink = document.querySelector('#edit-extended-summary-link');
+var $editDayForm = document.querySelector('#edit-day-form');
+var $editExtendedForm = document.querySelector('#edit-extended-form');
+var $editDayBudgetTransportInput = document.querySelector('#edit-day-budget-transport-input');
+var $editDayBudgetFoodInput = document.querySelector('#edit-day-budget-food-input');
+var $editDayBudgetActivitiesInput = document.querySelector('#edit-day-budget-activities-input');
+var $editDayBudgetSouvenirsInput = document.querySelector('#edit-day-budget-souvenirs-input');
+var $editDayBudgetReserveInput = document.querySelector('#edit-day-budget-reserve-input');
+var $editDaySpentTransportInput = document.querySelector('#edit-day-spent-transport-input');
+var $editDaySpentFoodInput = document.querySelector('#edit-day-spent-food-input');
+var $editDaySpentActivitiesInput = document.querySelector('#edit-day-spent-activities-input');
+var $editDaySpentSouvenirsInput = document.querySelector('#edit-day-spent-souvenirs-input');
+var $editDaySpentReserveInput = document.querySelector('#edit-day-spent-reserve-input');
+var $editExtendedBudgetTransportInput = document.querySelector('#edit-extended-budget-transport-input');
+var $editExtendedBudgetLodgingInput = document.querySelector('#edit-extended-budget-lodging-input');
+var $editExtendedBudgetFoodInput = document.querySelector('#edit-extended-budget-food-input');
+var $editExtendedBudgetActivitiesInput = document.querySelector('#edit-extended-budget-activities-input');
+var $editExtendedBudgetSouvenirsInput = document.querySelector('#edit-extended-budget-souvenirs-input');
+var $editExtendedBudgetReserveInput = document.querySelector('#edit-extended-budget-reserve-input');
+var $editExtendedSpentTransportInput = document.querySelector('#edit-extended-spent-transport-input');
+var $editExtendedSpentLodgingInput = document.querySelector('#edit-extended-spent-lodging-input');
+var $editExtendedSpentFoodInput = document.querySelector('#edit-extended-spent-food-input');
+var $editExtendedSpentActivitiesInput = document.querySelector('#edit-extended-spent-activities-input');
+var $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
+var $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
 
 function handleTripSelection(event) {
   event.preventDefault();
@@ -380,6 +408,7 @@ function handleExtendedSpentForm(event) {
 }
 
 function switchView(string) {
+  var $view = document.querySelectorAll('.view');
   for (var i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {
       $view[i].classList.remove('hidden');
@@ -412,6 +441,186 @@ function handleNavExtendedPlanner(event) {
   switchView('extended-summary');
 }
 
+function handleEditDaySummaryLink(event) {
+  event.preventDefault();
+  populateEditDaySummary();
+  switchView('edit-day-summary');
+}
+
+function handleEditExtendedSummaryLink(event) {
+  event.preventDefault();
+  populateEditExtendedSummary();
+  switchView('edit-extended-summary');
+}
+
+function populateEditDaySummary() {
+  $editDayBudgetTransportInput.value = data.dayBudget.transport;
+  $editDayBudgetFoodInput.value = data.dayBudget.food;
+  $editDayBudgetActivitiesInput.value = data.dayBudget.activities;
+  $editDayBudgetSouvenirsInput.value = data.dayBudget.souvenirs;
+  $editDayBudgetReserveInput.value = data.dayBudget.reserve;
+
+  if (data.daySpent.transport !== '') {
+    $editDaySpentTransportInput.value = data.daySpent.transport;
+  }
+  if (data.daySpent.food !== '') {
+    $editDaySpentFoodInput.value = data.daySpent.food;
+  }
+  if (data.daySpent.activities !== '') {
+    $editDaySpentActivitiesInput.value = data.daySpent.activities;
+  }
+  if (data.daySpent.souvenirs !== '') {
+    $editDaySpentSouvenirsInput.value = data.daySpent.souvenirs;
+  }
+  if (data.daySpent.reserve !== '') {
+    $editDaySpentReserveInput.value = data.daySpent.reserve;
+  }
+}
+
+function populateEditExtendedSummary() {
+  $editExtendedBudgetTransportInput.value = data.extendedBudget.transport;
+  $editExtendedBudgetLodgingInput.value = data.extendedBudget.lodging;
+  $editExtendedBudgetFoodInput.value = data.extendedBudget.food;
+  $editExtendedBudgetActivitiesInput.value = data.extendedBudget.activities;
+  $editExtendedBudgetSouvenirsInput.value = data.extendedBudget.souvenirs;
+  $editExtendedBudgetReserveInput.value = data.extendedBudget.reserve;
+
+  if (data.extendedSpent.transport !== '') {
+    $editExtendedSpentTransportInput.value = data.extendedSpent.transport;
+  }
+  if (data.extendedSpent.lodging !== '') {
+    $editExtendedSpentLodgingInput.value = data.extendedSpent.lodging;
+  }
+  if (data.extendedSpent.food !== '') {
+    $editExtendedSpentFoodInput.value = data.extendedSpent.food;
+  }
+  if (data.extendedSpent.activities !== '') {
+    $editExtendedSpentActivitiesInput.value = data.extendedSpent.activities;
+  }
+  if (data.extendedSpent.souvenirs !== '') {
+    $editExtendedSpentSouvenirsInput.value = data.extendedSpent.souvenirs;
+  }
+  if (data.extendedSpent.reserve !== '') {
+    $editExtendedSpentReserveInput.value = data.extendedSpent.reserve;
+  }
+}
+
+function editHelper(summaryInput, editInput) {
+  summaryInput.textContent = editInput.value;
+}
+
+function updateDaySummary() {
+  var $dayTransportSpent = document.querySelector('#day-transport-spent');
+  var $dayFoodSpent = document.querySelector('#day-food-spent');
+  var $dayActivitiesSpent = document.querySelector('#day-activities-spent');
+  var $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
+  var $dayReserveSpent = document.querySelector('#day-reserve-spent');
+
+  data.dayBudget.transport = $editDayBudgetTransportInput.value;
+  editHelper($dayTransportBudget, $editDayBudgetTransportInput);
+  data.dayBudget.food = $editDayBudgetFoodInput.value;
+  editHelper($dayFoodBudget, $editDayBudgetFoodInput);
+  data.dayBudget.activities = $editDayBudgetActivitiesInput.value;
+  editHelper($dayActivitiesBudget, $editDayBudgetActivitiesInput);
+  data.dayBudget.souvenirs = $editDayBudgetSouvenirsInput.value;
+  editHelper($daySouvenirsBudget, $editDayBudgetSouvenirsInput);
+  data.dayBudget.reserve = $editDayBudgetReserveInput.value;
+  editHelper($dayReserveBudget, $editDayBudgetReserveInput);
+
+  data.daySpent.transport = $editDaySpentTransportInput.value;
+  editHelper($dayTransportSpent, $editDaySpentTransportInput);
+  data.daySpent.food = $editDaySpentFoodInput.value;
+  editHelper($dayFoodSpent, $editDaySpentFoodInput);
+  data.daySpent.activities = $editDaySpentActivitiesInput.value;
+  editHelper($dayActivitiesSpent, $editDaySpentActivitiesInput);
+  data.daySpent.souvenirs = $editDaySpentSouvenirsInput.value;
+  editHelper($daySouvenirsSpent, $editDaySpentSouvenirsInput);
+  data.daySpent.reserve = $editDaySpentReserveInput.value;
+  editHelper($dayReserveSpent, $editDaySpentReserveInput);
+
+  if ($editDaySpentTransportInput.value === '') {
+    $dayTransportSpent.appendChild($daySpentTransportInput);
+  }
+  if ($editDaySpentFoodInput.value === '') {
+    $dayFoodSpent.appendChild($daySpentFoodInput);
+  }
+  if ($editDaySpentActivitiesInput.value === '') {
+    $dayActivitiesSpent.appendChild($daySpentActivitiesInput);
+  }
+  if ($editDaySpentSouvenirsInput.value === '') {
+    $daySouvenirsSpent.appendChild($daySpentSouvenirsInput);
+  }
+  if ($editDaySpentReserveInput.value === '') {
+    $dayReserveSpent.appendChild($daySpentReserveInput);
+  }
+}
+
+function updateExtendedSummary() {
+  var $extendedTransportSpent = document.querySelector('#extended-transport-spent');
+  var $extendedLodgingSpent = document.querySelector('#extended-lodging-spent');
+  var $extendedFoodSpent = document.querySelector('#extended-food-spent');
+  var $extendedActivitiesSpent = document.querySelector('#extended-activities-spent');
+  var $extendedSouvenirsSpent = document.querySelector('#extended-souvenirs-spent');
+  var $extendedReserveSpent = document.querySelector('#extended-reserve-spent');
+
+  data.extendedBudget.transport = $editExtendedBudgetTransportInput.value;
+  editHelper($extendedTransportBudget, $editExtendedBudgetTransportInput);
+  data.extendedBudget.lodging = $editExtendedBudgetLodgingInput.value;
+  editHelper($extendedLodgingBudget, $editExtendedBudgetLodgingInput);
+  data.extendedBudget.food = $editExtendedBudgetFoodInput.value;
+  editHelper($extendedFoodBudget, $editExtendedBudgetFoodInput);
+  data.extendedBudget.activities = $editExtendedBudgetActivitiesInput.value;
+  editHelper($extendedActivitiesBudget, $editExtendedBudgetActivitiesInput);
+  data.extendedBudget.souvenirs = $editExtendedBudgetSouvenirsInput.value;
+  editHelper($extendedSouvenirsBudget, $editExtendedBudgetSouvenirsInput);
+  data.extendedBudget.reserve = $editExtendedBudgetReserveInput.value;
+  editHelper($extendedReserveBudget, $editExtendedBudgetReserveInput);
+
+  data.extendedSpent.transport = $editExtendedSpentTransportInput.value;
+  editHelper($extendedTransportSpent, $editExtendedSpentTransportInput);
+  data.extendedSpent.lodging = $editExtendedSpentLodgingInput.value;
+  editHelper($extendedLodgingSpent, $editExtendedSpentLodgingInput);
+  data.extendedSpent.food = $editExtendedSpentFoodInput.value;
+  editHelper($extendedFoodSpent, $editExtendedSpentFoodInput);
+  data.extendedSpent.activities = $editExtendedSpentActivitiesInput.value;
+  editHelper($extendedActivitiesSpent, $editExtendedSpentActivitiesInput);
+  data.extendedSpent.souvenirs = $editExtendedSpentSouvenirsInput.value;
+  editHelper($extendedSouvenirsSpent, $editExtendedSpentSouvenirsInput);
+  data.extendedSpent.reserve = $editExtendedSpentReserveInput.value;
+  editHelper($extendedReserveSpent, $editExtendedSpentReserveInput);
+
+  if ($editExtendedSpentTransportInput.value === '') {
+    $extendedTransportSpent.appendChild($extendedSpentTransportInput);
+  }
+  if ($editExtendedSpentLodgingInput.value === '') {
+    $extendedLodgingSpent.appendChild($extendedSpentLodgingInput);
+  }
+  if ($editExtendedSpentFoodInput.value === '') {
+    $extendedFoodSpent.appendChild($extendedSpentFoodInput);
+  }
+  if ($editExtendedSpentActivitiesInput.value === '') {
+    $extendedActivitiesSpent.appendChild($extendedSpentActivitiesInput);
+  }
+  if ($editExtendedSpentSouvenirsInput.value === '') {
+    $extendedSouvenirsSpent.appendChild($extendedSpentSouvenirsInput);
+  }
+  if ($editExtendedSpentReserveInput.value === '') {
+    $extendedReserveSpent.appendChild($extendedSpentReserveInput);
+  }
+}
+
+function handleSubmitEditDayForm(event) {
+  event.preventDefault();
+  updateDaySummary();
+  switchView('day-summary');
+}
+
+function handleSubmitEditExtendedForm(event) {
+  event.preventDefault();
+  updateExtendedSummary();
+  switchView('extended-summary');
+}
+
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $extendedForm.addEventListener('submit', handleExtendedForm);
@@ -422,3 +631,7 @@ $dayPlanner.addEventListener('click', handleNavDayPlanner);
 $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
 $daySpentForm.addEventListener('submit', handleDaySpentForm);
 $extendedSpentForm.addEventListener('submit', handleExtendedSpentForm);
+$editDaySummaryLink.addEventListener('click', handleEditDaySummaryLink);
+$editExtendedSummaryLink.addEventListener('click', handleEditExtendedSummaryLink);
+$editDayForm.addEventListener('submit', handleSubmitEditDayForm);
+$editExtendedForm.addEventListener('submit', handleSubmitEditExtendedForm);

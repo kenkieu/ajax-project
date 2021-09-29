@@ -6,7 +6,8 @@ var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
 
 var data = {
   view: '',
-  editing: null,
+  daySpent: { transport: '', food: '', activities: '', souvenirs: '', reserve: '' },
+  extendedSpent: { transport: '', lodging: '', food: '', activities: '', souvenirs: '', reserve: '' },
   currentWeather: { date: currentDate }
 };
 
