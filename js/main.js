@@ -76,6 +76,10 @@ var $editExtendedSpentActivitiesInput = document.querySelector('#edit-extended-s
 var $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
 var $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
 
+var $modalContainer = document.querySelector('#modal-container');
+var $cancelModalLink = document.querySelector('#cancel-modal-link');
+var $deleteModalLink = document.querySelector('#delete-modal-link');
+
 function handleTripSelection(event) {
   event.preventDefault();
   switchView($tripSelect.value);
@@ -734,9 +738,6 @@ function handleSubmitEditExtendedForm(event) {
   switchView('extended-summary');
 }
 
-var $modalContainer = document.querySelector('#modal-container');
-var $cancelModalLink = document.querySelector('#cancel-modal-link');
-var $deleteModalLink = document.querySelector('#delete-modal-link');
 var modalOpen = false;
 
 function handleModalOpen() {
