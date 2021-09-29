@@ -429,18 +429,26 @@ function handleSwap(event) {
 
 function handleNavDayPlanner(event) {
   event.preventDefault();
-  getCurrentWeather(data.dayBudget.destination);
-  populateDayBudget();
-  populateDaySpent();
-  switchView('day-summary');
+  if (!data.dayBudget) {
+    switchView('day-form');
+  } else {
+    getCurrentWeather(data.dayBudget.destination);
+    populateDayBudget();
+    populateDaySpent();
+    switchView('day-summary');
+  }
 }
 
 function handleNavExtendedPlanner(event) {
   event.preventDefault();
-  getForecastWeather(data.extendedBudget.destination);
-  populateExtendedBudget();
-  populateExtendedSpent();
-  switchView('extended-summary');
+  if (!data.extendedBudget) {
+    switchView('extended-form');
+  } else {
+    getForecastWeather(data.extendedBudget.destination);
+    populateExtendedBudget();
+    populateExtendedSpent();
+    switchView('extended-summary');
+  }
 }
 
 function handleEditDaySummaryLink(event) {
