@@ -82,6 +82,7 @@ function handleDayForm(event) {
   data.dayBudget = dayBudget;
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
+  defaultDayBudgetValues();
 }
 
 function handleExtendedForm(event) {
@@ -97,6 +98,7 @@ function handleExtendedForm(event) {
   extendedBudget.reserve = $extendedForm.elements['extended-reserve'].value;
   data.extendedBudget = extendedBudget;
   populateExtendedBudget();
+  defaultExtendedBudgetValues();
 }
 
 function getCurrentWeather(name) {
@@ -427,6 +429,38 @@ function handleSwap(event) {
   switchView(currentView);
 }
 
+function defaultDayBudgetValues() {
+  var $dayBudgetDestination = document.querySelector('#day-budget-destination');
+  var $dayBudgetTransport = document.querySelector('#day-budget-transport');
+  var $dayBudgetFood = document.querySelector('#day-budget-food');
+  var $dayBudgetActivities = document.querySelector('#day-budget-activities');
+  var $dayBudgetSouvenirs = document.querySelector('#day-budget-souvenirs');
+  var $dayBudgetReserve = document.querySelector('#day-budget-reserve');
+  $dayBudgetDestination.value = '';
+  $dayBudgetTransport.value = '';
+  $dayBudgetFood.value = '';
+  $dayBudgetActivities.value = '';
+  $dayBudgetSouvenirs.value = '';
+  $dayBudgetReserve.value = '';
+}
+
+function defaultExtendedBudgetValues() {
+  var $extendedBudgetDestination = document.querySelector('#extended-destination');
+  var $extendedBudgetTransport = document.querySelector('#extended-transport');
+  var $extendedBudgetLodging = document.querySelector('#extended-lodging');
+  var $extendedBudgetFood = document.querySelector('#extended-food');
+  var $extendedBudgetActivities = document.querySelector('#extended-activities');
+  var $extendedBudgetSouvenirs = document.querySelector('#extended-souvenirs');
+  var $extendedBudgetReserve = document.querySelector('#extended-reserve');
+  $extendedBudgetDestination.value = '';
+  $extendedBudgetLodging.value = '';
+  $extendedBudgetTransport.value = '';
+  $extendedBudgetFood.value = '';
+  $extendedBudgetActivities.value = '';
+  $extendedBudgetSouvenirs.value = '';
+  $extendedBudgetReserve.value = '';
+}
+
 function handleNavDayPlanner(event) {
   event.preventDefault();
   if (!data.dayBudget) {
@@ -442,6 +476,20 @@ function handleNavDayPlanner(event) {
 function handleNavExtendedPlanner(event) {
   event.preventDefault();
   if (!data.extendedBudget) {
+    var $extendedBudgetDestination = document.querySelector('#extended-destination');
+    var $extendedBudgetTransport = document.querySelector('#extended-transport');
+    var $extendedBudgetLodging = document.querySelector('#extended-lodging');
+    var $extendedBudgetFood = document.querySelector('#extended-food');
+    var $extendedBudgetActivities = document.querySelector('#extended-activities');
+    var $extendedBudgetSouvenirs = document.querySelector('#extended-souvenirs');
+    var $extendedBudgetReserve = document.querySelector('#extended-reserve');
+    $extendedBudgetDestination.value = '';
+    $extendedBudgetTransport.value = '';
+    $extendedBudgetLodging.value = '';
+    $extendedBudgetFood.value = '';
+    $extendedBudgetActivities.value = '';
+    $extendedBudgetSouvenirs.value = '';
+    $extendedBudgetReserve.value = '';
     switchView('extended-form');
   } else {
     getForecastWeather(data.extendedBudget.destination);
