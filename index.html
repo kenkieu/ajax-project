@@ -14,6 +14,20 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
+<div class="container hidden" id="modal-container">
+  <div class="row modal-bg justify-center align-center">
+    <div class="modal-box">
+      <div class="column-full ptb-one-rem">
+        <p>Are you sure you want to delete this entry?</p>
+      </div>
+      <div class="column-full justify-evenly ptb-one-rem ">
+        <a href="#" class="btn grey-btn" id="cancel-modal-link">Cancel</a>
+        <a href="#" class="btn red-btn" id="delete-modal-link">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body class="background-image">
   <nav class="nav">
     <div class="row justify-between">
@@ -43,7 +57,7 @@
       </div>
     </form>
     <form id="day-form" class="view hidden" data-view="day-form">
-      <div class="row card-white">
+      <div class="row card-white pad-three-rem">
         <div class="column-full justify-center">
           <h2 class="blue-heading">Day Trip</h2>
         </div>
@@ -67,7 +81,7 @@
       </div>
     </form>
     <form id="extended-form" class="view hidden" data-view="extended-form">
-      <div class="row card-white">
+      <div class="row card-white pad-three-rem">
         <div class="column-full justify-center">
           <h2 class="blue-heading">Extended Trip</h2>
         </div>
@@ -157,7 +171,7 @@
   <!-- Editing Day -->
   <div class="container view hidden" data-view="edit-day-summary">
     <form id="edit-day-form">
-      <div class="row card-white mtb-two-rem">
+      <div class="row card-white pad-one-rem mtb-two-rem">
         <div class="column-full">
           <h1 class="text-center mtb-two-rem blue-heading">Edit Trip</h1>
         </div>
@@ -217,7 +231,7 @@
             </tr>
             <tr>
               <td class="edit-save-row">
-                <a href="#" class="delete-link">Delete Entry</a>
+                <a href="#" class="delete-link" id="day-delete-link">Delete Entry</a>
               </td>
               <td class="edit-save-row">&nbsp;</td>
               <td class="edit-save-row">
@@ -300,7 +314,7 @@
   <!-- Editing Extended -->
   <div class="container view hidden" data-view="edit-extended-summary">
     <form id="edit-extended-form">
-      <div class="row card-white mtb-two-rem">
+      <div class="row card-white pad-one-rem mtb-two-rem">
         <div class="column-full">
           <h1 class="text-center mtb-two-rem blue-heading">Edit Trip</h1>
         </div>
@@ -369,7 +383,7 @@
             </tr>
             <tr>
               <td class="edit-save-row">
-                <a href="#" class="delete-link">Delete Entry</a>
+                <a href="#" class="delete-link" id="extended-delete-link">Delete Entry</a>
               </td>
               <td class="edit-save-row">&nbsp;</td>
               <td class="edit-save-row">

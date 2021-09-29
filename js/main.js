@@ -17,6 +17,7 @@ var $daySpentFoodInput = document.querySelector('#day-spent-food-input');
 var $daySpentActivitiesInput = document.querySelector('#day-spent-activities-input');
 var $daySpentSouvenirsInput = document.querySelector('#day-spent-souvenirs-input');
 var $daySpentReserveInput = document.querySelector('#day-spent-reserve-input');
+var $dayDeleteLink = document.querySelector('#day-delete-link');
 
 var $extendedForm = document.querySelector('#extended-form');
 var $extendedTripContainer = document.querySelector('#extended-summary');
@@ -35,6 +36,7 @@ var $extendedSpentSouvenirsInput = document.querySelector('#extended-spent-souve
 var $extendedSpentReserveInput = document.querySelector('#extended-spent-reserve-input');
 var $extendedPlanner = document.querySelector('#extended-planner');
 var $extendedSpentForm = document.querySelector('#extended-spent-form');
+var $extendedDeleteLink = document.querySelector('#extended-delete-link');
 
 var $editDaySummaryLink = document.querySelector('#edit-day-summary-link');
 var $editExtendedSummaryLink = document.querySelector('#edit-extended-summary-link');
@@ -621,6 +623,47 @@ function handleSubmitEditExtendedForm(event) {
   switchView('extended-summary');
 }
 
+var $modalContainer = document.querySelector('#modal-container');
+var $cancelModalLink = document.querySelector('#cancel-modal-link');
+var $deleteModalLink = document.querySelector('#delete-modal-link');
+var modalOpen = false;
+
+function handleModalOpen() {
+  if (modalOpen === false) {
+    $modalContainer.classList.remove('hidden');
+    modalOpen = true;
+  }
+}
+
+function handleHideModal() {
+  if (modalOpen === true) {
+    $modalContainer.classList.add('hidden');
+    modalOpen = false;
+  }
+}
+
+function handleDeleteEntry(event) {
+  if (data.view === 'edit-day-summary') {
+    deleteDayEntry();
+  } else {
+    deleteExtendedEntry();
+  }
+  handleHideModal();
+  switchView('home');
+}
+
+function deleteDayEntry() {
+  var defaultDaySpent = { transport: '', food: '', activities: '', souvenirs: '', reserve: '' };
+  delete data.dayBudget;
+  data.daySpent = defaultDaySpent;
+}
+
+function deleteExtendedEntry() {
+  var defaultExtendedSpent = { transport: '', lodging: '', food: '', activities: '', souvenirs: '', reserve: '' };
+  delete data.extendedBudget;
+  data.extendedSpent = defaultExtendedSpent;
+}
+
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $extendedForm.addEventListener('submit', handleExtendedForm);
@@ -635,3 +678,7 @@ $editDaySummaryLink.addEventListener('click', handleEditDaySummaryLink);
 $editExtendedSummaryLink.addEventListener('click', handleEditExtendedSummaryLink);
 $editDayForm.addEventListener('submit', handleSubmitEditDayForm);
 $editExtendedForm.addEventListener('submit', handleSubmitEditExtendedForm);
+$dayDeleteLink.addEventListener('click', handleModalOpen);
+$extendedDeleteLink.addEventListener('click', handleModalOpen);
+$cancelModalLink.addEventListener('click', handleHideModal);
+$deleteModalLink.addEventListener('click', handleDeleteEntry);
