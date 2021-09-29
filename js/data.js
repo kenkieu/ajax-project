@@ -6,9 +6,6 @@ var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
 
 var data = {
   view: '',
-  editing: null,
-  daySummary: {},
-  extendedSummary: {},
   currentWeather: { date: currentDate }
 };
 
