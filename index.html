@@ -14,6 +14,20 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
+<div class="container hidden" id="modal-container">
+  <div class="row modal-bg justify-center align-center">
+    <div class="modal-box">
+      <div class="column-full ptb-one-rem">
+        <p>Are you sure you want to delete this entry?</p>
+      </div>
+      <div class="column-full justify-evenly ptb-one-rem ">
+        <a href="#" class="btn grey-btn" id="cancel-modal-link">Cancel</a>
+        <a href="#" class="btn red-btn" id="delete-modal-link">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body class="background-image">
   <nav class="nav">
     <div class="row justify-between">
@@ -43,7 +57,7 @@
       </div>
     </form>
     <form id="day-form" class="view hidden" data-view="day-form">
-      <div class="row card-white">
+      <div class="row card-white pad-three-rem">
         <div class="column-full justify-center">
           <h2 class="blue-heading">Day Trip</h2>
         </div>
@@ -67,7 +81,7 @@
       </div>
     </form>
     <form id="extended-form" class="view hidden" data-view="extended-form">
-      <div class="row card-white">
+      <div class="row card-white pad-three-rem">
         <div class="column-full justify-center">
           <h2 class="blue-heading">Extended Trip</h2>
         </div>
@@ -109,42 +123,42 @@
             <tr>
               <td>Transport</td>
               <td id="day-transport-budget"></td>
-              <td id="day-transport-spent">
-                <input type="number" placeholder="Amount" id="day-spent-transport-input">
+              <td id="day-transport-spent" class="day-spent-td">
+                <input type="number" placeholder="Amount" id="day-spent-transport-input" class="day-spent-input">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td id="day-food-budget"></td>
-              <td id="day-food-spent">
-                <input type="number" placeholder="Amount" id="day-spent-food-input">
+              <td id="day-food-spent" class="day-spent-td">
+                <input type="number" placeholder="Amount" id="day-spent-food-input" class="day-spent-input">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td id="day-activities-budget"></td>
-              <td id="day-activities-spent">
-                <input type="number" placeholder="Amount" id="day-spent-activities-input">
+              <td id="day-activities-spent" class="day-spent-td">
+                <input type="number" placeholder="Amount" id="day-spent-activities-input" class="day-spent-input">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td id="day-souvenirs-budget"></td>
-              <td id="day-souvenirs-spent">
-                <input type="number" placeholder="Amount" id="day-spent-souvenirs-input">
+              <td id="day-souvenirs-spent" class="day-spent-td">
+                <input type="number" placeholder="Amount" id="day-spent-souvenirs-input" class="day-spent-input">
               </td>
             </tr>
             <tr id="day-row-reserve">
               <td>Reserve</td>
               <td id="day-reserve-budget"></td>
-              <td id="day-reserve-spent">
-                <input type="number" placeholder="Amount" id="day-spent-reserve-input">
+              <td id="day-reserve-spent" class="day-spent-td">
+                <input type="number" placeholder="Amount" id="day-spent-reserve-input" class="day-spent-input">
               </td>
             </tr>
             <tr>
-              <td class="edit-save-row"><a href="#" id="edit-day-summary-link">Edit Entry</a></td>
+              <td class="edit-save-row"><a href="#" class="edit-link" id="edit-day-summary-link">Edit Entry</a></td>
               <td class="edit-save-row">&nbsp;</td>
-              <td class="edit-save-row">
+              <td class="edit-save-row" >
                 <button type="submit" class="btn blue-btn">Save</button>
               </td>
             </tr>
@@ -157,7 +171,7 @@
   <!-- Editing Day -->
   <div class="container view hidden" data-view="edit-day-summary">
     <form id="edit-day-form">
-      <div class="row card-white mtb-two-rem">
+      <div class="row card-white pad-one-rem mtb-two-rem">
         <div class="column-full">
           <h1 class="text-center mtb-two-rem blue-heading">Edit Trip</h1>
         </div>
@@ -216,7 +230,9 @@
               </td>
             </tr>
             <tr>
-              <td class="edit-save-row">&nbsp;</td>
+              <td class="edit-save-row">
+                <a href="#" class="delete-link" id="day-delete-link">Delete Entry</a>
+              </td>
               <td class="edit-save-row">&nbsp;</td>
               <td class="edit-save-row">
                 <button type="submit" class="btn blue-btn">Submit</button>
@@ -243,47 +259,47 @@
             <tr>
               <td>Transport</td>
               <td id="extended-transport-budget"></td>
-              <td id="extended-transport-spent">
-                <input type=" number" placeholder="Amount" id="extended-spent-transport-input">
+              <td id="extended-transport-spent" class="extended-spent-td">
+                <input type=" number" placeholder="Amount" id="extended-spent-transport-input" class="extended-spent-input">
               </td>
             </tr>
             <tr>
               <td>Lodging</td>
               <td id="extended-lodging-budget"></td>
-              <td id="extended-lodging-spent">
-                <input type="number" placeholder="Amount" id="extended-spent-lodging-input">
+              <td id="extended-lodging-spent" class="extended-spent-td">
+                <input type="number" placeholder="Amount" id="extended-spent-lodging-input" class="extended-spent-input">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td id="extended-food-budget"></td>
-              <td id="extended-food-spent">
-                <input type="number" placeholder="Amount" id="extended-spent-food-input">
+              <td id="extended-food-spent" class="extended-spent-td">
+                <input type="number" placeholder="Amount" id="extended-spent-food-input" class="extended-spent-input">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td id="extended-activities-budget"></td>
-              <td id="extended-activities-spent">
-                <input type="number" placeholder="Amount" id="extended-spent-activities-input">
+              <td id="extended-activities-spent" class="extended-spent-td">
+                <input type="number" placeholder="Amount" id="extended-spent-activities-input" class="extended-spent-input">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td id="extended-souvenirs-budget"></td>
-              <td id="extended-souvenirs-spent">
-                <input type="number" placeholder="Amount" id="extended-spent-souvenirs-input">
+              <td id="extended-souvenirs-spent" class="extended-spent-td">
+                <input type="number" placeholder="Amount" id="extended-spent-souvenirs-input" class="extended-spent-input">
               </td>
             </tr>
             <tr>
               <td>Reserve</td>
               <td id="extended-reserve-budget"></td>
-              <td id="extended-reserve-spent">
-                <input type="number" placeholder="Amount" id="extended-spent-reserve-input">
+              <td id="extended-reserve-spent" class="extended-spent-td">
+                <input type="number" placeholder="Amount" id="extended-spent-reserve-input" class="extended-spent-input">
               </td>
             </tr>
             <tr>
-              <td class="edit-save-row"><a href="#" id="edit-extended-summary-link">Edit Entry</a></td>
+              <td class="edit-save-row"><a href="#" class="edit-link" id="edit-extended-summary-link">Edit Entry</a></td>
               <td class="edit-save-row">&nbsp;</td>
               <td class="edit-save-row">
                 <button type="submit" class="btn blue-btn">Save</button>
@@ -298,7 +314,7 @@
   <!-- Editing Extended -->
   <div class="container view hidden" data-view="edit-extended-summary">
     <form id="edit-extended-form">
-      <div class="row card-white mtb-two-rem">
+      <div class="row card-white pad-one-rem mtb-two-rem">
         <div class="column-full">
           <h1 class="text-center mtb-two-rem blue-heading">Edit Trip</h1>
         </div>
@@ -366,7 +382,9 @@
               </td>
             </tr>
             <tr>
-              <td class="edit-save-row">&nbsp;</td>
+              <td class="edit-save-row">
+                <a href="#" class="delete-link" id="extended-delete-link">Delete Entry</a>
+              </td>
               <td class="edit-save-row">&nbsp;</td>
               <td class="edit-save-row">
                 <button type="submit" class="btn blue-btn">Submit</button>
