@@ -96,31 +96,21 @@ function handleDayForm(event) {
   dayBudget.reserve = $dayForm.elements['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
 
-  if (data.daySpent.transport === '') {
-    $dayTransportSpent.textContent = '';
-    $daySpentTransportInput.value = '';
-    $dayTransportSpent.appendChild($daySpentTransportInput);
+  var $daySpentTD = document.querySelectorAll('.day-spent-td');
+  var $daySpentInput = document.querySelectorAll('.day-spent-input');
+
+  for (var key in data.daySpent) {
+    if (data.daySpent[key] === '') {
+      for (var i = 0; i < $daySpentTD.length; i++) {
+        if ($daySpentTD[i].getAttribute('id').includes(key) && $daySpentInput[i].getAttribute('id').includes(key)) {
+          $daySpentTD[i].textContent = '';
+          $daySpentInput[i].value = '';
+          $daySpentTD[i].appendChild($daySpentInput[i]);
+        }
+      }
+    }
   }
-  if (data.daySpent.food === '') {
-    $dayFoodSpent.textContent = '';
-    $daySpentFoodInput.value = '';
-    $dayFoodSpent.appendChild($daySpentFoodInput);
-  }
-  if (data.daySpent.activities === '') {
-    $dayActivitiesSpent.textContent = '';
-    $daySpentActivitiesInput.value = '';
-    $dayActivitiesSpent.appendChild($daySpentActivitiesInput);
-  }
-  if (data.daySpent.souvenirs === '') {
-    $daySouvenirsSpent.textContent = '';
-    $daySpentSouvenirsInput.value = '';
-    $daySouvenirsSpent.appendChild($daySpentSouvenirsInput);
-  }
-  if (data.daySpent.reserve === '') {
-    $dayReserveSpent.textContent = '';
-    $daySpentReserveInput.value = '';
-    $dayReserveSpent.appendChild($daySpentReserveInput);
-  }
+
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
   defaultDayBudgetValues();
@@ -139,36 +129,20 @@ function handleExtendedForm(event) {
   extendedBudget.reserve = $extendedForm.elements['extended-reserve'].value;
   data.extendedBudget = extendedBudget;
 
-  if (data.extendedSpent.transport === '') {
-    $extendedTransportSpent.textContent = '';
-    $extendedSpentTransportInput.value = '';
-    $extendedTransportSpent.appendChild($extendedSpentTransportInput);
+  var $extendedSpentTD = document.querySelectorAll('.extended-spent-td');
+  var $extendedSpentInput = document.querySelectorAll('.extended-spent-input');
+  for (var key in data.extendedSpent) {
+    if (data.extendedSpent[key] === '') {
+      for (var i = 0; i < $extendedSpentTD.length; i++) {
+        if ($extendedSpentTD[i].getAttribute('id').includes(key) && $extendedSpentInput[i].getAttribute('id').includes(key)) {
+          $extendedSpentTD[i].textContent = '';
+          $extendedSpentInput[i].value = '';
+          $extendedSpentTD[i].appendChild($extendedSpentInput[i]);
+        }
+      }
+    }
   }
-  if (data.extendedSpent.lodging === '') {
-    $extendedLodgingSpent.textContent = '';
-    $extendedSpentLodgingInput.value = '';
-    $extendedLodgingSpent.appendChild($extendedSpentLodgingInput);
-  }
-  if (data.extendedSpent.food === '') {
-    $extendedFoodSpent.textContent = '';
-    $extendedSpentFoodInput.value = '';
-    $extendedFoodSpent.appendChild($extendedSpentFoodInput);
-  }
-  if (data.extendedSpent.activities === '') {
-    $extendedActivitiesSpent.textContent = '';
-    $extendedSpentActivitiesInput.value = '';
-    $extendedActivitiesSpent.appendChild($extendedSpentActivitiesInput);
-  }
-  if (data.extendedSpent.souvenirs === '') {
-    $extendedSouvenirsSpent.textContent = '';
-    $extendedSpentSouvenirsInput.value = '';
-    $extendedSouvenirsSpent.appendChild($extendedSpentSouvenirsInput);
-  }
-  if (data.extendedSpent.reserve === '') {
-    $extendedReserveSpent.textContent = '';
-    $extendedSpentReserveInput.value = '';
-    $extendedReserveSpent.appendChild($extendedSpentReserveInput);
-  }
+
   populateExtendedBudget();
   defaultExtendedBudgetValues();
 }
