@@ -1,3 +1,3 @@
-# ajax-project
+# tripify
 
-A dynamic HTML, CSS, and JavaScript solo project.
+A web application for travel enthusiasts who want to manage their finances and keep updated with the weather.
