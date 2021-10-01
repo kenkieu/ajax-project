@@ -9,7 +9,6 @@ var $dayFoodBudget = document.querySelector('#day-food-budget');
 var $dayActivitiesBudget = document.querySelector('#day-activities-budget');
 var $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
 var $dayReserveBudget = document.querySelector('#day-reserve-budget');
-var $daySummaryButton = document.querySelector('.day-summary-btn');
 var $dayPlanner = document.querySelector('#day-planner');
 var $daySpentForm = document.querySelector('#day-spent-form');
 var $daySpentTransportInput = document.querySelector('#day-spent-transport-input');
@@ -26,7 +25,6 @@ var $dayReserveSpent = document.querySelector('#day-reserve-spent');
 
 var $extendedForm = document.querySelector('#extended-form');
 var $extendedTripContainer = document.querySelector('#extended-summary');
-var $extendedSummaryButton = document.querySelector('.extended-summary-btn');
 var $extendedTransportBudget = document.querySelector('#extended-transport-budget');
 var $extendedLodgingBudget = document.querySelector('#extended-lodging-budget');
 var $extendedFoodBudget = document.querySelector('#extended-food-budget');
@@ -114,6 +112,7 @@ function handleDayForm(event) {
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
   defaultDayBudgetValues();
+  switchView('day-summary');
 }
 
 function handleExtendedForm(event) {
@@ -145,6 +144,7 @@ function handleExtendedForm(event) {
 
   populateExtendedBudget();
   defaultExtendedBudgetValues();
+  switchView('extended-summary');
 }
 
 function getCurrentWeather(name) {
@@ -754,8 +754,6 @@ $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $extendedForm.addEventListener('submit', handleExtendedForm);
 $tripTypeButton.addEventListener('click', handleSwap);
-$daySummaryButton.addEventListener('click', handleSwap);
-$extendedSummaryButton.addEventListener('click', handleSwap);
 $dayPlanner.addEventListener('click', handleNavDayPlanner);
 $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
 $daySpentForm.addEventListener('submit', handleDaySpentForm);
