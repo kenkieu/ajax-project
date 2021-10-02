@@ -147,19 +147,35 @@ function handleExtendedForm(event) {
   switchView('extended-summary');
 }
 
+function createSpinner() {
+  var $spinner = document.createElement('div');
+  $spinner.className = 'lds-hourglass';
+  return $spinner;
+}
+
 function getCurrentWeather(name) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
   xhr.responseType = 'json';
+
   xhr.addEventListener('load', function () {
-    var $currentWeatherCard = document.querySelector('#current-weather-card');
-    data.currentWeather.temp = xhr.response.data[0].temp + '°F';
-    data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-    data.currentWeather.description = xhr.response.data[0].weather.description;
-    if ($currentWeatherCard) {
-      $currentWeatherCard.remove();
+    //* var $spinnerDiv = document.querySelector('.lds-hourglass');
+    //* if ($spinnerDiv) {
+    //*   $spinnerDiv.remove();
+    //* }
+    //* $dayTripContainer.prepend(createSpinner());
+
+    if (xhr.status === 200) {
+      //! console.log(xhr.status);
+      var $currentWeatherCard = document.querySelector('#current-weather-card');
+      data.currentWeather.temp = xhr.response.data[0].temp + '°F';
+      data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
+      data.currentWeather.description = xhr.response.data[0].weather.description;
+      if ($currentWeatherCard) {
+        $currentWeatherCard.remove();
+      }
+      $dayTripContainer.prepend(createCurrentWeather());
     }
-    $dayTripContainer.prepend(createCurrentWeather());
   });
   xhr.send();
 }
