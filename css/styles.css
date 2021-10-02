@@ -18,6 +18,9 @@ h3 {
 
 input {
   width: 100%;
+}
+
+.form-input {
   margin-bottom: 1rem;
 }
 
@@ -75,9 +78,10 @@ th {
 }
 
 .card-white {
-  margin-top: 1rem;
+  margin-top: 2rem;
   background-color: #fff;
   border-radius: 5px;
+  margin-bottom: 2rem;
 }
 
 .card-table {
@@ -85,6 +89,7 @@ th {
   padding: 1rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  margin-bottom: 2rem;
 }
 
 .pad-one-rem {
@@ -268,9 +273,27 @@ th {
   padding: 1rem;
 }
 
+@media screen and (min-width: 575px) {
+  .font-scale {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.6rem 0.75rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
-  td,
   th {
-    padding: 1rem 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .card-sky {
+    padding: 0 4rem;
+  }
+
+  .nav {
+    padding: 0 1.5rem;
   }
 }

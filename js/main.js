@@ -229,7 +229,7 @@ function createCurrentWeather() {
   $currentWeatherRow.setAttribute('id', 'current-weather-card');
   $cityDateColumn.className = 'column-full';
   $headerColumn.className = 'column-full justify-center';
-  $cityHeader.className = 'mb-zero';
+  $cityHeader.className = 'mb-zero font-scale';
   $cityHeader.textContent = data.dayBudget.destination;
   $dateColumn.className = 'column-full justify-center';
   $dateParagraph.className = 'rm-margin';

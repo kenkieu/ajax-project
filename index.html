@@ -67,17 +67,17 @@
         </div>
         <div class="column-full justify-center flex-column">
           <label for="day-budget-destination">Destination</label>
-          <input required id="day-budget-destination" name="day-destination" type="text" placeholder="City, State">
+          <input required id="day-budget-destination" name="day-destination" type="text" placeholder="City, State" class="form-input">
           <label for="day-budget-transport">Transport</label>
-          <input required id="day-budget-transport" name="day-budget-transport" type="number" placeholder="Budget">
+          <input required id="day-budget-transport" name="day-budget-transport" type="number" placeholder="Budget" class="form-input">
           <label for="day-food">Food</label>
-          <input required id="day-budget-food" name="day-budget-food" type="number" placeholder="Budget">
+          <input required id="day-budget-food" name="day-budget-food" type="number" placeholder="Budget" class="form-input">
           <label for="day-activities">Activities</label>
-          <input required id="day-budget-activities" name="day-budget-activities" type="number" placeholder="Budget">
+          <input required id="day-budget-activities" name="day-budget-activities" type="number" placeholder="Budget" class="form-input">
           <label for="day-souvenirs">Souvenirs</label>
-          <input required id="day-budget-souvenirs" name="day-budget-souvenirs" type="number" placeholder="Budget">
+          <input required id="day-budget-souvenirs" name="day-budget-souvenirs" type="number" placeholder="Budget" class="form-input">
           <label for="day-reserve">Reserve</label>
-          <input required id="day-budget-reserve" name="day-budget-reserve" type="number" placeholder="Budget">
+          <input required id="day-budget-reserve" name="day-budget-reserve" type="number" placeholder="Budget" class="form-input">
           <div class="column-full justify-end">
             <button class="btn blue-btn day-summary-btn" type="submit" data-view="day-summary">Submit</button>
           </div>
@@ -91,19 +91,19 @@
         </div>
         <div class="column-full justify-center flex-column">
           <label for="extended-destination">Destination</label>
-          <input required id="extended-destination" name="extended-destination" type="text" placeholder="City, State">
+          <input required id="extended-destination" name="extended-destination" type="text" placeholder="City, State" class="form-input">
           <label for="extended-transport">Transport</label>
-          <input required id="extended-transport" name="extended-transport" type="number" placeholder="Budget">
+          <input required id="extended-transport" name="extended-transport" type="number" placeholder="Budget" class="form-input">
           <label for="extended-lodging">Lodging</label>
-          <input required id="extended-lodging" name="extended-lodging" type="number" placeholder="Budget">
+          <input required id="extended-lodging" name="extended-lodging" type="number" placeholder="Budget" class="form-input">
           <label for="extended-food">Food</label>
-          <input required id="extended-food" name="extended-food" type="number" placeholder="Budget">
+          <input required id="extended-food" name="extended-food" type="number" placeholder="Budget" class="form-input">
           <label for="extended-activities">Activities</label>
-          <input required id="extended-activities" name="extended-activities" type="number" placeholder="Budget">
+          <input required id="extended-activities" name="extended-activities" type="number" placeholder="Budget" class="form-input">
           <label for="extended-souvenirs">Souvenirs</label>
-          <input required id="extended-souvenirs" name="extended-souvenirs" type="number" placeholder="Budget">
+          <input required id="extended-souvenirs" name="extended-souvenirs" type="number" placeholder="Budget" class="form-input">
           <label for="extended-reserve">Reserve</label>
-          <input required id="extended-reserve" name="extended-reserve" type="number" placeholder="Budget">
+          <input required id="extended-reserve" name="extended-reserve" type="number" placeholder="Budget" class="form-input">
           <div class="column-full justify-end">
             <button class="btn blue-btn extended-summary-btn" type="submit" data-view="extended-summary">Submit</button>
           </div>
@@ -128,35 +128,35 @@
               <td>Transport</td>
               <td id="day-transport-budget"></td>
               <td id="day-transport-spent" class="day-spent-td">
-                <input type="number" placeholder="Amount" id="day-spent-transport-input" class="day-spent-input">
+                <input type="number" placeholder="Amount" id="day-spent-transport-input" class="day-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td id="day-food-budget"></td>
               <td id="day-food-spent" class="day-spent-td">
-                <input type="number" placeholder="Amount" id="day-spent-food-input" class="day-spent-input">
+                <input type="number" placeholder="Amount" id="day-spent-food-input" class="day-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td id="day-activities-budget"></td>
               <td id="day-activities-spent" class="day-spent-td">
-                <input type="number" placeholder="Amount" id="day-spent-activities-input" class="day-spent-input">
+                <input type="number" placeholder="Amount" id="day-spent-activities-input" class="day-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td id="day-souvenirs-budget"></td>
               <td id="day-souvenirs-spent" class="day-spent-td">
-                <input type="number" placeholder="Amount" id="day-spent-souvenirs-input" class="day-spent-input">
+                <input type="number" placeholder="Amount" id="day-spent-souvenirs-input" class="day-spent-input text-center">
               </td>
             </tr>
             <tr id="day-row-reserve">
               <td>Reserve</td>
               <td id="day-reserve-budget"></td>
               <td id="day-reserve-spent" class="day-spent-td">
-                <input type="number" placeholder="Amount" id="day-spent-reserve-input" class="day-spent-input">
+                <input type="number" placeholder="Amount" id="day-spent-reserve-input" class="day-spent-input text-center">
               </td>
             </tr>
             <tr>
@@ -264,42 +264,42 @@
               <td>Transport</td>
               <td id="extended-transport-budget"></td>
               <td id="extended-transport-spent" class="extended-spent-td">
-                <input type=" number" placeholder="Amount" id="extended-spent-transport-input" class="extended-spent-input">
+                <input type=" number" placeholder="Amount" id="extended-spent-transport-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Lodging</td>
               <td id="extended-lodging-budget"></td>
               <td id="extended-lodging-spent" class="extended-spent-td">
-                <input type="number" placeholder="Amount" id="extended-spent-lodging-input" class="extended-spent-input">
+                <input type="number" placeholder="Amount" id="extended-spent-lodging-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td id="extended-food-budget"></td>
               <td id="extended-food-spent" class="extended-spent-td">
-                <input type="number" placeholder="Amount" id="extended-spent-food-input" class="extended-spent-input">
+                <input type="number" placeholder="Amount" id="extended-spent-food-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td id="extended-activities-budget"></td>
               <td id="extended-activities-spent" class="extended-spent-td">
-                <input type="number" placeholder="Amount" id="extended-spent-activities-input" class="extended-spent-input">
+                <input type="number" placeholder="Amount" id="extended-spent-activities-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td id="extended-souvenirs-budget"></td>
               <td id="extended-souvenirs-spent" class="extended-spent-td">
-                <input type="number" placeholder="Amount" id="extended-spent-souvenirs-input" class="extended-spent-input">
+                <input type="number" placeholder="Amount" id="extended-spent-souvenirs-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
               <td>Reserve</td>
               <td id="extended-reserve-budget"></td>
               <td id="extended-reserve-spent" class="extended-spent-td">
-                <input type="number" placeholder="Amount" id="extended-spent-reserve-input" class="extended-spent-input">
+                <input type="number" placeholder="Amount" id="extended-spent-reserve-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
