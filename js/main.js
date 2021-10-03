@@ -226,8 +226,8 @@ function getForecastWeather(name) {
       $extendedTripContainer.prepend(createForecastWeather());
     } else {
       $extendedSpinner.classList.add('hidden');
+      var $weatherError = document.querySelector('#weather-error');
       if ($weatherError) {
-        var $weatherError = document.querySelector('#weather-error');
         $weatherError.remove();
       }
       $extendedTripContainer.prepend(createWeatherError());
