@@ -224,7 +224,11 @@ function getForecastWeather(name) {
         $weatherError.remove();
       }
       $extendedTripContainer.prepend(createForecastWeather());
-    } else {
+    }
+    // else if(xhr.status === 400) {
+    //   console.log(xhr.status, "Sorry, we're experiencing issues connecting to the network. Please check your internet connection and try again!")
+    // }
+    else {
       $extendedSpinner.classList.add('hidden');
       var $weatherError = document.querySelector('#weather-error');
       if ($weatherError) {
