@@ -150,23 +150,51 @@ function handleExtendedForm(event) {
 function getCurrentWeather(name) {
   var $daySpinner = document.querySelector('#day-spinner');
   $daySpinner.classList.remove('hidden');
-
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
   xhr.responseType = 'json';
-
   xhr.addEventListener('load', function () {
-    $daySpinner.classList.add('hidden');
-    var $currentWeatherCard = document.querySelector('#current-weather-card');
-    data.currentWeather.temp = xhr.response.data[0].temp + '°F';
-    data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-    data.currentWeather.description = xhr.response.data[0].weather.description;
-    if ($currentWeatherCard) {
-      $currentWeatherCard.remove();
+    if (xhr.status === 200) {
+      $daySpinner.classList.add('hidden');
+      var $currentWeatherCard = document.querySelector('#current-weather-card');
+      data.currentWeather.temp = xhr.response.data[0].temp + '°F';
+      data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
+      data.currentWeather.description = xhr.response.data[0].weather.description;
+      if ($currentWeatherCard) {
+        $currentWeatherCard.remove();
+      }
+      var $weatherError = document.querySelector('#weather-error');
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      $dayTripContainer.prepend(createCurrentWeather());
+    } else {
+      var $weatherError = document.querySelector('#weather-error');
+      $daySpinner.classList.add('hidden');
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      $dayTripContainer.prepend(createWeatherError());
     }
-    $dayTripContainer.prepend(createCurrentWeather());
   });
   xhr.send();
+}
+
+function createWeatherError() {
+  var $cardSky = document.createElement('div');
+  $cardSky.className = 'row card-sky';
+  $cardSky.setAttribute('id', 'weather-error');
+
+  var $errorColumn = document.createElement('div');
+  $errorColumn.className = 'column-full justify-center align-center';
+
+  var $errorMessage = document.createElement('p');
+  $errorMessage.textContent = 'Oops, something went wrong. Please try again momentarily!';
+
+  $cardSky.appendChild($errorColumn);
+  $errorColumn.appendChild($errorMessage);
+
+  return $cardSky;
 }
 
 function getForecastWeather(name) {
@@ -176,21 +204,34 @@ function getForecastWeather(name) {
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    $extendedSpinner.classList.add('hidden');
-    var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
-    var forecastArr = [];
-    for (var i = 0; i < xhr.response.data.length; i++) {
-      var dailyForecast = {};
-      dailyForecast.temp = xhr.response.data[i].temp;
-      dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
-      dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
-      forecastArr.push(dailyForecast);
+    if (xhr.status === 200) {
+      $extendedSpinner.classList.add('hidden');
+      var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
+      var forecastArr = [];
+      for (var i = 0; i < xhr.response.data.length; i++) {
+        var dailyForecast = {};
+        dailyForecast.temp = xhr.response.data[i].temp;
+        dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
+        dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
+        forecastArr.push(dailyForecast);
+      }
+      data.forecastWeather = forecastArr;
+      if ($forecastWeatherCard) {
+        $forecastWeatherCard.remove();
+      }
+      var $weatherError = document.querySelector('#weather-error');
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      $extendedTripContainer.prepend(createForecastWeather());
+    } else {
+      $extendedSpinner.classList.add('hidden');
+      if ($weatherError) {
+        var $weatherError = document.querySelector('#weather-error');
+        $weatherError.remove();
+      }
+      $extendedTripContainer.prepend(createWeatherError());
     }
-    data.forecastWeather = forecastArr;
-    if ($forecastWeatherCard) {
-      $forecastWeatherCard.remove();
-    }
-    $extendedTripContainer.prepend(createForecastWeather());
   });
   xhr.send();
 }
