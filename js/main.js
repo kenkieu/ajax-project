@@ -147,44 +147,36 @@ function handleExtendedForm(event) {
   switchView('extended-summary');
 }
 
-function createSpinner() {
-  var $spinner = document.createElement('div');
-  $spinner.className = 'lds-hourglass';
-  return $spinner;
-}
-
 function getCurrentWeather(name) {
+  var $daySpinner = document.querySelector('#day-spinner');
+  $daySpinner.classList.remove('hidden');
+
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
   xhr.responseType = 'json';
 
   xhr.addEventListener('load', function () {
-    //* var $spinnerDiv = document.querySelector('.lds-hourglass');
-    //* if ($spinnerDiv) {
-    //*   $spinnerDiv.remove();
-    //* }
-    //* $dayTripContainer.prepend(createSpinner());
-
-    if (xhr.status === 200) {
-      //! console.log(xhr.status);
-      var $currentWeatherCard = document.querySelector('#current-weather-card');
-      data.currentWeather.temp = xhr.response.data[0].temp + '°F';
-      data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-      data.currentWeather.description = xhr.response.data[0].weather.description;
-      if ($currentWeatherCard) {
-        $currentWeatherCard.remove();
-      }
-      $dayTripContainer.prepend(createCurrentWeather());
+    $daySpinner.classList.add('hidden');
+    var $currentWeatherCard = document.querySelector('#current-weather-card');
+    data.currentWeather.temp = xhr.response.data[0].temp + '°F';
+    data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
+    data.currentWeather.description = xhr.response.data[0].weather.description;
+    if ($currentWeatherCard) {
+      $currentWeatherCard.remove();
     }
+    $dayTripContainer.prepend(createCurrentWeather());
   });
   xhr.send();
 }
 
 function getForecastWeather(name) {
+  var $extendedSpinner = document.querySelector('#extended-spinner');
+  $extendedSpinner.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    $extendedSpinner.classList.add('hidden');
     var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
     var forecastArr = [];
     for (var i = 0; i < xhr.response.data.length; i++) {
