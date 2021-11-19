@@ -28,10 +28,6 @@ input {
   width: 100%;
 }
 
-.form-input {
-  margin-bottom: 1rem;
-}
-
 input,
 select {
   border-radius: 3px;
@@ -205,8 +201,16 @@ th {
   margin-bottom: 0.5rem;
 }
 
+.mb-one-rem {
+  margin-bottom: 1rem;
+}
+
 .mtb-two-rem {
   margin: 2rem 0;
+}
+
+.ml-one-rem {
+  margin-left: 1rem;
 }
 
 .justify-center {

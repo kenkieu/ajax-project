@@ -74,13 +74,13 @@ var $editExtendedSpentFoodInput = document.querySelector('#edit-extended-spent-f
 var $editExtendedSpentActivitiesInput = document.querySelector('#edit-extended-spent-activities-input');
 var $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
 var $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
-
+var $weatherError = document.querySelector('#weather-error');
 var $modalContainer = document.querySelector('#modal-container');
 var $cancelModalLink = document.querySelector('#cancel-modal-link');
 var $deleteModalLink = document.querySelector('#delete-modal-link');
 
-function returnHome(){
-  switchView("home")
+function returnHome() {
+  switchView('home');
 }
 
 function handleTripSelection(event) {
@@ -155,6 +155,7 @@ function handleExtendedForm(event) {
 
 function getCurrentWeather(name) {
   var $daySpinner = document.querySelector('#day-spinner');
+  var $currentWeatherCard = document.querySelector('#current-weather-card');
   $daySpinner.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
@@ -162,12 +163,10 @@ function getCurrentWeather(name) {
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
       $daySpinner.classList.add('hidden');
-      data.currentWeather.location = xhr.response.data[0].city_name + ", " + xhr.response.data[0].state_code;
+      data.currentWeather.location = xhr.response.data[0].city_name + ', ' + xhr.response.data[0].state_code;
       data.currentWeather.temp = xhr.response.data[0].temp + '°F';
       data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
       data.currentWeather.description = xhr.response.data[0].weather.description;
-      var $weatherError = document.querySelector('#weather-error');
-      var $currentWeatherCard = document.querySelector('#current-weather-card');
       if ($currentWeatherCard) {
         $currentWeatherCard.remove();
       }
@@ -176,29 +175,27 @@ function getCurrentWeather(name) {
       }
       $dayTripContainer.prepend(createCurrentWeather());
     } else {
-      var $weatherError = document.querySelector('#weather-error');
-      var $currentWeatherCard = document.querySelector('#current-weather-card');
       if ($currentWeatherCard) {
         $currentWeatherCard.remove();
       }
-        if ($weatherError) {
-          $weatherError.remove();
-        }
+      if ($weatherError) {
+        $weatherError.remove();
+      }
       $daySpinner.classList.add('hidden');
-      $dayTripContainer.prepend(createWeatherError());
+      $dayTripContainer.prepend(noContentError());
     }
   });
   xhr.send();
 }
 
-function createWeatherError() {
+function noContentError() {
   var $cardSky = document.createElement('div');
   $cardSky.className = 'row card-sky';
   $cardSky.setAttribute('id', 'weather-error');
   var $errorColumn = document.createElement('div');
   $errorColumn.className = 'column-full justify-center align-center';
   var $errorMessage = document.createElement('h3');
-  $errorMessage.className = 'error-message'
+  $errorMessage.className = 'error-message';
   $errorMessage.textContent = 'Oops, something went wrong! Please verify that a valid City, State was entered.';
   $cardSky.appendChild($errorColumn);
   $errorColumn.appendChild($errorMessage);
@@ -207,45 +204,42 @@ function createWeatherError() {
 
 function getForecastWeather(name) {
   var $extendedSpinner = document.querySelector('#extended-spinner');
+
   $extendedSpinner.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
     if (xhr.status === 200) {
       $extendedSpinner.classList.add('hidden');
       var forecastArr = [];
       for (var i = 0; i < xhr.response.data.length; i++) {
         var dailyForecast = {};
-        dailyForecast.location = xhr.response.city_name + ", " + xhr.response.state_code;
+        dailyForecast.location = xhr.response.city_name + ', ' + xhr.response.state_code;
         dailyForecast.temp = xhr.response.data[i].temp;
         dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
         dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
         forecastArr.push(dailyForecast);
       }
       data.forecastWeather = forecastArr;
-      var $weatherError = document.querySelector('#weather-error');
-      var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
 
-      if ($weatherError) {
-        $weatherError.remove();
-      }
-      if($forecastWeatherCard){
-        $forecastWeatherCard.remove();
-      }
-      $extendedTripContainer.prepend(createForecastWeather());
-    }
-    else {
-      $extendedSpinner.classList.add('hidden');
-      var $weatherError = document.querySelector('#weather-error');
-      var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
       if ($weatherError) {
         $weatherError.remove();
       }
       if ($forecastWeatherCard) {
         $forecastWeatherCard.remove();
       }
-      $extendedTripContainer.prepend(createWeatherError());
+      $extendedTripContainer.prepend(createForecastWeather());
+    } else {
+      $extendedSpinner.classList.add('hidden');
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      if ($forecastWeatherCard) {
+        $forecastWeatherCard.remove();
+      }
+      $extendedTripContainer.prepend(noContentError());
     }
   });
   xhr.send();
@@ -382,7 +376,7 @@ function createForecastWeather() {
     $forecastIcon.setAttribute('src', data.forecastWeather[i].icon);
     $forecastIcon.setAttribute('alt', 'weather-icon');
     $forecastIcon.className = 'forecast-icon';
-    $forecastDate.className = "forecast-date"
+    $forecastDate.className = 'forecast-date';
     $forecastDate.textContent = data.forecastWeather[i].date;
     $forecastTemp.textContent = data.forecastWeather[i].temp + '°F';
 
@@ -750,17 +744,17 @@ function updateExtendedSummary() {
   editHelper($extendedReserveBudget, $editExtendedBudgetReserveInput);
 
   es.transport = $editExtendedSpentTransportInput.value;
-  $extendedSpentTransportInput.value = es.transport
+  $extendedSpentTransportInput.value = es.transport;
   es.lodging = $editExtendedSpentLodgingInput.value;
-  $extendedSpentLodgingInput.value = es.lodging
+  $extendedSpentLodgingInput.value = es.lodging;
   es.food = $editExtendedSpentFoodInput.value;
-  $extendedSpentFoodInput.value = es.food
+  $extendedSpentFoodInput.value = es.food;
   es.activities = $editExtendedSpentActivitiesInput.value;
-  $extendedSpentActivitiesInput.value = es.activities
+  $extendedSpentActivitiesInput.value = es.activities;
   es.souvenirs = $editExtendedSpentSouvenirsInput.value;
-  $extendedSpentSouvenirsInput.value = es.souvenirs
+  $extendedSpentSouvenirsInput.value = es.souvenirs;
   es.reserve = $editExtendedSpentReserveInput.value;
-  $extendedSpentReserveInput.value = es.reserve
+  $extendedSpentReserveInput.value = es.reserve;
 
   editHelper($extendedTransportSpent, $editExtendedSpentTransportInput);
   editHelper($extendedLodgingSpent, $editExtendedSpentLodgingInput);
@@ -830,18 +824,18 @@ function handleDeleteEntry(event) {
 function deleteDayEntry() {
   var defaultDaySpent = { transport: '', food: '', activities: '', souvenirs: '', reserve: '' };
   delete data.dayBudget;
-  data.currentWeather = {}
+  data.currentWeather = {};
   data.daySpent = defaultDaySpent;
 }
 
 function deleteExtendedEntry() {
   var defaultExtendedSpent = { transport: '', lodging: '', food: '', activities: '', souvenirs: '', reserve: '' };
   delete data.extendedBudget;
-  data.forecastWeather = {}
+  data.forecastWeather = {};
   data.extendedSpent = defaultExtendedSpent;
 }
 
-$logoAnchor.addEventListener('click', returnHome)
+$logoAnchor.addEventListener('click', returnHome);
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $extendedForm.addEventListener('submit', handleExtendedForm);
