@@ -677,6 +677,7 @@ function editHelper(summaryInput, editInput) {
   summaryInput.textContent = editInput.value;
 }
 
+//Check edit input for deleted items when going back to summary
 function updateDaySummary() {
   data.dayBudget.transport = $editDayBudgetTransportInput.value;
   editHelper($dayTransportBudget, $editDayBudgetTransportInput);
@@ -701,7 +702,6 @@ function updateDaySummary() {
   editHelper($dayReserveSpent, $editDaySpentReserveInput);
 
   if ($editDaySpentTransportInput.value === '') {
-    $editDaySpentTransportInput.value === ''
     $dayTransportSpent.appendChild($daySpentTransportInput);
   }
   if ($editDaySpentFoodInput.value === '') {
