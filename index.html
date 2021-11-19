@@ -11,8 +11,13 @@
   <title>tripify</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+    rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -39,9 +44,15 @@
         <h1 class="logo">tripify</h1>
       </div>
       <div class="column-half align-center justify-end">
-        <a href="#" class="nav-links" id="day-planner">Day</a>
+        <a href="#" class="nav-links" id="day-planner">
+          <i class="fas fa-suitcase-rolling"></i>
+          Day
+        </a>
         <div class="lds-hourglass hidden" id="day-spinner"></div>
-        <a href="#" class="nav-links" id="extended-planner">Extended</a>
+        <a href="#" class="nav-links" id="extended-planner">
+          <i class="fas fa-suitcase"></i>
+          Extended
+        </a>
         <div class="lds-hourglass hidden" id="extended-spinner"></div>
       </div>
     </div>
@@ -190,46 +201,46 @@
             <tr>
               <td>Transport</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-day-budget-transport-input">
+                <input required type="number" placeholder="Amount" id="edit-day-budget-transport-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-day-spent-transport-input">
+                <input type="number" placeholder="Amount" id="edit-day-spent-transport-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-day-budget-food-input">
+                <input required type="number" placeholder="Amount" id="edit-day-budget-food-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-day-spent-food-input">
+                <input type="number" placeholder="Amount" id="edit-day-spent-food-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-day-budget-activities-input">
+                <input required type="number" placeholder="Amount" id="edit-day-budget-activities-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-day-spent-activities-input">
+                <input type="number" placeholder="Amount" id="edit-day-spent-activities-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-day-budget-souvenirs-input">
+                <input required type="number" placeholder="Amount" id="edit-day-budget-souvenirs-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-day-spent-souvenirs-input">
+                <input type="number" placeholder="Amount" id="edit-day-spent-souvenirs-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Reserve</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-day-budget-reserve-input">
+                <input required type="number" placeholder="Amount" id="edit-day-budget-reserve-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-day-spent-reserve-input">
+                <input type="number" placeholder="Amount" id="edit-day-spent-reserve-input" class="text-center">
               </td>
             </tr>
             <tr>
@@ -250,7 +261,7 @@
   <div class="container view hidden" id="extended-summary" data-view="extended-summary">
     <form id="extended-spent-form">
       <div class="row card-table">
-        <table>
+        <table class="text-center">
           <thead>
             <tr>
               <th>Categories</th>
@@ -263,7 +274,7 @@
               <td>Transport</td>
               <td id="extended-transport-budget"></td>
               <td id="extended-transport-spent" class="extended-spent-td">
-                <input type=" number" placeholder="Amount" id="extended-spent-transport-input" class="extended-spent-input text-center">
+                <input type="number" placeholder="Amount" id="extended-spent-transport-input" class="extended-spent-input text-center">
               </td>
             </tr>
             <tr>
@@ -331,55 +342,55 @@
             <tr>
               <td>Transport</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-extended-budget-transport-input">
+                <input required type="number" placeholder="Amount" id="edit-extended-budget-transport-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-extended-spent-transport-input">
+                <input type="number" placeholder="Amount" id="edit-extended-spent-transport-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Lodging</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-extended-budget-lodging-input">
+                <input required type="number" placeholder="Amount" id="edit-extended-budget-lodging-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-extended-spent-lodging-input">
+                <input type="number" placeholder="Amount" id="edit-extended-spent-lodging-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Food</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-extended-budget-food-input">
+                <input required type="number" placeholder="Amount" id="edit-extended-budget-food-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-extended-spent-food-input">
+                <input type="number" placeholder="Amount" id="edit-extended-spent-food-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Activities</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-extended-budget-activities-input">
+                <input required type="number" placeholder="Amount" id="edit-extended-budget-activities-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-extended-spent-activities-input">
+                <input type="number" placeholder="Amount" id="edit-extended-spent-activities-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Souvenirs</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-extended-budget-souvenirs-input">
+                <input required type="number" placeholder="Amount" id="edit-extended-budget-souvenirs-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-extended-spent-souvenirs-input">
+                <input type="number" placeholder="Amount" id="edit-extended-spent-souvenirs-input" class="text-center">
               </td>
             </tr>
             <tr>
               <td>Reserve</td>
               <td>
-                <input required type="number" placeholder="Amount" id="edit-extended-budget-reserve-input">
+                <input required type="number" placeholder="Amount" id="edit-extended-budget-reserve-input" class="text-center">
               </td>
               <td>
-                <input type="number" placeholder="Amount" id="edit-extended-spent-reserve-input">
+                <input type="number" placeholder="Amount" id="edit-extended-spent-reserve-input" class="text-center">
               </td>
             </tr>
             <tr>

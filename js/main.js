@@ -85,6 +85,7 @@ function handleTripSelection(event) {
 
 function handleDayForm(event) {
   event.preventDefault();
+
   var dayBudget = {};
   dayBudget.destination = $dayForm.elements['day-destination'].value;
   dayBudget.transport = $dayForm.elements['day-budget-transport'].value;
@@ -108,7 +109,6 @@ function handleDayForm(event) {
       }
     }
   }
-
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
   defaultDayBudgetValues();
@@ -118,6 +118,7 @@ function handleDayForm(event) {
 function handleExtendedForm(event) {
   event.preventDefault();
   var extendedBudget = {};
+
   getForecastWeather($extendedForm.elements['extended-destination'].value);
   extendedBudget.destination = $extendedForm.elements['extended-destination'].value;
   extendedBudget.transport = $extendedForm.elements['extended-transport'].value;
@@ -156,24 +157,29 @@ function getCurrentWeather(name) {
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
       $daySpinner.classList.add('hidden');
-      var $currentWeatherCard = document.querySelector('#current-weather-card');
       data.currentWeather.temp = xhr.response.data[0].temp + '°F';
       data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
       data.currentWeather.description = xhr.response.data[0].weather.description;
+      var $weatherError = document.querySelector('#weather-error');
+      var $currentWeatherCard = document.querySelector('#current-weather-card');
       if ($currentWeatherCard) {
         $currentWeatherCard.remove();
       }
-      var $weatherError = document.querySelector('#weather-error');
       if ($weatherError) {
         $weatherError.remove();
       }
       $dayTripContainer.prepend(createCurrentWeather());
     } else {
       var $weatherError = document.querySelector('#weather-error');
-      $daySpinner.classList.add('hidden');
-      if ($weatherError) {
-        $weatherError.remove();
+      var $currentWeatherCard = document.querySelector('#current-weather-card');
+      if ($currentWeatherCard) {
+        $currentWeatherCard.remove();
       }
+        if ($weatherError) {
+          $weatherError.remove();
+        }
+      $daySpinner.classList.add('hidden');
+      console.log('add new error card')
       $dayTripContainer.prepend(createWeatherError());
     }
   });
@@ -197,6 +203,7 @@ function createWeatherError() {
   return $cardSky;
 }
 
+//FIX WEATHERERROR REMOVAL AND FIX FORECASTWEATHER, ADD DELETE FOR FORECAST FOR SPECIFIC TEMP ETC.
 function getForecastWeather(name) {
   var $extendedSpinner = document.querySelector('#extended-spinner');
   $extendedSpinner.classList.remove('hidden');
@@ -206,6 +213,7 @@ function getForecastWeather(name) {
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
       $extendedSpinner.classList.add('hidden');
+      var $weatherError = document.querySelector('#weather-error');
       var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
       var forecastArr = [];
       for (var i = 0; i < xhr.response.data.length; i++) {
@@ -216,18 +224,25 @@ function getForecastWeather(name) {
         forecastArr.push(dailyForecast);
       }
       data.forecastWeather = forecastArr;
+      if ($weatherError) {
+        $weatherError.remove();
+      }
       if ($forecastWeatherCard) {
         $forecastWeatherCard.remove();
       }
       var $weatherError = document.querySelector('#weather-error');
+      var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
       if ($weatherError) {
         $weatherError.remove();
       }
+      if($forecastWeatherCard){
+        $forecastWeatherCard.remove();
+      }
       $extendedTripContainer.prepend(createForecastWeather());
     }
-    // else if(xhr.status === 400) {
-    //   console.log(xhr.status, "Sorry, we're experiencing issues connecting to the network. Please check your internet connection and try again!")
-    // }
+    else if(xhr.status === 400) {
+      console.log(xhr.status, "Sorry, we're experiencing issues connecting to the network. Please check your internet connection and try again!")
+    }
     else {
       $extendedSpinner.classList.add('hidden');
       var $weatherError = document.querySelector('#weather-error');
@@ -263,7 +278,6 @@ function createCurrentWeather() {
   </div>
 </div>
 */
-
   var $currentWeatherRow = document.createElement('div');
   var $cityDateColumn = document.createElement('div');
   var $headerColumn = document.createElement('div');
@@ -298,7 +312,7 @@ function createCurrentWeather() {
   $descriptionParagraph.className = 'rm-margin';
   $descriptionParagraph.textContent = data.currentWeather.description;
 
-  $currentWeatherRow.append($cityDateColumn);
+  $currentWeatherRow.appendChild($cityDateColumn);
   $cityDateColumn.appendChild($headerColumn);
   $headerColumn.appendChild($cityHeader);
   $cityDateColumn.appendChild($dateColumn);
@@ -690,6 +704,7 @@ function updateDaySummary() {
   editHelper($dayReserveSpent, $editDaySpentReserveInput);
 
   if ($editDaySpentTransportInput.value === '') {
+    $editDaySpentTransportInput.value === ''
     $dayTransportSpent.appendChild($daySpentTransportInput);
   }
   if ($editDaySpentFoodInput.value === '') {
@@ -794,6 +809,7 @@ function handleDeleteEntry(event) {
 function deleteDayEntry() {
   var defaultDaySpent = { transport: '', food: '', activities: '', souvenirs: '', reserve: '' };
   delete data.dayBudget;
+  data.currentWeather = {}
   data.daySpent = defaultDaySpent;
 }
 

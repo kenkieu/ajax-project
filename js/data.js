@@ -19,6 +19,9 @@ if (previousJSONData !== null) {
 function handleBeforeUnload() {
   var dataJSON = JSON.stringify(data);
   localStorage.setItem('trip', dataJSON);
+
+  // localStorage.clear();
 }
+
 
 window.addEventListener('beforeunload', handleBeforeUnload);
