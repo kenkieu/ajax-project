@@ -1,6 +1,7 @@
 var $home = document.querySelector('#home');
 var $tripSelect = document.querySelector('#trip-type');
 var $tripTypeButton = document.querySelector('.trip-type-button');
+var $logoAnchor = document.querySelector('#logo');
 
 var $dayForm = document.querySelector('#day-form');
 var $dayTripContainer = document.querySelector('#day-summary');
@@ -9,7 +10,6 @@ var $dayFoodBudget = document.querySelector('#day-food-budget');
 var $dayActivitiesBudget = document.querySelector('#day-activities-budget');
 var $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
 var $dayReserveBudget = document.querySelector('#day-reserve-budget');
-var $daySummaryButton = document.querySelector('.day-summary-btn');
 var $dayPlanner = document.querySelector('#day-planner');
 var $daySpentForm = document.querySelector('#day-spent-form');
 var $daySpentTransportInput = document.querySelector('#day-spent-transport-input');
@@ -26,7 +26,6 @@ var $dayReserveSpent = document.querySelector('#day-reserve-spent');
 
 var $extendedForm = document.querySelector('#extended-form');
 var $extendedTripContainer = document.querySelector('#extended-summary');
-var $extendedSummaryButton = document.querySelector('.extended-summary-btn');
 var $extendedTransportBudget = document.querySelector('#extended-transport-budget');
 var $extendedLodgingBudget = document.querySelector('#extended-lodging-budget');
 var $extendedFoodBudget = document.querySelector('#extended-food-budget');
@@ -75,10 +74,14 @@ var $editExtendedSpentFoodInput = document.querySelector('#edit-extended-spent-f
 var $editExtendedSpentActivitiesInput = document.querySelector('#edit-extended-spent-activities-input');
 var $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
 var $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
-
+var $weatherError = document.querySelector('#weather-error');
 var $modalContainer = document.querySelector('#modal-container');
 var $cancelModalLink = document.querySelector('#cancel-modal-link');
 var $deleteModalLink = document.querySelector('#delete-modal-link');
+
+function returnHome() {
+  switchView('home');
+}
 
 function handleTripSelection(event) {
   event.preventDefault();
@@ -87,6 +90,7 @@ function handleTripSelection(event) {
 
 function handleDayForm(event) {
   event.preventDefault();
+
   var dayBudget = {};
   dayBudget.destination = $dayForm.elements['day-destination'].value;
   dayBudget.transport = $dayForm.elements['day-budget-transport'].value;
@@ -110,15 +114,16 @@ function handleDayForm(event) {
       }
     }
   }
-
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
   defaultDayBudgetValues();
+  switchView('day-summary');
 }
 
 function handleExtendedForm(event) {
   event.preventDefault();
   var extendedBudget = {};
+
   getForecastWeather($extendedForm.elements['extended-destination'].value);
   extendedBudget.destination = $extendedForm.elements['extended-destination'].value;
   extendedBudget.transport = $extendedForm.elements['extended-transport'].value;
@@ -145,44 +150,97 @@ function handleExtendedForm(event) {
 
   populateExtendedBudget();
   defaultExtendedBudgetValues();
+  switchView('extended-summary');
 }
 
 function getCurrentWeather(name) {
+  var $daySpinner = document.querySelector('#day-spinner');
+  var $currentWeatherCard = document.querySelector('#current-weather-card');
+  $daySpinner.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var $currentWeatherCard = document.querySelector('#current-weather-card');
-    data.currentWeather.temp = xhr.response.data[0].temp + '°F';
-    data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-    data.currentWeather.description = xhr.response.data[0].weather.description;
-    if ($currentWeatherCard) {
-      $currentWeatherCard.remove();
+    if (xhr.status === 200) {
+      $daySpinner.classList.add('hidden');
+      data.currentWeather.location = xhr.response.data[0].city_name + ', ' + xhr.response.data[0].state_code;
+      data.currentWeather.temp = xhr.response.data[0].temp + '°F';
+      data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
+      data.currentWeather.description = xhr.response.data[0].weather.description;
+      if ($currentWeatherCard) {
+        $currentWeatherCard.remove();
+      }
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      $dayTripContainer.prepend(createCurrentWeather());
+    } else {
+      if ($currentWeatherCard) {
+        $currentWeatherCard.remove();
+      }
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      $daySpinner.classList.add('hidden');
+      $dayTripContainer.prepend(noContentError());
     }
-    $dayTripContainer.prepend(createCurrentWeather());
   });
   xhr.send();
 }
 
+function noContentError() {
+  var $cardSky = document.createElement('div');
+  $cardSky.className = 'row card-sky';
+  $cardSky.setAttribute('id', 'weather-error');
+  var $errorColumn = document.createElement('div');
+  $errorColumn.className = 'column-full justify-center align-center';
+  var $errorMessage = document.createElement('h3');
+  $errorMessage.className = 'error-message';
+  $errorMessage.textContent = 'Oops, something went wrong! Please verify that a valid City, State was entered.';
+  $cardSky.appendChild($errorColumn);
+  $errorColumn.appendChild($errorMessage);
+  return $cardSky;
+}
+
 function getForecastWeather(name) {
+  var $extendedSpinner = document.querySelector('#extended-spinner');
+
+  $extendedSpinner.classList.remove('hidden');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
-    var forecastArr = [];
-    for (var i = 0; i < xhr.response.data.length; i++) {
-      var dailyForecast = {};
-      dailyForecast.temp = xhr.response.data[i].temp;
-      dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
-      dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
-      forecastArr.push(dailyForecast);
+    if (xhr.status === 200) {
+      $extendedSpinner.classList.add('hidden');
+      var forecastArr = [];
+      for (var i = 0; i < xhr.response.data.length; i++) {
+        var dailyForecast = {};
+        dailyForecast.location = xhr.response.city_name + ', ' + xhr.response.state_code;
+        dailyForecast.temp = xhr.response.data[i].temp;
+        dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
+        dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
+        forecastArr.push(dailyForecast);
+      }
+      data.forecastWeather = forecastArr;
+
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      if ($forecastWeatherCard) {
+        $forecastWeatherCard.remove();
+      }
+      $extendedTripContainer.prepend(createForecastWeather());
+    } else {
+      $extendedSpinner.classList.add('hidden');
+      if ($weatherError) {
+        $weatherError.remove();
+      }
+      if ($forecastWeatherCard) {
+        $forecastWeatherCard.remove();
+      }
+      $extendedTripContainer.prepend(noContentError());
     }
-    data.forecastWeather = forecastArr;
-    if ($forecastWeatherCard) {
-      $forecastWeatherCard.remove();
-    }
-    $extendedTripContainer.prepend(createForecastWeather());
   });
   xhr.send();
 }
@@ -210,7 +268,6 @@ function createCurrentWeather() {
   </div>
 </div>
 */
-
   var $currentWeatherRow = document.createElement('div');
   var $cityDateColumn = document.createElement('div');
   var $headerColumn = document.createElement('div');
@@ -229,15 +286,15 @@ function createCurrentWeather() {
   $currentWeatherRow.setAttribute('id', 'current-weather-card');
   $cityDateColumn.className = 'column-full';
   $headerColumn.className = 'column-full justify-center';
-  $cityHeader.className = 'mb-zero';
-  $cityHeader.textContent = data.dayBudget.destination;
+  $cityHeader.className = 'mb-zero font-scale';
+  $cityHeader.textContent = data.currentWeather.location;
   $dateColumn.className = 'column-full justify-center';
   $dateParagraph.className = 'rm-margin';
   $dateParagraph.textContent = data.currentWeather.date;
   $iconColumn.className = 'column-half justify-center';
   $icon.setAttribute('src', data.currentWeather.icon);
   $icon.setAttribute('alt', 'weather-icon');
-  $tempDescriptionColumn.className = 'column-half';
+  $tempDescriptionColumn.className = 'column-half align-content-center flex-wrap';
   $tempColumn.className = 'column-full';
   $tempHeader.className = 'degrees rm-margin justify-center';
   $tempHeader.textContent = data.currentWeather.temp;
@@ -245,7 +302,7 @@ function createCurrentWeather() {
   $descriptionParagraph.className = 'rm-margin';
   $descriptionParagraph.textContent = data.currentWeather.description;
 
-  $currentWeatherRow.append($cityDateColumn);
+  $currentWeatherRow.appendChild($cityDateColumn);
   $cityDateColumn.appendChild($headerColumn);
   $headerColumn.appendChild($cityHeader);
   $cityDateColumn.appendChild($dateColumn);
@@ -300,12 +357,13 @@ function createForecastWeather() {
   var $forecastHeaderColumn = document.createElement('div');
   var $forecastCityHeader = document.createElement('h3');
   var $innerForecastRow = document.createElement('div');
+  var [city] = data.forecastWeather;
 
   $forecastWeatherRow.className = 'row card-sky justify-center';
   $forecastWeatherRow.setAttribute('id', 'forecast-weather-card');
   $forecastHeaderColumn.className = 'column-full justify-center';
-  $forecastCityHeader.className = 'mb-half-rem';
-  $forecastCityHeader.textContent = data.extendedBudget.destination;
+  $forecastCityHeader.className = 'mb-zero font-scale';
+  $forecastCityHeader.textContent = city.location;
   $innerForecastRow.className = 'row text-center';
 
   for (var i = 0; i < data.forecastWeather.length; i++) {
@@ -318,6 +376,7 @@ function createForecastWeather() {
     $forecastIcon.setAttribute('src', data.forecastWeather[i].icon);
     $forecastIcon.setAttribute('alt', 'weather-icon');
     $forecastIcon.className = 'forecast-icon';
+    $forecastDate.className = 'forecast-date';
     $forecastDate.textContent = data.forecastWeather[i].date;
     $forecastTemp.textContent = data.forecastWeather[i].temp + '°F';
 
@@ -558,26 +617,29 @@ function handleEditExtendedSummaryLink(event) {
 }
 
 function populateEditDaySummary() {
-  $editDayBudgetTransportInput.value = data.dayBudget.transport;
-  $editDayBudgetFoodInput.value = data.dayBudget.food;
-  $editDayBudgetActivitiesInput.value = data.dayBudget.activities;
-  $editDayBudgetSouvenirsInput.value = data.dayBudget.souvenirs;
-  $editDayBudgetReserveInput.value = data.dayBudget.reserve;
+  const db = data.dayBudget;
+  const ds = data.daySpent;
 
-  if (data.daySpent.transport !== '') {
-    $editDaySpentTransportInput.value = data.daySpent.transport;
+  $editDayBudgetTransportInput.value = db.transport;
+  $editDayBudgetFoodInput.value = db.food;
+  $editDayBudgetActivitiesInput.value = db.activities;
+  $editDayBudgetSouvenirsInput.value = db.souvenirs;
+  $editDayBudgetReserveInput.value = db.reserve;
+
+  if (ds.transport !== '') {
+    $editDaySpentTransportInput.value = ds.transport;
   }
-  if (data.daySpent.food !== '') {
-    $editDaySpentFoodInput.value = data.daySpent.food;
+  if (ds.food !== '') {
+    $editDaySpentFoodInput.value = ds.food;
   }
-  if (data.daySpent.activities !== '') {
-    $editDaySpentActivitiesInput.value = data.daySpent.activities;
+  if (ds.activities !== '') {
+    $editDaySpentActivitiesInput.value = ds.activities;
   }
-  if (data.daySpent.souvenirs !== '') {
-    $editDaySpentSouvenirsInput.value = data.daySpent.souvenirs;
+  if (ds.souvenirs !== '') {
+    $editDaySpentSouvenirsInput.value = ds.souvenirs;
   }
-  if (data.daySpent.reserve !== '') {
-    $editDaySpentReserveInput.value = data.daySpent.reserve;
+  if (ds.reserve !== '') {
+    $editDaySpentReserveInput.value = ds.reserve;
   }
 }
 
@@ -614,26 +676,36 @@ function editHelper(summaryInput, editInput) {
 }
 
 function updateDaySummary() {
-  data.dayBudget.transport = $editDayBudgetTransportInput.value;
+  const db = data.dayBudget;
+  const ds = data.daySpent;
+
+  db.transport = $editDayBudgetTransportInput.value;
+  db.food = $editDayBudgetFoodInput.value;
+  db.activities = $editDayBudgetActivitiesInput.value;
+  db.souvenirs = $editDayBudgetSouvenirsInput.value;
+  db.reserve = $editDayBudgetReserveInput.value;
+
   editHelper($dayTransportBudget, $editDayBudgetTransportInput);
-  data.dayBudget.food = $editDayBudgetFoodInput.value;
   editHelper($dayFoodBudget, $editDayBudgetFoodInput);
-  data.dayBudget.activities = $editDayBudgetActivitiesInput.value;
   editHelper($dayActivitiesBudget, $editDayBudgetActivitiesInput);
-  data.dayBudget.souvenirs = $editDayBudgetSouvenirsInput.value;
   editHelper($daySouvenirsBudget, $editDayBudgetSouvenirsInput);
-  data.dayBudget.reserve = $editDayBudgetReserveInput.value;
   editHelper($dayReserveBudget, $editDayBudgetReserveInput);
 
-  data.daySpent.transport = $editDaySpentTransportInput.value;
+  ds.transport = $editDaySpentTransportInput.value;
+  $daySpentTransportInput.value = ds.transport;
+  ds.food = $editDaySpentFoodInput.value;
+  $daySpentFoodInput.value = ds.food;
+  ds.activities = $editDaySpentActivitiesInput.value;
+  $daySpentActivitiesInput.value = ds.activities;
+  ds.souvenirs = $editDaySpentSouvenirsInput.value;
+  $daySpentSouvenirsInput.value = ds.souvenirs;
+  ds.reserve = $editDaySpentReserveInput.value;
+  $daySpentReserveInput.value = ds.reserve;
+
   editHelper($dayTransportSpent, $editDaySpentTransportInput);
-  data.daySpent.food = $editDaySpentFoodInput.value;
   editHelper($dayFoodSpent, $editDaySpentFoodInput);
-  data.daySpent.activities = $editDaySpentActivitiesInput.value;
   editHelper($dayActivitiesSpent, $editDaySpentActivitiesInput);
-  data.daySpent.souvenirs = $editDaySpentSouvenirsInput.value;
   editHelper($daySouvenirsSpent, $editDaySpentSouvenirsInput);
-  data.daySpent.reserve = $editDaySpentReserveInput.value;
   editHelper($dayReserveSpent, $editDaySpentReserveInput);
 
   if ($editDaySpentTransportInput.value === '') {
@@ -654,30 +726,41 @@ function updateDaySummary() {
 }
 
 function updateExtendedSummary() {
-  data.extendedBudget.transport = $editExtendedBudgetTransportInput.value;
+  const eb = data.extendedBudget;
+  const es = data.extendedSpent;
+
+  eb.transport = $editExtendedBudgetTransportInput.value;
+  eb.lodging = $editExtendedBudgetLodgingInput.value;
+  eb.food = $editExtendedBudgetFoodInput.value;
+  eb.activities = $editExtendedBudgetActivitiesInput.value;
+  eb.souvenirs = $editExtendedBudgetSouvenirsInput.value;
+  eb.reserve = $editExtendedBudgetReserveInput.value;
+
   editHelper($extendedTransportBudget, $editExtendedBudgetTransportInput);
-  data.extendedBudget.lodging = $editExtendedBudgetLodgingInput.value;
   editHelper($extendedLodgingBudget, $editExtendedBudgetLodgingInput);
-  data.extendedBudget.food = $editExtendedBudgetFoodInput.value;
   editHelper($extendedFoodBudget, $editExtendedBudgetFoodInput);
-  data.extendedBudget.activities = $editExtendedBudgetActivitiesInput.value;
   editHelper($extendedActivitiesBudget, $editExtendedBudgetActivitiesInput);
-  data.extendedBudget.souvenirs = $editExtendedBudgetSouvenirsInput.value;
   editHelper($extendedSouvenirsBudget, $editExtendedBudgetSouvenirsInput);
-  data.extendedBudget.reserve = $editExtendedBudgetReserveInput.value;
   editHelper($extendedReserveBudget, $editExtendedBudgetReserveInput);
 
-  data.extendedSpent.transport = $editExtendedSpentTransportInput.value;
+  es.transport = $editExtendedSpentTransportInput.value;
+  $extendedSpentTransportInput.value = es.transport;
+  es.lodging = $editExtendedSpentLodgingInput.value;
+  $extendedSpentLodgingInput.value = es.lodging;
+  es.food = $editExtendedSpentFoodInput.value;
+  $extendedSpentFoodInput.value = es.food;
+  es.activities = $editExtendedSpentActivitiesInput.value;
+  $extendedSpentActivitiesInput.value = es.activities;
+  es.souvenirs = $editExtendedSpentSouvenirsInput.value;
+  $extendedSpentSouvenirsInput.value = es.souvenirs;
+  es.reserve = $editExtendedSpentReserveInput.value;
+  $extendedSpentReserveInput.value = es.reserve;
+
   editHelper($extendedTransportSpent, $editExtendedSpentTransportInput);
-  data.extendedSpent.lodging = $editExtendedSpentLodgingInput.value;
   editHelper($extendedLodgingSpent, $editExtendedSpentLodgingInput);
-  data.extendedSpent.food = $editExtendedSpentFoodInput.value;
   editHelper($extendedFoodSpent, $editExtendedSpentFoodInput);
-  data.extendedSpent.activities = $editExtendedSpentActivitiesInput.value;
   editHelper($extendedActivitiesSpent, $editExtendedSpentActivitiesInput);
-  data.extendedSpent.souvenirs = $editExtendedSpentSouvenirsInput.value;
   editHelper($extendedSouvenirsSpent, $editExtendedSpentSouvenirsInput);
-  data.extendedSpent.reserve = $editExtendedSpentReserveInput.value;
   editHelper($extendedReserveSpent, $editExtendedSpentReserveInput);
 
   if ($editExtendedSpentTransportInput.value === '') {
@@ -741,21 +824,22 @@ function handleDeleteEntry(event) {
 function deleteDayEntry() {
   var defaultDaySpent = { transport: '', food: '', activities: '', souvenirs: '', reserve: '' };
   delete data.dayBudget;
+  data.currentWeather = {};
   data.daySpent = defaultDaySpent;
 }
 
 function deleteExtendedEntry() {
   var defaultExtendedSpent = { transport: '', lodging: '', food: '', activities: '', souvenirs: '', reserve: '' };
   delete data.extendedBudget;
+  data.forecastWeather = {};
   data.extendedSpent = defaultExtendedSpent;
 }
 
+$logoAnchor.addEventListener('click', returnHome);
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $extendedForm.addEventListener('submit', handleExtendedForm);
 $tripTypeButton.addEventListener('click', handleSwap);
-$daySummaryButton.addEventListener('click', handleSwap);
-$extendedSummaryButton.addEventListener('click', handleSwap);
 $dayPlanner.addEventListener('click', handleNavDayPlanner);
 $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
 $daySpentForm.addEventListener('submit', handleDaySpentForm);
