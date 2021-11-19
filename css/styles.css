@@ -123,8 +123,14 @@ th {
   width: 100%;
 }
 
+.forecast-date {
+  margin-top: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
 .icon {
-  font-size:2rem;
+  font-size: 2rem;
 }
 
 .background-image {
@@ -183,7 +189,6 @@ th {
 }
 
 .degrees {
-  margin-top: 1.5rem;
   font-size: 3rem;
   color: #fff;
   font-weight: 500;
@@ -210,6 +215,16 @@ th {
 .flex-end {
   display: flex;
   justify-content: flex-end;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.align-content-center{
+  display: flex;
+  align-content: center;
 }
 
 .nav-links,

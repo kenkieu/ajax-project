@@ -300,7 +300,7 @@ function createCurrentWeather() {
   $iconColumn.className = 'column-half justify-center';
   $icon.setAttribute('src', data.currentWeather.icon);
   $icon.setAttribute('alt', 'weather-icon');
-  $tempDescriptionColumn.className = 'column-half';
+  $tempDescriptionColumn.className = 'column-half align-content-center flex-wrap';
   $tempColumn.className = 'column-full';
   $tempHeader.className = 'degrees rm-margin justify-center';
   $tempHeader.textContent = data.currentWeather.temp;
@@ -368,7 +368,7 @@ function createForecastWeather() {
   $forecastWeatherRow.className = 'row card-sky justify-center';
   $forecastWeatherRow.setAttribute('id', 'forecast-weather-card');
   $forecastHeaderColumn.className = 'column-full justify-center';
-  $forecastCityHeader.className = 'mb-half-rem';
+  $forecastCityHeader.className = 'mb-zero font-scale';
   $forecastCityHeader.textContent = city.location;
   $innerForecastRow.className = 'row text-center';
 
@@ -382,6 +382,7 @@ function createForecastWeather() {
     $forecastIcon.setAttribute('src', data.forecastWeather[i].icon);
     $forecastIcon.setAttribute('alt', 'weather-icon');
     $forecastIcon.className = 'forecast-icon';
+    $forecastDate.className = "forecast-date"
     $forecastDate.textContent = data.forecastWeather[i].date;
     $forecastTemp.textContent = data.forecastWeather[i].temp + '°F';
 
@@ -622,26 +623,29 @@ function handleEditExtendedSummaryLink(event) {
 }
 
 function populateEditDaySummary() {
-  $editDayBudgetTransportInput.value = data.dayBudget.transport;
-  $editDayBudgetFoodInput.value = data.dayBudget.food;
-  $editDayBudgetActivitiesInput.value = data.dayBudget.activities;
-  $editDayBudgetSouvenirsInput.value = data.dayBudget.souvenirs;
-  $editDayBudgetReserveInput.value = data.dayBudget.reserve;
+  const db = data.dayBudget;
+  const ds = data.daySpent;
 
-  if (data.daySpent.transport !== '') {
-    $editDaySpentTransportInput.value = data.daySpent.transport;
+  $editDayBudgetTransportInput.value = db.transport;
+  $editDayBudgetFoodInput.value = db.food;
+  $editDayBudgetActivitiesInput.value = db.activities;
+  $editDayBudgetSouvenirsInput.value = db.souvenirs;
+  $editDayBudgetReserveInput.value = db.reserve;
+
+  if (ds.transport !== '') {
+    $editDaySpentTransportInput.value = ds.transport;
   }
-  if (data.daySpent.food !== '') {
-    $editDaySpentFoodInput.value = data.daySpent.food;
+  if (ds.food !== '') {
+    $editDaySpentFoodInput.value = ds.food;
   }
-  if (data.daySpent.activities !== '') {
-    $editDaySpentActivitiesInput.value = data.daySpent.activities;
+  if (ds.activities !== '') {
+    $editDaySpentActivitiesInput.value = ds.activities;
   }
-  if (data.daySpent.souvenirs !== '') {
-    $editDaySpentSouvenirsInput.value = data.daySpent.souvenirs;
+  if (ds.souvenirs !== '') {
+    $editDaySpentSouvenirsInput.value = ds.souvenirs;
   }
-  if (data.daySpent.reserve !== '') {
-    $editDaySpentReserveInput.value = data.daySpent.reserve;
+  if (ds.reserve !== '') {
+    $editDaySpentReserveInput.value = ds.reserve;
   }
 }
 
@@ -677,28 +681,37 @@ function editHelper(summaryInput, editInput) {
   summaryInput.textContent = editInput.value;
 }
 
-//Check edit input for deleted items when going back to summary
 function updateDaySummary() {
-  data.dayBudget.transport = $editDayBudgetTransportInput.value;
+  const db = data.dayBudget;
+  const ds = data.daySpent;
+
+  db.transport = $editDayBudgetTransportInput.value;
+  db.food = $editDayBudgetFoodInput.value;
+  db.activities = $editDayBudgetActivitiesInput.value;
+  db.souvenirs = $editDayBudgetSouvenirsInput.value;
+  db.reserve = $editDayBudgetReserveInput.value;
+
   editHelper($dayTransportBudget, $editDayBudgetTransportInput);
-  data.dayBudget.food = $editDayBudgetFoodInput.value;
   editHelper($dayFoodBudget, $editDayBudgetFoodInput);
-  data.dayBudget.activities = $editDayBudgetActivitiesInput.value;
   editHelper($dayActivitiesBudget, $editDayBudgetActivitiesInput);
-  data.dayBudget.souvenirs = $editDayBudgetSouvenirsInput.value;
   editHelper($daySouvenirsBudget, $editDayBudgetSouvenirsInput);
-  data.dayBudget.reserve = $editDayBudgetReserveInput.value;
   editHelper($dayReserveBudget, $editDayBudgetReserveInput);
 
-  data.daySpent.transport = $editDaySpentTransportInput.value;
+  ds.transport = $editDaySpentTransportInput.value;
+  $daySpentTransportInput.value = ds.transport;
+  ds.food = $editDaySpentFoodInput.value;
+  $daySpentFoodInput.value = ds.food;
+  ds.activities = $editDaySpentActivitiesInput.value;
+  $daySpentActivitiesInput.value = ds.activities;
+  ds.souvenirs = $editDaySpentSouvenirsInput.value;
+  $daySpentSouvenirsInput.value = ds.souvenirs;
+  ds.reserve = $editDaySpentReserveInput.value;
+  $daySpentReserveInput.value = ds.reserve;
+
   editHelper($dayTransportSpent, $editDaySpentTransportInput);
-  data.daySpent.food = $editDaySpentFoodInput.value;
   editHelper($dayFoodSpent, $editDaySpentFoodInput);
-  data.daySpent.activities = $editDaySpentActivitiesInput.value;
   editHelper($dayActivitiesSpent, $editDaySpentActivitiesInput);
-  data.daySpent.souvenirs = $editDaySpentSouvenirsInput.value;
   editHelper($daySouvenirsSpent, $editDaySpentSouvenirsInput);
-  data.daySpent.reserve = $editDaySpentReserveInput.value;
   editHelper($dayReserveSpent, $editDaySpentReserveInput);
 
   if ($editDaySpentTransportInput.value === '') {
@@ -719,30 +732,41 @@ function updateDaySummary() {
 }
 
 function updateExtendedSummary() {
-  data.extendedBudget.transport = $editExtendedBudgetTransportInput.value;
+  const eb = data.extendedBudget;
+  const es = data.extendedSpent;
+
+  eb.transport = $editExtendedBudgetTransportInput.value;
+  eb.lodging = $editExtendedBudgetLodgingInput.value;
+  eb.food = $editExtendedBudgetFoodInput.value;
+  eb.activities = $editExtendedBudgetActivitiesInput.value;
+  eb.souvenirs = $editExtendedBudgetSouvenirsInput.value;
+  eb.reserve = $editExtendedBudgetReserveInput.value;
+
   editHelper($extendedTransportBudget, $editExtendedBudgetTransportInput);
-  data.extendedBudget.lodging = $editExtendedBudgetLodgingInput.value;
   editHelper($extendedLodgingBudget, $editExtendedBudgetLodgingInput);
-  data.extendedBudget.food = $editExtendedBudgetFoodInput.value;
   editHelper($extendedFoodBudget, $editExtendedBudgetFoodInput);
-  data.extendedBudget.activities = $editExtendedBudgetActivitiesInput.value;
   editHelper($extendedActivitiesBudget, $editExtendedBudgetActivitiesInput);
-  data.extendedBudget.souvenirs = $editExtendedBudgetSouvenirsInput.value;
   editHelper($extendedSouvenirsBudget, $editExtendedBudgetSouvenirsInput);
-  data.extendedBudget.reserve = $editExtendedBudgetReserveInput.value;
   editHelper($extendedReserveBudget, $editExtendedBudgetReserveInput);
 
-  data.extendedSpent.transport = $editExtendedSpentTransportInput.value;
+  es.transport = $editExtendedSpentTransportInput.value;
+  $extendedSpentTransportInput.value = es.transport
+  es.lodging = $editExtendedSpentLodgingInput.value;
+  $extendedSpentLodgingInput.value = es.lodging
+  es.food = $editExtendedSpentFoodInput.value;
+  $extendedSpentFoodInput.value = es.food
+  es.activities = $editExtendedSpentActivitiesInput.value;
+  $extendedSpentActivitiesInput.value = es.activities
+  es.souvenirs = $editExtendedSpentSouvenirsInput.value;
+  $extendedSpentSouvenirsInput.value = es.souvenirs
+  es.reserve = $editExtendedSpentReserveInput.value;
+  $extendedSpentReserveInput.value = es.reserve
+
   editHelper($extendedTransportSpent, $editExtendedSpentTransportInput);
-  data.extendedSpent.lodging = $editExtendedSpentLodgingInput.value;
   editHelper($extendedLodgingSpent, $editExtendedSpentLodgingInput);
-  data.extendedSpent.food = $editExtendedSpentFoodInput.value;
   editHelper($extendedFoodSpent, $editExtendedSpentFoodInput);
-  data.extendedSpent.activities = $editExtendedSpentActivitiesInput.value;
   editHelper($extendedActivitiesSpent, $editExtendedSpentActivitiesInput);
-  data.extendedSpent.souvenirs = $editExtendedSpentSouvenirsInput.value;
   editHelper($extendedSouvenirsSpent, $editExtendedSpentSouvenirsInput);
-  data.extendedSpent.reserve = $editExtendedSpentReserveInput.value;
   editHelper($extendedReserveSpent, $editExtendedSpentReserveInput);
 
   if ($editExtendedSpentTransportInput.value === '') {
