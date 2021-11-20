@@ -74,7 +74,7 @@ var $editExtendedSpentFoodInput = document.querySelector('#edit-extended-spent-f
 var $editExtendedSpentActivitiesInput = document.querySelector('#edit-extended-spent-activities-input');
 var $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
 var $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
-var $weatherError = document.querySelector('#weather-error');
+
 var $modalContainer = document.querySelector('#modal-container');
 var $cancelModalLink = document.querySelector('#cancel-modal-link');
 var $deleteModalLink = document.querySelector('#delete-modal-link');
@@ -161,6 +161,7 @@ function getCurrentWeather(name) {
   xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    var $weatherError = document.querySelector('#weather-error');
     if (xhr.status === 200) {
       $daySpinner.classList.add('hidden');
       data.currentWeather.location = xhr.response.data[0].city_name + ', ' + xhr.response.data[0].state_code;
@@ -211,6 +212,7 @@ function getForecastWeather(name) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
+    var $weatherError = document.querySelector('#weather-error');
     if (xhr.status === 200) {
       $extendedSpinner.classList.add('hidden');
       var forecastArr = [];
