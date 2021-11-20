@@ -27,7 +27,7 @@ Try the application live at [https://kenkieu.github.io/tripify/index.html](https
 
 ## Preview
 
-![tripify](assets/sgt-react.gif)
+![tripify](images/card-render.gif)
 
 ## Stretch Features
 
