@@ -246,8 +246,7 @@ function getForecastWeather(name) {
 }
 
 function createCurrentWeather() {
-
-  /*
+/*
 <div class="column-full">
   <div class="column-full justify-center">
     <h3 class="mb-none">Irvine, CA</h3>
@@ -326,27 +325,27 @@ function createForecastWeather() {
     </div>
     <div class="row">
       <div class="column-fifth">
-        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="w-100">
         <p class="rm-margin">09/23</p>
         <p>63.5&deg;F</p>
       </div>
       <div class="column-fifth">
-        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="w-100">
         <p class="rm-margin">09/23</p>
         <p>63.5&deg;F</p>
       </div>
       <div class="column-fifth">
-        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="w-100">
         <p class="rm-margin">09/23</p>
         <p>63.5&deg;F</p>
       </div>
       <div class="column-fifth">
-        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="w-100">
         <p class="rm-margin">09/23</p>
         <p>63.5&deg;F</p>
       </div>
       <div class="column-fifth">
-        <img src="images/icons/a01d.png" alt="weather-icon" class="forecast-icon">
+        <img src="images/icons/a01d.png" alt="weather-icon" class="w-100">
         <p class="rm-margin">09/23</p>
         <p>63.5&deg;F</p>
       </div>
@@ -375,7 +374,7 @@ function createForecastWeather() {
     $weatherInfoColumn.className = 'column-fifth';
     $forecastIcon.setAttribute('src', data.forecastWeather[i].icon);
     $forecastIcon.setAttribute('alt', 'weather-icon');
-    $forecastIcon.className = 'forecast-icon';
+    $forecastIcon.className = 'w-100';
     $forecastDate.className = 'forecast-date';
     $forecastDate.textContent = data.forecastWeather[i].date;
     $forecastTemp.textContent = data.forecastWeather[i].temp + '°F';
