@@ -48,4 +48,4 @@ Try the application live at [https://kenkieu.github.io/tripify/index.html](https
     cd tripify
     ```
 
-2. Start the project by opening index.html.
+2. Start the project by opening `index.html`.
