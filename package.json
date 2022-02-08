@@ -1,8 +1,8 @@
 {
-  "name": "ajax-project",
+  "name": "tripify",
   "version": "1.0.0",
   "private": true,
-  "description": "A dynamic HTML, CSS, and JavaScript solo project.",
+  "description": "A web application for travel enthusiasts who want to track finances for their trip and keep updated with the weather.",
   "main": "index.js",
   "husky": {
     "hooks": {
