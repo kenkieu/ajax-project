@@ -1,87 +1,165 @@
-var $home = document.querySelector('#home');
-var $tripSelect = document.querySelector('#trip-type');
-var $tripTypeButton = document.querySelector('.trip-type-button');
-var $logoAnchor = document.querySelector('#logo');
+const $home = document.querySelector('#home');
+const $tripSelect = document.querySelector('#trip-type');
+const $tripTypeButton = document.querySelector('.trip-type-button');
+const $logoAnchor = document.querySelector('#logo');
 
-var $dayForm = document.querySelector('#day-form');
-var $dayTripContainer = document.querySelector('#day-summary');
-var $dayTransportBudget = document.querySelector('#day-transport-budget');
-var $dayFoodBudget = document.querySelector('#day-food-budget');
-var $dayActivitiesBudget = document.querySelector('#day-activities-budget');
-var $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
-var $dayReserveBudget = document.querySelector('#day-reserve-budget');
-var $dayPlanner = document.querySelector('#day-planner');
-var $daySpentForm = document.querySelector('#day-spent-form');
-var $daySpentTransportInput = document.querySelector('#day-spent-transport-input');
-var $daySpentFoodInput = document.querySelector('#day-spent-food-input');
-var $daySpentActivitiesInput = document.querySelector('#day-spent-activities-input');
-var $daySpentSouvenirsInput = document.querySelector('#day-spent-souvenirs-input');
-var $daySpentReserveInput = document.querySelector('#day-spent-reserve-input');
-var $dayDeleteLink = document.querySelector('#day-delete-link');
-var $dayTransportSpent = document.querySelector('#day-transport-spent');
-var $dayFoodSpent = document.querySelector('#day-food-spent');
-var $dayActivitiesSpent = document.querySelector('#day-activities-spent');
-var $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
-var $dayReserveSpent = document.querySelector('#day-reserve-spent');
+const $dayForm = document.querySelector('#day-form');
+const $dayTripContainer = document.querySelector('#day-summary');
+const $dayTransportBudget = document.querySelector('#day-transport-budget');
+const $dayFoodBudget = document.querySelector('#day-food-budget');
+const $dayActivitiesBudget = document.querySelector('#day-activities-budget');
+const $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
+const $dayReserveBudget = document.querySelector('#day-reserve-budget');
+const $dayPlanner = document.querySelector('#day-planner');
+const $daySpentForm = document.querySelector('#day-spent-form');
+const $daySpentTransportInput = document.querySelector(
+  '#day-spent-transport-input'
+);
+const $daySpentFoodInput = document.querySelector('#day-spent-food-input');
+const $daySpentActivitiesInput = document.querySelector(
+  '#day-spent-activities-input'
+);
+const $daySpentSouvenirsInput = document.querySelector(
+  '#day-spent-souvenirs-input'
+);
+const $daySpentReserveInput = document.querySelector(
+  '#day-spent-reserve-input'
+);
+const $dayDeleteLink = document.querySelector('#day-delete-link');
+const $dayTransportSpent = document.querySelector('#day-transport-spent');
+const $dayFoodSpent = document.querySelector('#day-food-spent');
+const $dayActivitiesSpent = document.querySelector('#day-activities-spent');
+const $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
+const $dayReserveSpent = document.querySelector('#day-reserve-spent');
 
-var $extendedForm = document.querySelector('#extended-form');
-var $extendedTripContainer = document.querySelector('#extended-summary');
-var $extendedTransportBudget = document.querySelector('#extended-transport-budget');
-var $extendedLodgingBudget = document.querySelector('#extended-lodging-budget');
-var $extendedFoodBudget = document.querySelector('#extended-food-budget');
-var $extendedActivitiesBudget = document.querySelector('#extended-activities-budget');
-var $extendedSouvenirsBudget = document.querySelector('#extended-souvenirs-budget');
-var $extendedReserveBudget = document.querySelector('#extended-reserve-budget');
-var $extendedSpentTransportInput = document.querySelector('#extended-spent-transport-input');
-var $extendedSpentLodgingInput = document.querySelector('#extended-spent-lodging-input');
-var $extendedSpentFoodInput = document.querySelector('#extended-spent-food-input');
-var $extendedSpentActivitiesInput = document.querySelector('#extended-spent-activities-input');
-var $extendedSpentSouvenirsInput = document.querySelector('#extended-spent-souvenirs-input');
-var $extendedSpentReserveInput = document.querySelector('#extended-spent-reserve-input');
-var $extendedPlanner = document.querySelector('#extended-planner');
-var $extendedSpentForm = document.querySelector('#extended-spent-form');
-var $extendedDeleteLink = document.querySelector('#extended-delete-link');
-var $extendedTransportSpent = document.querySelector('#extended-transport-spent');
-var $extendedLodgingSpent = document.querySelector('#extended-lodging-spent');
-var $extendedFoodSpent = document.querySelector('#extended-food-spent');
-var $extendedActivitiesSpent = document.querySelector('#extended-activities-spent');
-var $extendedSouvenirsSpent = document.querySelector('#extended-souvenirs-spent');
-var $extendedReserveSpent = document.querySelector('#extended-reserve-spent');
+const $extendedForm = document.querySelector('#extended-form');
+const $extendedTripContainer = document.querySelector('#extended-summary');
+const $extendedTransportBudget = document.querySelector(
+  '#extended-transport-budget'
+);
+const $extendedLodgingBudget = document.querySelector(
+  '#extended-lodging-budget'
+);
+const $extendedFoodBudget = document.querySelector('#extended-food-budget');
+const $extendedActivitiesBudget = document.querySelector(
+  '#extended-activities-budget'
+);
+const $extendedSouvenirsBudget = document.querySelector(
+  '#extended-souvenirs-budget'
+);
+const $extendedReserveBudget = document.querySelector(
+  '#extended-reserve-budget'
+);
+const $extendedSpentTransportInput = document.querySelector(
+  '#extended-spent-transport-input'
+);
+const $extendedSpentLodgingInput = document.querySelector(
+  '#extended-spent-lodging-input'
+);
+const $extendedSpentFoodInput = document.querySelector(
+  '#extended-spent-food-input'
+);
+const $extendedSpentActivitiesInput = document.querySelector(
+  '#extended-spent-activities-input'
+);
+const $extendedSpentSouvenirsInput = document.querySelector(
+  '#extended-spent-souvenirs-input'
+);
+const $extendedSpentReserveInput = document.querySelector(
+  '#extended-spent-reserve-input'
+);
+const $extendedPlanner = document.querySelector('#extended-planner');
+const $extendedSpentForm = document.querySelector('#extended-spent-form');
+const $extendedDeleteLink = document.querySelector('#extended-delete-link');
+const $extendedTransportSpent = document.querySelector(
+  '#extended-transport-spent'
+);
+const $extendedLodgingSpent = document.querySelector('#extended-lodging-spent');
+const $extendedFoodSpent = document.querySelector('#extended-food-spent');
+const $extendedActivitiesSpent = document.querySelector(
+  '#extended-activities-spent'
+);
+const $extendedSouvenirsSpent = document.querySelector(
+  '#extended-souvenirs-spent'
+);
+const $extendedReserveSpent = document.querySelector('#extended-reserve-spent');
 
-var $editDaySummaryLink = document.querySelector('#edit-day-summary-link');
-var $editExtendedSummaryLink = document.querySelector('#edit-extended-summary-link');
-var $editDayForm = document.querySelector('#edit-day-form');
-var $editExtendedForm = document.querySelector('#edit-extended-form');
-var $editDayBudgetTransportInput = document.querySelector('#edit-day-budget-transport-input');
-var $editDayBudgetFoodInput = document.querySelector('#edit-day-budget-food-input');
-var $editDayBudgetActivitiesInput = document.querySelector('#edit-day-budget-activities-input');
-var $editDayBudgetSouvenirsInput = document.querySelector('#edit-day-budget-souvenirs-input');
-var $editDayBudgetReserveInput = document.querySelector('#edit-day-budget-reserve-input');
-var $editDaySpentTransportInput = document.querySelector('#edit-day-spent-transport-input');
-var $editDaySpentFoodInput = document.querySelector('#edit-day-spent-food-input');
-var $editDaySpentActivitiesInput = document.querySelector('#edit-day-spent-activities-input');
-var $editDaySpentSouvenirsInput = document.querySelector('#edit-day-spent-souvenirs-input');
-var $editDaySpentReserveInput = document.querySelector('#edit-day-spent-reserve-input');
-var $editExtendedBudgetTransportInput = document.querySelector('#edit-extended-budget-transport-input');
-var $editExtendedBudgetLodgingInput = document.querySelector('#edit-extended-budget-lodging-input');
-var $editExtendedBudgetFoodInput = document.querySelector('#edit-extended-budget-food-input');
-var $editExtendedBudgetActivitiesInput = document.querySelector('#edit-extended-budget-activities-input');
-var $editExtendedBudgetSouvenirsInput = document.querySelector('#edit-extended-budget-souvenirs-input');
-var $editExtendedBudgetReserveInput = document.querySelector('#edit-extended-budget-reserve-input');
-var $editExtendedSpentTransportInput = document.querySelector('#edit-extended-spent-transport-input');
-var $editExtendedSpentLodgingInput = document.querySelector('#edit-extended-spent-lodging-input');
-var $editExtendedSpentFoodInput = document.querySelector('#edit-extended-spent-food-input');
-var $editExtendedSpentActivitiesInput = document.querySelector('#edit-extended-spent-activities-input');
-var $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
-var $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
+const $editDaySummaryLink = document.querySelector('#edit-day-summary-link');
+const $editExtendedSummaryLink = document.querySelector(
+  '#edit-extended-summary-link'
+);
+const $editDayForm = document.querySelector('#edit-day-form');
+const $editExtendedForm = document.querySelector('#edit-extended-form');
+const $editDayBudgetTransportInput = document.querySelector(
+  '#edit-day-budget-transport-input'
+);
+const $editDayBudgetFoodInput = document.querySelector(
+  '#edit-day-budget-food-input'
+);
+const $editDayBudgetActivitiesInput = document.querySelector(
+  '#edit-day-budget-activities-input'
+);
+const $editDayBudgetSouvenirsInput = document.querySelector(
+  '#edit-day-budget-souvenirs-input'
+);
+const $editDayBudgetReserveInput = document.querySelector(
+  '#edit-day-budget-reserve-input'
+);
+const $editDaySpentTransportInput = document.querySelector(
+  '#edit-day-spent-transport-input'
+);
+const $editDaySpentFoodInput = document.querySelector(
+  '#edit-day-spent-food-input'
+);
+const $editDaySpentActivitiesInput = document.querySelector(
+  '#edit-day-spent-activities-input'
+);
+const $editDaySpentSouvenirsInput = document.querySelector(
+  '#edit-day-spent-souvenirs-input'
+);
+const $editDaySpentReserveInput = document.querySelector(
+  '#edit-day-spent-reserve-input'
+);
+const $editExtendedBudgetTransportInput = document.querySelector(
+  '#edit-extended-budget-transport-input'
+);
+const $editExtendedBudgetLodgingInput = document.querySelector(
+  '#edit-extended-budget-lodging-input'
+);
+const $editExtendedBudgetFoodInput = document.querySelector(
+  '#edit-extended-budget-food-input'
+);
+const $editExtendedBudgetActivitiesInput = document.querySelector(
+  '#edit-extended-budget-activities-input'
+);
+const $editExtendedBudgetSouvenirsInput = document.querySelector(
+  '#edit-extended-budget-souvenirs-input'
+);
+const $editExtendedBudgetReserveInput = document.querySelector(
+  '#edit-extended-budget-reserve-input'
+);
+const $editExtendedSpentTransportInput = document.querySelector(
+  '#edit-extended-spent-transport-input'
+);
+const $editExtendedSpentLodgingInput = document.querySelector(
+  '#edit-extended-spent-lodging-input'
+);
+const $editExtendedSpentFoodInput = document.querySelector(
+  '#edit-extended-spent-food-input'
+);
+const $editExtendedSpentActivitiesInput = document.querySelector(
+  '#edit-extended-spent-activities-input'
+);
+const $editExtendedSpentSouvenirsInput = document.querySelector(
+  '#edit-extended-spent-souvenirs-input'
+);
+const $editExtendedSpentReserveInput = document.querySelector(
+  '#edit-extended-spent-reserve-input'
+);
 
-var $modalContainer = document.querySelector('#modal-container');
-var $cancelModalLink = document.querySelector('#cancel-modal-link');
-var $deleteModalLink = document.querySelector('#delete-modal-link');
-
-function returnHome() {
-  switchView('home');
-}
+const $modalContainer = document.querySelector('#modal-container');
+const $cancelModalLink = document.querySelector('#cancel-modal-link');
+const $deleteModalLink = document.querySelector('#delete-modal-link');
 
 function handleTripSelection(event) {
   event.preventDefault();
@@ -91,7 +169,7 @@ function handleTripSelection(event) {
 function handleDayForm(event) {
   event.preventDefault();
 
-  var dayBudget = {};
+  const dayBudget = {};
   dayBudget.destination = $dayForm.elements['day-destination'].value;
   dayBudget.transport = $dayForm.elements['day-budget-transport'].value;
   dayBudget.food = $dayForm.elements['day-budget-food'].value;
@@ -100,13 +178,16 @@ function handleDayForm(event) {
   dayBudget.reserve = $dayForm.elements['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
 
-  var $daySpentTD = document.querySelectorAll('.day-spent-td');
-  var $daySpentInput = document.querySelectorAll('.day-spent-input');
+  const $daySpentTD = document.querySelectorAll('.day-spent-td');
+  const $daySpentInput = document.querySelectorAll('.day-spent-input');
 
-  for (var key in data.daySpent) {
+  for (const key in data.daySpent) {
     if (data.daySpent[key] === '') {
-      for (var i = 0; i < $daySpentTD.length; i++) {
-        if ($daySpentTD[i].getAttribute('id').includes(key) && $daySpentInput[i].getAttribute('id').includes(key)) {
+      for (let i = 0; i < $daySpentTD.length; i++) {
+        if (
+          $daySpentTD[i].getAttribute('id').includes(key) &&
+          $daySpentInput[i].getAttribute('id').includes(key)
+        ) {
           $daySpentTD[i].textContent = '';
           $daySpentInput[i].value = '';
           $daySpentTD[i].appendChild($daySpentInput[i]);
@@ -122,24 +203,29 @@ function handleDayForm(event) {
 
 function handleExtendedForm(event) {
   event.preventDefault();
-  var extendedBudget = {};
+  const extendedBudget = {};
 
   getForecastWeather($extendedForm.elements['extended-destination'].value);
-  extendedBudget.destination = $extendedForm.elements['extended-destination'].value;
+  extendedBudget.destination =
+    $extendedForm.elements['extended-destination'].value;
   extendedBudget.transport = $extendedForm.elements['extended-transport'].value;
   extendedBudget.lodging = $extendedForm.elements['extended-lodging'].value;
   extendedBudget.food = $extendedForm.elements['extended-food'].value;
-  extendedBudget.activities = $extendedForm.elements['extended-activities'].value;
+  extendedBudget.activities =
+    $extendedForm.elements['extended-activities'].value;
   extendedBudget.souvenirs = $extendedForm.elements['extended-souvenirs'].value;
   extendedBudget.reserve = $extendedForm.elements['extended-reserve'].value;
   data.extendedBudget = extendedBudget;
 
-  var $extendedSpentTD = document.querySelectorAll('.extended-spent-td');
-  var $extendedSpentInput = document.querySelectorAll('.extended-spent-input');
-  for (var key in data.extendedSpent) {
+  const $extendedSpentTD = document.querySelectorAll('.extended-spent-td');
+  const $extendedSpentInput = document.querySelectorAll('.extended-spent-input');
+  for (const key in data.extendedSpent) {
     if (data.extendedSpent[key] === '') {
-      for (var i = 0; i < $extendedSpentTD.length; i++) {
-        if ($extendedSpentTD[i].getAttribute('id').includes(key) && $extendedSpentInput[i].getAttribute('id').includes(key)) {
+      for (let i = 0; i < $extendedSpentTD.length; i++) {
+        if (
+          $extendedSpentTD[i].getAttribute('id').includes(key) &&
+          $extendedSpentInput[i].getAttribute('id').includes(key)
+        ) {
           $extendedSpentTD[i].textContent = '';
           $extendedSpentInput[i].value = '';
           $extendedSpentTD[i].appendChild($extendedSpentInput[i]);
@@ -154,20 +240,28 @@ function handleExtendedForm(event) {
 }
 
 function getCurrentWeather(name) {
-  var $daySpinner = document.querySelector('#day-spinner');
-  var $currentWeatherCard = document.querySelector('#current-weather-card');
+  const $daySpinner = document.querySelector('#day-spinner');
+  const $currentWeatherCard = document.querySelector('#current-weather-card');
   $daySpinner.classList.remove('hidden');
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.weatherbit.io/v2.0/current?&city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i');
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    'https://api.weatherbit.io/v2.0/current?&city=' +
+      name +
+      '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i'
+  );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var $weatherError = document.querySelector('#weather-error');
+    const $weatherError = document.querySelector('#weather-error');
     if (xhr.status === 200) {
       $daySpinner.classList.add('hidden');
-      data.currentWeather.location = xhr.response.data[0].city_name + ', ' + xhr.response.data[0].state_code;
+      data.currentWeather.location =
+        xhr.response.data[0].city_name + ', ' + xhr.response.data[0].state_code;
       data.currentWeather.temp = xhr.response.data[0].temp + '°F';
-      data.currentWeather.icon = 'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-      data.currentWeather.description = xhr.response.data[0].weather.description;
+      data.currentWeather.icon =
+        'images/icons/' + xhr.response.data[0].weather.icon + '.png';
+      data.currentWeather.description =
+        xhr.response.data[0].weather.description;
       if ($currentWeatherCard) {
         $currentWeatherCard.remove();
       }
@@ -190,38 +284,48 @@ function getCurrentWeather(name) {
 }
 
 function noContentError() {
-  var $cardSky = document.createElement('div');
+  const $cardSky = document.createElement('div');
   $cardSky.className = 'row card-sky';
   $cardSky.setAttribute('id', 'weather-error');
-  var $errorColumn = document.createElement('div');
+  const $errorColumn = document.createElement('div');
   $errorColumn.className = 'column-full justify-center align-center';
-  var $errorMessage = document.createElement('h3');
+  const $errorMessage = document.createElement('h3');
   $errorMessage.className = 'error-message';
-  $errorMessage.textContent = 'Oops, something went wrong! Please verify that a valid City, State was entered.';
+  $errorMessage.textContent =
+    'Oops, something went wrong! Please verify that a valid City, State was entered.';
   $cardSky.appendChild($errorColumn);
   $errorColumn.appendChild($errorMessage);
   return $cardSky;
 }
 
 function getForecastWeather(name) {
-  var $extendedSpinner = document.querySelector('#extended-spinner');
+  const $extendedSpinner = document.querySelector('#extended-spinner');
 
   $extendedSpinner.classList.remove('hidden');
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.weatherbit.io/v2.0/forecast/daily?city=' + name + '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5');
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    'https://api.weatherbit.io/v2.0/forecast/daily?city=' +
+      name +
+      '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5'
+  );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var $forecastWeatherCard = document.querySelector('#forecast-weather-card');
-    var $weatherError = document.querySelector('#weather-error');
+    const $forecastWeatherCard = document.querySelector('#forecast-weather-card');
+    const $weatherError = document.querySelector('#weather-error');
     if (xhr.status === 200) {
       $extendedSpinner.classList.add('hidden');
-      var forecastArr = [];
-      for (var i = 0; i < xhr.response.data.length; i++) {
-        var dailyForecast = {};
-        dailyForecast.location = xhr.response.city_name + ', ' + xhr.response.state_code;
+      const forecastArr = [];
+      for (let i = 0; i < xhr.response.data.length; i++) {
+        const dailyForecast = {};
+        dailyForecast.location =
+          xhr.response.city_name + ', ' + xhr.response.state_code;
         dailyForecast.temp = xhr.response.data[i].temp;
-        dailyForecast.date = xhr.response.data[i].datetime.slice(5).replace('-', '/');
-        dailyForecast.icon = 'images/icons/' + xhr.response.data[i].weather.icon + '.png';
+        dailyForecast.date = xhr.response.data[i].datetime
+          .slice(5)
+          .replace('-', '/');
+        dailyForecast.icon =
+          'images/icons/' + xhr.response.data[i].weather.icon + '.png';
         forecastArr.push(dailyForecast);
       }
       data.forecastWeather = forecastArr;
@@ -248,7 +352,7 @@ function getForecastWeather(name) {
 }
 
 function createCurrentWeather() {
-/*
+  /*
 <div class="column-full">
   <div class="column-full justify-center">
     <h3 class="mb-none">Irvine, CA</h3>
@@ -269,19 +373,19 @@ function createCurrentWeather() {
   </div>
 </div>
 */
-  var $currentWeatherRow = document.createElement('div');
-  var $cityDateColumn = document.createElement('div');
-  var $headerColumn = document.createElement('div');
-  var $cityHeader = document.createElement('h3');
-  var $dateColumn = document.createElement('div');
-  var $dateParagraph = document.createElement('p');
-  var $iconColumn = document.createElement('div');
-  var $icon = document.createElement('img');
-  var $tempDescriptionColumn = document.createElement('div');
-  var $tempColumn = document.createElement('div');
-  var $tempHeader = document.createElement('h1');
-  var $descriptionColumn = document.createElement('div');
-  var $descriptionParagraph = document.createElement('p');
+  const $currentWeatherRow = document.createElement('div');
+  const $cityDateColumn = document.createElement('div');
+  const $headerColumn = document.createElement('div');
+  const $cityHeader = document.createElement('h3');
+  const $dateColumn = document.createElement('div');
+  const $dateParagraph = document.createElement('p');
+  const $iconColumn = document.createElement('div');
+  const $icon = document.createElement('img');
+  const $tempDescriptionColumn = document.createElement('div');
+  const $tempColumn = document.createElement('div');
+  const $tempHeader = document.createElement('h1');
+  const $descriptionColumn = document.createElement('div');
+  const $descriptionParagraph = document.createElement('p');
 
   $currentWeatherRow.className = 'row card-sky';
   $currentWeatherRow.setAttribute('id', 'current-weather-card');
@@ -295,7 +399,8 @@ function createCurrentWeather() {
   $iconColumn.className = 'column-half justify-center';
   $icon.setAttribute('src', data.currentWeather.icon);
   $icon.setAttribute('alt', 'weather-icon');
-  $tempDescriptionColumn.className = 'column-half align-content-center flex-wrap';
+  $tempDescriptionColumn.className =
+    'column-half align-content-center flex-wrap';
   $tempColumn.className = 'column-full';
   $tempHeader.className = 'degrees rm-margin justify-center';
   $tempHeader.textContent = data.currentWeather.temp;
@@ -320,7 +425,7 @@ function createCurrentWeather() {
 }
 
 function createForecastWeather() {
-/*
+  /*
   <div div class="row card-sky justify-center" >
     <div class="column-full justify-center">
       <h3 class="mb-half-rem">City, ST</h3>
@@ -354,11 +459,11 @@ function createForecastWeather() {
     </div>
   </div >
 */
-  var $forecastWeatherRow = document.createElement('div');
-  var $forecastHeaderColumn = document.createElement('div');
-  var $forecastCityHeader = document.createElement('h3');
-  var $innerForecastRow = document.createElement('div');
-  var [city] = data.forecastWeather;
+  const $forecastWeatherRow = document.createElement('div');
+  const $forecastHeaderColumn = document.createElement('div');
+  const $forecastCityHeader = document.createElement('h3');
+  const $innerForecastRow = document.createElement('div');
+  const [city] = data.forecastWeather;
 
   $forecastWeatherRow.className = 'row card-sky justify-center';
   $forecastWeatherRow.setAttribute('id', 'forecast-weather-card');
@@ -367,11 +472,11 @@ function createForecastWeather() {
   $forecastCityHeader.textContent = city.location;
   $innerForecastRow.className = 'row text-center';
 
-  for (var i = 0; i < data.forecastWeather.length; i++) {
-    var $weatherInfoColumn = document.createElement('div');
-    var $forecastIcon = document.createElement('img');
-    var $forecastDate = document.createElement('p');
-    var $forecastTemp = document.createElement('p');
+  for (let i = 0; i < data.forecastWeather.length; i++) {
+    const $weatherInfoColumn = document.createElement('div');
+    const $forecastIcon = document.createElement('img');
+    const $forecastDate = document.createElement('p');
+    const $forecastTemp = document.createElement('p');
 
     $weatherInfoColumn.className = 'column-fifth';
     $forecastIcon.setAttribute('src', data.forecastWeather[i].icon);
@@ -413,7 +518,7 @@ function populateExtendedBudget() {
 }
 
 function replaceDaySpent() {
-  var daySpent = {};
+  const daySpent = {};
   daySpent.transport = $daySpentTransportInput.value;
   daySpent.food = $daySpentFoodInput.value;
   daySpent.activities = $daySpentActivitiesInput.value;
@@ -439,7 +544,7 @@ function replaceDaySpent() {
 }
 
 function replaceExtendedSpent() {
-  var extendedSpent = {};
+  const extendedSpent = {};
   extendedSpent.transport = $extendedSpentTransportInput.value;
   extendedSpent.lodging = $extendedSpentLodgingInput.value;
   extendedSpent.food = $extendedSpentFoodInput.value;
@@ -449,7 +554,9 @@ function replaceExtendedSpent() {
   data.extendedSpent = extendedSpent;
 
   if (extendedSpent.transport !== '') {
-    $extendedSpentTransportInput.replaceWith($extendedSpentTransportInput.value);
+    $extendedSpentTransportInput.replaceWith(
+      $extendedSpentTransportInput.value
+    );
   }
   if (!(extendedSpent.lodging === '')) {
     $extendedSpentLodgingInput.replaceWith($extendedSpentLodgingInput.value);
@@ -458,10 +565,14 @@ function replaceExtendedSpent() {
     $extendedSpentFoodInput.replaceWith($extendedSpentFoodInput.value);
   }
   if (!(extendedSpent.activities === '')) {
-    $extendedSpentActivitiesInput.replaceWith($extendedSpentActivitiesInput.value);
+    $extendedSpentActivitiesInput.replaceWith(
+      $extendedSpentActivitiesInput.value
+    );
   }
   if (!(extendedSpent.souvenirs === '')) {
-    $extendedSpentSouvenirsInput.replaceWith($extendedSpentSouvenirsInput.value);
+    $extendedSpentSouvenirsInput.replaceWith(
+      $extendedSpentSouvenirsInput.value
+    );
   }
   if (!(extendedSpent.reserve === '')) {
     $extendedSpentReserveInput.replaceWith($extendedSpentReserveInput.value);
@@ -518,8 +629,8 @@ function handleExtendedSpentForm(event) {
 }
 
 function switchView(string) {
-  var $view = document.querySelectorAll('.view');
-  for (var i = 0; i < $view.length; i++) {
+  const $view = document.querySelectorAll('.view');
+  for (let i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {
       $view[i].classList.remove('hidden');
       data.view = $view[i].dataset.view;
@@ -530,18 +641,18 @@ function switchView(string) {
 }
 
 function handleSwap(event) {
-  var currentView = event.target.getAttribute('data-view');
+  const currentView = event.target.getAttribute('data-view');
   data.view = currentView;
   switchView(currentView);
 }
 
 function defaultDayBudgetValues() {
-  var $dayBudgetDestination = document.querySelector('#day-budget-destination');
-  var $dayBudgetTransport = document.querySelector('#day-budget-transport');
-  var $dayBudgetFood = document.querySelector('#day-budget-food');
-  var $dayBudgetActivities = document.querySelector('#day-budget-activities');
-  var $dayBudgetSouvenirs = document.querySelector('#day-budget-souvenirs');
-  var $dayBudgetReserve = document.querySelector('#day-budget-reserve');
+  const $dayBudgetDestination = document.querySelector('#day-budget-destination');
+  const $dayBudgetTransport = document.querySelector('#day-budget-transport');
+  const $dayBudgetFood = document.querySelector('#day-budget-food');
+  const $dayBudgetActivities = document.querySelector('#day-budget-activities');
+  const $dayBudgetSouvenirs = document.querySelector('#day-budget-souvenirs');
+  const $dayBudgetReserve = document.querySelector('#day-budget-reserve');
   $dayBudgetDestination.value = '';
   $dayBudgetTransport.value = '';
   $dayBudgetFood.value = '';
@@ -551,13 +662,17 @@ function defaultDayBudgetValues() {
 }
 
 function defaultExtendedBudgetValues() {
-  var $extendedBudgetDestination = document.querySelector('#extended-destination');
-  var $extendedBudgetTransport = document.querySelector('#extended-transport');
-  var $extendedBudgetLodging = document.querySelector('#extended-lodging');
-  var $extendedBudgetFood = document.querySelector('#extended-food');
-  var $extendedBudgetActivities = document.querySelector('#extended-activities');
-  var $extendedBudgetSouvenirs = document.querySelector('#extended-souvenirs');
-  var $extendedBudgetReserve = document.querySelector('#extended-reserve');
+  const $extendedBudgetDestination = document.querySelector(
+    '#extended-destination'
+  );
+  const $extendedBudgetTransport = document.querySelector('#extended-transport');
+  const $extendedBudgetLodging = document.querySelector('#extended-lodging');
+  const $extendedBudgetFood = document.querySelector('#extended-food');
+  const $extendedBudgetActivities = document.querySelector(
+    '#extended-activities'
+  );
+  const $extendedBudgetSouvenirs = document.querySelector('#extended-souvenirs');
+  const $extendedBudgetReserve = document.querySelector('#extended-reserve');
   $extendedBudgetDestination.value = '';
   $extendedBudgetLodging.value = '';
   $extendedBudgetTransport.value = '';
@@ -582,13 +697,21 @@ function handleNavDayPlanner(event) {
 function handleNavExtendedPlanner(event) {
   event.preventDefault();
   if (!data.extendedBudget) {
-    var $extendedBudgetDestination = document.querySelector('#extended-destination');
-    var $extendedBudgetTransport = document.querySelector('#extended-transport');
-    var $extendedBudgetLodging = document.querySelector('#extended-lodging');
-    var $extendedBudgetFood = document.querySelector('#extended-food');
-    var $extendedBudgetActivities = document.querySelector('#extended-activities');
-    var $extendedBudgetSouvenirs = document.querySelector('#extended-souvenirs');
-    var $extendedBudgetReserve = document.querySelector('#extended-reserve');
+    const $extendedBudgetDestination = document.querySelector(
+      '#extended-destination'
+    );
+    const $extendedBudgetTransport = document.querySelector(
+      '#extended-transport'
+    );
+    const $extendedBudgetLodging = document.querySelector('#extended-lodging');
+    const $extendedBudgetFood = document.querySelector('#extended-food');
+    const $extendedBudgetActivities = document.querySelector(
+      '#extended-activities'
+    );
+    const $extendedBudgetSouvenirs = document.querySelector(
+      '#extended-souvenirs'
+    );
+    const $extendedBudgetReserve = document.querySelector('#extended-reserve');
     $extendedBudgetDestination.value = '';
     $extendedBudgetTransport.value = '';
     $extendedBudgetLodging.value = '';
@@ -796,7 +919,7 @@ function handleSubmitEditExtendedForm(event) {
   switchView('extended-summary');
 }
 
-var modalOpen = false;
+let modalOpen = false;
 
 function handleModalOpen() {
   if (modalOpen === false) {
@@ -823,20 +946,35 @@ function handleDeleteEntry(event) {
 }
 
 function deleteDayEntry() {
-  var defaultDaySpent = { transport: '', food: '', activities: '', souvenirs: '', reserve: '' };
+  const defaultDaySpent = {
+    transport: '',
+    food: '',
+    activities: '',
+    souvenirs: '',
+    reserve: ''
+  };
   delete data.dayBudget;
   data.currentWeather = {};
   data.daySpent = defaultDaySpent;
 }
 
 function deleteExtendedEntry() {
-  var defaultExtendedSpent = { transport: '', lodging: '', food: '', activities: '', souvenirs: '', reserve: '' };
+  const defaultExtendedSpent = {
+    transport: '',
+    lodging: '',
+    food: '',
+    activities: '',
+    souvenirs: '',
+    reserve: ''
+  };
   delete data.extendedBudget;
   data.forecastWeather = {};
   data.extendedSpent = defaultExtendedSpent;
 }
 
-$logoAnchor.addEventListener('click', returnHome);
+$logoAnchor.addEventListener('click', () => {
+  switchView('home');
+});
 $home.addEventListener('submit', handleTripSelection);
 $dayForm.addEventListener('submit', handleDayForm);
 $extendedForm.addEventListener('submit', handleExtendedForm);
@@ -846,7 +984,10 @@ $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
 $daySpentForm.addEventListener('submit', handleDaySpentForm);
 $extendedSpentForm.addEventListener('submit', handleExtendedSpentForm);
 $editDaySummaryLink.addEventListener('click', handleEditDaySummaryLink);
-$editExtendedSummaryLink.addEventListener('click', handleEditExtendedSummaryLink);
+$editExtendedSummaryLink.addEventListener(
+  'click',
+  handleEditExtendedSummaryLink
+);
 $editDayForm.addEventListener('submit', handleSubmitEditDayForm);
 $editExtendedForm.addEventListener('submit', handleSubmitEditExtendedForm);
 $dayDeleteLink.addEventListener('click', handleModalOpen);

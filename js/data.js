@@ -1,23 +1,23 @@
 /* exported data */
 
-var dateObj = new Date();
-var options = { weekday: 'long', month: 'long', day: 'numeric' };
-var currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
+const dateObj = new Date();
+const options = { weekday: 'long', month: 'long', day: 'numeric' };
+const currentDate = new Intl.DateTimeFormat('en-US', options).format(dateObj);
 
-var data = {
+let data = {
   view: '',
   daySpent: { transport: '', food: '', activities: '', souvenirs: '', reserve: '' },
   extendedSpent: { transport: '', lodging: '', food: '', activities: '', souvenirs: '', reserve: '' },
   currentWeather: { date: currentDate }
 };
 
-var previousJSONData = localStorage.getItem('trip');
+const previousJSONData = localStorage.getItem('trip');
 if (previousJSONData !== null) {
   data = JSON.parse(previousJSONData);
 }
 
 function handleBeforeUnload() {
-  var dataJSON = JSON.stringify(data);
+  const dataJSON = JSON.stringify(data);
   localStorage.setItem('trip', dataJSON);
 }
 
