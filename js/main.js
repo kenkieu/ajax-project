@@ -243,25 +243,16 @@ function getCurrentWeather(name) {
   const $daySpinner = document.querySelector('#day-spinner');
   const $currentWeatherCard = document.querySelector('#current-weather-card');
   $daySpinner.classList.remove('hidden');
-  const xhr = new XMLHttpRequest();
-  xhr.open(
-    'GET',
-    'https://api.weatherbit.io/v2.0/current?&city=' +
-      name +
-      '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i'
-  );
-  xhr.responseType = 'json';
-  xhr.addEventListener('load', function () {
-    const $weatherError = document.querySelector('#weather-error');
-    if (xhr.status === 200) {
+  fetch(`https://api.weatherbit.io/v2.0/current?&city=${name}&country=US&key=40a3d45da7724864bea69f3762cab669&units=i`)
+    .then(res => res.json())
+    .then(result => {
+      const { data: dataset } = result;
+      const $weatherError = document.querySelector('#weather-error');
       $daySpinner.classList.add('hidden');
-      data.currentWeather.location =
-        xhr.response.data[0].city_name + ', ' + xhr.response.data[0].state_code;
-      data.currentWeather.temp = xhr.response.data[0].temp + '°F';
-      data.currentWeather.icon =
-        'images/icons/' + xhr.response.data[0].weather.icon + '.png';
-      data.currentWeather.description =
-        xhr.response.data[0].weather.description;
+      data.currentWeather.location = dataset[0].city_name + ',' + dataset[0].state_code;
+      data.currentWeather.temp = `${dataset[0].temp}°F`;
+      data.currentWeather.icon = `images/icons/${dataset[0].weather.icon}.png`;
+      data.currentWeather.description = dataset[0].weather.description;
       if ($currentWeatherCard) {
         $currentWeatherCard.remove();
       }
@@ -269,18 +260,20 @@ function getCurrentWeather(name) {
         $weatherError.remove();
       }
       $dayTripContainer.prepend(createCurrentWeather());
-    } else {
-      if ($currentWeatherCard) {
-        $currentWeatherCard.remove();
+    })
+    .catch(err => {
+      if (err) {
+        const $weatherError = document.querySelector('#weather-error');
+        if ($currentWeatherCard) {
+          $currentWeatherCard.remove();
+        }
+        if ($weatherError) {
+          $weatherError.remove();
+        }
+        $daySpinner.classList.add('hidden');
+        $dayTripContainer.prepend(noContentError());
       }
-      if ($weatherError) {
-        $weatherError.remove();
-      }
-      $daySpinner.classList.add('hidden');
-      $dayTripContainer.prepend(noContentError());
-    }
-  });
-  xhr.send();
+    });
 }
 
 function noContentError() {
@@ -299,56 +292,48 @@ function noContentError() {
 }
 
 function getForecastWeather(name) {
+  const $forecastWeatherCard = document.querySelector('#forecast-weather-card');
+  const $weatherError = document.querySelector('#weather-error');
   const $extendedSpinner = document.querySelector('#extended-spinner');
-
   $extendedSpinner.classList.remove('hidden');
-  const xhr = new XMLHttpRequest();
-  xhr.open(
-    'GET',
-    'https://api.weatherbit.io/v2.0/forecast/daily?city=' +
-      name +
-      '&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5'
-  );
-  xhr.responseType = 'json';
-  xhr.addEventListener('load', function () {
-    const $forecastWeatherCard = document.querySelector('#forecast-weather-card');
-    const $weatherError = document.querySelector('#weather-error');
-    if (xhr.status === 200) {
-      $extendedSpinner.classList.add('hidden');
-      const forecastArr = [];
-      for (let i = 0; i < xhr.response.data.length; i++) {
-        const dailyForecast = {};
-        dailyForecast.location =
-          xhr.response.city_name + ', ' + xhr.response.state_code;
-        dailyForecast.temp = xhr.response.data[i].temp;
-        dailyForecast.date = xhr.response.data[i].datetime
-          .slice(5)
-          .replace('-', '/');
-        dailyForecast.icon =
-          'images/icons/' + xhr.response.data[i].weather.icon + '.png';
-        forecastArr.push(dailyForecast);
-      }
-      data.forecastWeather = forecastArr;
 
-      if ($weatherError) {
-        $weatherError.remove();
+  fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${name}&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5`)
+    .then(response => response.json()
+      .then(result => {
+        const { data: dataset } = result;
+        $extendedSpinner.classList.add('hidden');
+        const forecastArr = [];
+        for (let i = 0; i < dataset.length; i++) {
+          const dailyForecast = {};
+          dailyForecast.location = result.city_name + ', ' + result.state_code;
+          dailyForecast.temp = dataset[i].temp;
+          dailyForecast.date = dataset[i].datetime
+            .slice(5)
+            .replace('-', '/');
+          dailyForecast.icon = `images/icons/${dataset[i].weather.icon}.png`;
+          forecastArr.push(dailyForecast);
+        }
+        data.forecastWeather = forecastArr;
+        if ($weatherError) {
+          $weatherError.remove();
+        }
+        if ($forecastWeatherCard) {
+          $forecastWeatherCard.remove();
+        }
+        $extendedTripContainer.prepend(createForecastWeather());
+      }))
+    .catch(err => {
+      if (err) {
+        $extendedSpinner.classList.add('hidden');
+        if ($weatherError) {
+          $weatherError.remove();
+        }
+        if ($forecastWeatherCard) {
+          $forecastWeatherCard.remove();
+        }
+        $extendedTripContainer.prepend(noContentError());
       }
-      if ($forecastWeatherCard) {
-        $forecastWeatherCard.remove();
-      }
-      $extendedTripContainer.prepend(createForecastWeather());
-    } else {
-      $extendedSpinner.classList.add('hidden');
-      if ($weatherError) {
-        $weatherError.remove();
-      }
-      if ($forecastWeatherCard) {
-        $forecastWeatherCard.remove();
-      }
-      $extendedTripContainer.prepend(noContentError());
-    }
-  });
-  xhr.send();
+    });
 }
 
 function createCurrentWeather() {
@@ -628,10 +613,10 @@ function handleExtendedSpentForm(event) {
   replaceExtendedSpent();
 }
 
-function switchView(string) {
+function switchView(view) {
   const $view = document.querySelectorAll('.view');
   for (let i = 0; i < $view.length; i++) {
-    if ($view[i].dataset.view === string) {
+    if ($view[i].dataset.view === view) {
       $view[i].classList.remove('hidden');
       data.view = $view[i].dataset.view;
     } else {
