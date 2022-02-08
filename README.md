@@ -14,7 +14,7 @@ Try the application live at [https://kenkieu.github.io/tripify/index.html](https
 
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript ES6
 - Weatherbit API
 
 ## Features
