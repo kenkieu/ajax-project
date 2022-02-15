@@ -1,6 +1,4 @@
-const $home = document.querySelector('#home');
-const $tripSelect = document.querySelector('#trip-type');
-const $tripTypeButton = document.querySelector('.trip-type-button');
+
 const $logoAnchor = document.querySelector('#logo');
 
 const $dayTripContainer = document.querySelector('#day-summary');
@@ -161,6 +159,7 @@ const $deleteModalLink = document.querySelector('#delete-modal-link');
 
 function handleTripSelection(event) {
   event.preventDefault();
+  const $tripSelect = $('#trip-type')[0];
   switchView($tripSelect.value);
 }
 
@@ -954,10 +953,10 @@ function deleteExtendedEntry() {
 $logoAnchor.addEventListener('click', () => {
   switchView('home');
 });
-$home.addEventListener('submit', handleTripSelection);
+$('#home').submit(handleTripSelection);
 $('#day-form').submit(handleDayForm);
 $('#extended-form').submit(handleExtendedForm);
-$tripTypeButton.addEventListener('click', handleSwap);
+$('.trip-type-button').click(handleSwap);
 $dayPlanner.addEventListener('click', handleNavDayPlanner);
 $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
 $daySpentForm.addEventListener('submit', handleDaySpentForm);
