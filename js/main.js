@@ -1,9 +1,3 @@
-const $dayTripContainer = document.querySelector('#day-summary');
-const $dayTransportBudget = document.querySelector('#day-transport-budget');
-const $dayFoodBudget = document.querySelector('#day-food-budget');
-const $dayActivitiesBudget = document.querySelector('#day-activities-budget');
-const $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
-const $dayReserveBudget = document.querySelector('#day-reserve-budget');
 const $daySpentTransportInput = document.querySelector(
   '#day-spent-transport-input'
 );
@@ -70,11 +64,6 @@ const $extendedSouvenirsSpent = document.querySelector(
   '#extended-souvenirs-spent'
 );
 const $extendedReserveSpent = document.querySelector('#extended-reserve-spent');
-
-const $editDaySummaryLink = document.querySelector('#edit-day-summary-link');
-const $editExtendedSummaryLink = document.querySelector(
-  '#edit-extended-summary-link'
-);
 const $editDayBudgetTransportInput = document.querySelector(
   '#edit-day-budget-transport-input'
 );
@@ -135,12 +124,8 @@ const $editExtendedSpentFoodInput = document.querySelector(
 const $editExtendedSpentActivitiesInput = document.querySelector(
   '#edit-extended-spent-activities-input'
 );
-const $editExtendedSpentSouvenirsInput = document.querySelector(
-  '#edit-extended-spent-souvenirs-input'
-);
-const $editExtendedSpentReserveInput = document.querySelector(
-  '#edit-extended-spent-reserve-input'
-);
+const $editExtendedSpentSouvenirsInput = document.querySelector('#edit-extended-spent-souvenirs-input');
+const $editExtendedSpentReserveInput = document.querySelector('#edit-extended-spent-reserve-input');
 
 const $modalContainer = document.querySelector('#modal-container');
 
@@ -220,6 +205,7 @@ function handleExtendedForm(event) {
 }
 
 function getCurrentWeather(name) {
+  const $dayTripContainer = document.querySelector('#day-summary');
   const $daySpinner = document.querySelector('#day-spinner');
   const $currentWeatherCard = document.querySelector('#current-weather-card');
   $daySpinner.classList.remove('hidden');
@@ -765,6 +751,11 @@ function editHelper(summaryInput, editInput) {
 }
 
 function updateDaySummary() {
+  const $dayTransportBudget = $('#day-transport-budget')[0];
+  const $dayFoodBudget = $('#day-food-budget')[0];
+  const $dayActivitiesBudget = $('#day-activities-budget')[0];
+  const $daySouvenirsBudget = $('#day-souvenirs-budget')[0];
+  const $dayReserveBudget = $('#day-reserve-budget')[0];
   const db = data.dayBudget;
   const ds = data.daySpent;
 
@@ -946,12 +937,8 @@ $('#day-planner').click(handleNavDayPlanner);
 $('#extended-planner').click(handleNavExtendedPlanner);
 $('#day-spent-form').submit(handleDaySpentForm);
 $('#extended-spent-form').submit(handleExtendedSpentForm);
-$editDaySummaryLink.addEventListener('click', handleEditDaySummaryLink);
-$editExtendedSummaryLink.addEventListener(
-  'click',
-  handleEditExtendedSummaryLink
-);
-
+$('#edit-day-summary-link').click(handleEditDaySummaryLink);
+$('#edit-extended-summary-link').click(handleEditExtendedSummaryLink);
 $('#edit-day-form').submit(handleSubmitEditDayForm);
 $('#edit-extended-form').submit(handleSubmitEditExtendedForm);
 $('#day-delete-link').click(handleModalOpen);
