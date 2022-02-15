@@ -11,11 +11,6 @@ const $daySpentSouvenirsInput = document.querySelector(
 const $daySpentReserveInput = document.querySelector(
   '#day-spent-reserve-input'
 );
-const $dayTransportSpent = document.querySelector('#day-transport-spent');
-const $dayFoodSpent = document.querySelector('#day-food-spent');
-const $dayActivitiesSpent = document.querySelector('#day-activities-spent');
-const $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
-const $dayReserveSpent = document.querySelector('#day-reserve-spent');
 
 const $extendedTripContainer = document.querySelector('#extended-summary');
 const $extendedTransportBudget = document.querySelector(
@@ -147,8 +142,8 @@ function handleDayForm(event) {
   dayBudget.reserve = $dayForm['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
 
-  const $daySpentTD = $('.day-spent-td');
-  const $daySpentInput = $('.day-spent-input');
+  const $daySpentTD = $('.day-spent-td')[0];
+  const $daySpentInput = $('.day-spent-input')[0];
   for (const key in data.daySpent) {
     if (data.daySpent[key] === '') {
       for (let i = 0; i < $daySpentTD.length; i++) {
@@ -183,8 +178,8 @@ function handleExtendedForm(event) {
   extendedBudget.reserve = $extendedForm['extended-reserve'].value;
   data.extendedBudget = extendedBudget;
 
-  const $extendedSpentTD = $('.extended-spent-td');
-  const $extendedSpentInput = $('.extended-spent-input');
+  const $extendedSpentTD = $('.extended-spent-td')[0];
+  const $extendedSpentInput = $('.extended-spent-input')[0];
   for (const key in data.extendedSpent) {
     if (data.extendedSpent[key] === '') {
       for (let i = 0; i < $extendedSpentTD.length; i++) {
@@ -756,6 +751,11 @@ function updateDaySummary() {
   const $dayActivitiesBudget = $('#day-activities-budget')[0];
   const $daySouvenirsBudget = $('#day-souvenirs-budget')[0];
   const $dayReserveBudget = $('#day-reserve-budget')[0];
+  const $dayTransportSpent = $('#day-transport-spent')[0];
+  const $dayFoodSpent = $('#day-food-spent')[0];
+  const $dayActivitiesSpent = $('#day-activities-spent')[0];
+  const $daySouvenirsSpent = $('#day-souvenirs-spent')[0];
+  const $dayReserveSpent = $('#day-reserve-spent')[0];
   const db = data.dayBudget;
   const ds = data.daySpent;
 
