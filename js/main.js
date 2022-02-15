@@ -32,7 +32,8 @@ const $dayActivitiesSpent = document.querySelector('#day-activities-spent');
 const $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
 const $dayReserveSpent = document.querySelector('#day-reserve-spent');
 
-const $extendedForm = document.querySelector('#extended-form');
+const $extendedForm = $('#extended-form');
+
 const $extendedTripContainer = document.querySelector('#extended-summary');
 const $extendedTransportBudget = document.querySelector(
   '#extended-transport-budget'
