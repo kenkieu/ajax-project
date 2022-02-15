@@ -1,14 +1,9 @@
-
-const $logoAnchor = document.querySelector('#logo');
-
 const $dayTripContainer = document.querySelector('#day-summary');
 const $dayTransportBudget = document.querySelector('#day-transport-budget');
 const $dayFoodBudget = document.querySelector('#day-food-budget');
 const $dayActivitiesBudget = document.querySelector('#day-activities-budget');
 const $daySouvenirsBudget = document.querySelector('#day-souvenirs-budget');
 const $dayReserveBudget = document.querySelector('#day-reserve-budget');
-const $dayPlanner = document.querySelector('#day-planner');
-const $daySpentForm = document.querySelector('#day-spent-form');
 const $daySpentTransportInput = document.querySelector(
   '#day-spent-transport-input'
 );
@@ -22,7 +17,6 @@ const $daySpentSouvenirsInput = document.querySelector(
 const $daySpentReserveInput = document.querySelector(
   '#day-spent-reserve-input'
 );
-const $dayDeleteLink = document.querySelector('#day-delete-link');
 const $dayTransportSpent = document.querySelector('#day-transport-spent');
 const $dayFoodSpent = document.querySelector('#day-food-spent');
 const $dayActivitiesSpent = document.querySelector('#day-activities-spent');
@@ -64,9 +58,6 @@ const $extendedSpentSouvenirsInput = document.querySelector(
 const $extendedSpentReserveInput = document.querySelector(
   '#extended-spent-reserve-input'
 );
-const $extendedPlanner = document.querySelector('#extended-planner');
-const $extendedSpentForm = document.querySelector('#extended-spent-form');
-const $extendedDeleteLink = document.querySelector('#extended-delete-link');
 const $extendedTransportSpent = document.querySelector(
   '#extended-transport-spent'
 );
@@ -84,8 +75,6 @@ const $editDaySummaryLink = document.querySelector('#edit-day-summary-link');
 const $editExtendedSummaryLink = document.querySelector(
   '#edit-extended-summary-link'
 );
-const $editDayForm = document.querySelector('#edit-day-form');
-const $editExtendedForm = document.querySelector('#edit-extended-form');
 const $editDayBudgetTransportInput = document.querySelector(
   '#edit-day-budget-transport-input'
 );
@@ -154,8 +143,6 @@ const $editExtendedSpentReserveInput = document.querySelector(
 );
 
 const $modalContainer = document.querySelector('#modal-container');
-const $cancelModalLink = document.querySelector('#cancel-modal-link');
-const $deleteModalLink = document.querySelector('#delete-modal-link');
 
 function handleTripSelection(event) {
   event.preventDefault();
@@ -479,11 +466,11 @@ function createForecastWeather() {
 }
 
 function populateDayBudget() {
-  $dayTransportBudget.textContent = data.dayBudget.transport;
-  $dayFoodBudget.textContent = data.dayBudget.food;
-  $dayActivitiesBudget.textContent = data.dayBudget.activities;
-  $daySouvenirsBudget.textContent = data.dayBudget.souvenirs;
-  $dayReserveBudget.textContent = data.dayBudget.reserve;
+  $('#day-transport-budget').text(data.dayBudget.transport);
+  $('#day-food-budget').text(data.dayBudget.food);
+  $('#day-activities-budget').text(data.dayBudget.activities);
+  $('#day-souvenirs-budget').text(data.dayBudget.souvenirs);
+  $('#day-reserve-budget').text(data.dayBudget.reserve);
 }
 
 function populateExtendedBudget() {
@@ -950,25 +937,24 @@ function deleteExtendedEntry() {
   data.extendedSpent = defaultExtendedSpent;
 }
 
-$logoAnchor.addEventListener('click', () => {
-  switchView('home');
-});
+$('#logo').click(() => switchView('home'));
 $('#home').submit(handleTripSelection);
 $('#day-form').submit(handleDayForm);
 $('#extended-form').submit(handleExtendedForm);
 $('.trip-type-button').click(handleSwap);
-$dayPlanner.addEventListener('click', handleNavDayPlanner);
-$extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
-$daySpentForm.addEventListener('submit', handleDaySpentForm);
-$extendedSpentForm.addEventListener('submit', handleExtendedSpentForm);
+$('#day-planner').click(handleNavDayPlanner);
+$('#extended-planner').click(handleNavExtendedPlanner);
+$('#day-spent-form').submit(handleDaySpentForm);
+$('#extended-spent-form').submit(handleExtendedSpentForm);
 $editDaySummaryLink.addEventListener('click', handleEditDaySummaryLink);
 $editExtendedSummaryLink.addEventListener(
   'click',
   handleEditExtendedSummaryLink
 );
-$editDayForm.addEventListener('submit', handleSubmitEditDayForm);
-$editExtendedForm.addEventListener('submit', handleSubmitEditExtendedForm);
-$dayDeleteLink.addEventListener('click', handleModalOpen);
-$extendedDeleteLink.addEventListener('click', handleModalOpen);
-$cancelModalLink.addEventListener('click', handleHideModal);
-$deleteModalLink.addEventListener('click', handleDeleteEntry);
+
+$('#edit-day-form').submit(handleSubmitEditDayForm);
+$('#edit-extended-form').submit(handleSubmitEditExtendedForm);
+$('#day-delete-link').click(handleModalOpen);
+$('#extended-delete-link').click(handleModalOpen);
+$('#cancel-modal-link').click(handleHideModal);
+$('#delete-modal-link').click(handleDeleteEntry);
