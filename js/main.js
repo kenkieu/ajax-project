@@ -3,7 +3,6 @@ const $tripSelect = document.querySelector('#trip-type');
 const $tripTypeButton = document.querySelector('.trip-type-button');
 const $logoAnchor = document.querySelector('#logo');
 
-const $dayForm = document.querySelector('#day-form');
 const $dayTripContainer = document.querySelector('#day-summary');
 const $dayTransportBudget = document.querySelector('#day-transport-budget');
 const $dayFoodBudget = document.querySelector('#day-food-budget');
@@ -31,8 +30,6 @@ const $dayFoodSpent = document.querySelector('#day-food-spent');
 const $dayActivitiesSpent = document.querySelector('#day-activities-spent');
 const $daySouvenirsSpent = document.querySelector('#day-souvenirs-spent');
 const $dayReserveSpent = document.querySelector('#day-reserve-spent');
-
-const $extendedForm = $('#extended-form');
 
 const $extendedTripContainer = document.querySelector('#extended-summary');
 const $extendedTransportBudget = document.querySelector(
@@ -169,19 +166,18 @@ function handleTripSelection(event) {
 
 function handleDayForm(event) {
   event.preventDefault();
-
+  const $dayForm = $('day-form').prevObject[0].forms[1];
   const dayBudget = {};
-  dayBudget.destination = $dayForm.elements['day-destination'].value;
-  dayBudget.transport = $dayForm.elements['day-budget-transport'].value;
-  dayBudget.food = $dayForm.elements['day-budget-food'].value;
-  dayBudget.activities = $dayForm.elements['day-budget-activities'].value;
-  dayBudget.souvenirs = $dayForm.elements['day-budget-souvenirs'].value;
-  dayBudget.reserve = $dayForm.elements['day-budget-reserve'].value;
+  dayBudget.destination = $dayForm['day-destination'].value;
+  dayBudget.transport = $dayForm['day-budget-transport'].value;
+  dayBudget.food = $dayForm['day-budget-food'].value;
+  dayBudget.activities = $dayForm['day-budget-activities'].value;
+  dayBudget.souvenirs = $dayForm['day-budget-souvenirs'].value;
+  dayBudget.reserve = $dayForm['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
 
-  const $daySpentTD = document.querySelectorAll('.day-spent-td');
-  const $daySpentInput = document.querySelectorAll('.day-spent-input');
-
+  const $daySpentTD = $('.day-spent-td');
+  const $daySpentInput = $('.day-spent-input');
   for (const key in data.daySpent) {
     if (data.daySpent[key] === '') {
       for (let i = 0; i < $daySpentTD.length; i++) {
@@ -205,21 +201,19 @@ function handleDayForm(event) {
 function handleExtendedForm(event) {
   event.preventDefault();
   const extendedBudget = {};
-
-  getForecastWeather($extendedForm.elements['extended-destination'].value);
-  extendedBudget.destination =
-    $extendedForm.elements['extended-destination'].value;
-  extendedBudget.transport = $extendedForm.elements['extended-transport'].value;
-  extendedBudget.lodging = $extendedForm.elements['extended-lodging'].value;
-  extendedBudget.food = $extendedForm.elements['extended-food'].value;
-  extendedBudget.activities =
-    $extendedForm.elements['extended-activities'].value;
-  extendedBudget.souvenirs = $extendedForm.elements['extended-souvenirs'].value;
-  extendedBudget.reserve = $extendedForm.elements['extended-reserve'].value;
+  const $extendedForm = $('extended-form').prevObject[0].forms[2];
+  getForecastWeather($extendedForm['extended-destination'].value);
+  extendedBudget.destination = $extendedForm['extended-destination'].value;
+  extendedBudget.transport = $extendedForm['extended-transport'].value;
+  extendedBudget.lodging = $extendedForm['extended-lodging'].value;
+  extendedBudget.food = $extendedForm['extended-food'].value;
+  extendedBudget.activities = $extendedForm['extended-activities'].value;
+  extendedBudget.souvenirs = $extendedForm['extended-souvenirs'].value;
+  extendedBudget.reserve = $extendedForm['extended-reserve'].value;
   data.extendedBudget = extendedBudget;
 
-  const $extendedSpentTD = document.querySelectorAll('.extended-spent-td');
-  const $extendedSpentInput = document.querySelectorAll('.extended-spent-input');
+  const $extendedSpentTD = $('.extended-spent-td');
+  const $extendedSpentInput = $('.extended-spent-input');
   for (const key in data.extendedSpent) {
     if (data.extendedSpent[key] === '') {
       for (let i = 0; i < $extendedSpentTD.length; i++) {
@@ -234,7 +228,6 @@ function handleExtendedForm(event) {
       }
     }
   }
-
   populateExtendedBudget();
   defaultExtendedBudgetValues();
   switchView('extended-summary');
@@ -962,8 +955,8 @@ $logoAnchor.addEventListener('click', () => {
   switchView('home');
 });
 $home.addEventListener('submit', handleTripSelection);
-$dayForm.addEventListener('submit', handleDayForm);
-$extendedForm.addEventListener('submit', handleExtendedForm);
+$('#day-form').submit(handleDayForm);
+$('#extended-form').submit(handleExtendedForm);
 $tripTypeButton.addEventListener('click', handleSwap);
 $dayPlanner.addEventListener('click', handleNavDayPlanner);
 $extendedPlanner.addEventListener('click', handleNavExtendedPlanner);
