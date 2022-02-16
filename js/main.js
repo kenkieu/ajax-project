@@ -126,7 +126,7 @@ const $modalContainer = document.querySelector('#modal-container');
 
 function handleTripSelection(event) {
   event.preventDefault();
-  const $tripSelect = $('#trip-type')[0];
+  const [$tripSelect] = $('#trip-type');
   switchView($tripSelect.value);
 }
 
@@ -142,15 +142,12 @@ function handleDayForm(event) {
   dayBudget.reserve = $dayForm['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
 
-  const $daySpentTD = $('.day-spent-td')[0];
-  const $daySpentInput = $('.day-spent-input')[0];
+  const $daySpentTD = $('.day-spent-td');
+  const $daySpentInput = $('.day-spent-input');
   for (const key in data.daySpent) {
     if (data.daySpent[key] === '') {
       for (let i = 0; i < $daySpentTD.length; i++) {
-        if (
-          $daySpentTD[i].getAttribute('id').includes(key) &&
-          $daySpentInput[i].getAttribute('id').includes(key)
-        ) {
+        if ($daySpentTD[i].id.includes(key) && $daySpentInput[i].id.includes(key)) {
           $daySpentTD[i].textContent = '';
           $daySpentInput[i].value = '';
           $daySpentTD[i].appendChild($daySpentInput[i]);
@@ -178,15 +175,12 @@ function handleExtendedForm(event) {
   extendedBudget.reserve = $extendedForm['extended-reserve'].value;
   data.extendedBudget = extendedBudget;
 
-  const $extendedSpentTD = $('.extended-spent-td')[0];
-  const $extendedSpentInput = $('.extended-spent-input')[0];
+  const $extendedSpentTD = $('.extended-spent-td');
+  const $extendedSpentInput = $('.extended-spent-input');
   for (const key in data.extendedSpent) {
     if (data.extendedSpent[key] === '') {
       for (let i = 0; i < $extendedSpentTD.length; i++) {
-        if (
-          $extendedSpentTD[i].getAttribute('id').includes(key) &&
-          $extendedSpentInput[i].getAttribute('id').includes(key)
-        ) {
+        if ($extendedSpentTD[i].id.includes(key) && $extendedSpentInput[i].id.includes(key)) {
           $extendedSpentTD[i].textContent = '';
           $extendedSpentInput[i].value = '';
           $extendedSpentTD[i].appendChild($extendedSpentInput[i]);
@@ -200,37 +194,28 @@ function handleExtendedForm(event) {
 }
 
 function getCurrentWeather(name) {
-  const $dayTripContainer = document.querySelector('#day-summary');
-  const $daySpinner = document.querySelector('#day-spinner');
-  const $currentWeatherCard = document.querySelector('#current-weather-card');
+  const [$dayTripContainer] = $('#day-summary');
+  const [$daySpinner] = $('#day-spinner');
+  const [$currentWeatherCard] = $('#current-weather-card');
+  const [$weatherError] = $('#weather-error');
   $daySpinner.classList.remove('hidden');
   fetch(`https://api.weatherbit.io/v2.0/current?&city=${name}&country=US&key=40a3d45da7724864bea69f3762cab669&units=i`)
     .then(res => res.json())
     .then(result => {
       const { data: dataset } = result;
-      const $weatherError = document.querySelector('#weather-error');
       $daySpinner.classList.add('hidden');
       data.currentWeather.location = dataset[0].city_name + ',' + dataset[0].state_code;
       data.currentWeather.temp = `${dataset[0].temp}°F`;
       data.currentWeather.icon = `images/icons/${dataset[0].weather.icon}.png`;
       data.currentWeather.description = dataset[0].weather.description;
-      if ($currentWeatherCard) {
-        $currentWeatherCard.remove();
-      }
-      if ($weatherError) {
-        $weatherError.remove();
-      }
+      $currentWeatherCard && $currentWeatherCard.remove();
+      $weatherError && $weatherError.remove();
       $dayTripContainer.prepend(createCurrentWeather());
     })
     .catch(err => {
       if (err) {
-        const $weatherError = document.querySelector('#weather-error');
-        if ($currentWeatherCard) {
-          $currentWeatherCard.remove();
-        }
-        if ($weatherError) {
-          $weatherError.remove();
-        }
+        $currentWeatherCard && $currentWeatherCard.remove();
+        $weatherError && $weatherError.remove();
         $daySpinner.classList.add('hidden');
         $dayTripContainer.prepend(noContentError());
       }
