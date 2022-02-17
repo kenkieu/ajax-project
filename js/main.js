@@ -765,16 +765,16 @@ function editHelper(summaryInput, editInput) {
 }
 
 function updateDaySummary() {
-  const $dayTransportBudget = $('#day-transport-budget')[0];
-  const $dayFoodBudget = $('#day-food-budget')[0];
-  const $dayActivitiesBudget = $('#day-activities-budget')[0];
-  const $daySouvenirsBudget = $('#day-souvenirs-budget')[0];
-  const $dayReserveBudget = $('#day-reserve-budget')[0];
-  const $dayTransportSpent = $('#day-transport-spent')[0];
-  const $dayFoodSpent = $('#day-food-spent')[0];
-  const $dayActivitiesSpent = $('#day-activities-spent')[0];
-  const $daySouvenirsSpent = $('#day-souvenirs-spent')[0];
-  const $dayReserveSpent = $('#day-reserve-spent')[0];
+  const [$dayTransportBudget] = $('#day-transport-budget');
+  const [$dayFoodBudget] = $('#day-food-budget');
+  const [$dayActivitiesBudget] = $('#day-activities-budget');
+  const [$daySouvenirsBudget] = $('#day-souvenirs-budget');
+  const [$dayReserveBudget] = $('#day-reserve-budget');
+  const [$dayTransportSpent] = $('#day-transport-spent');
+  const [$dayFoodSpent] = $('#day-food-spent');
+  const [$dayActivitiesSpent] = $('#day-activities-spent');
+  const [$daySouvenirsSpent] = $('#day-souvenirs-spent');
+  const [$dayReserveSpent] = $('#day-reserve-spent');
   const db = data.dayBudget;
   const ds = data.daySpent;
 
