@@ -146,8 +146,8 @@ function handleDayForm(event) {
   dayBudget.reserve = $dayForm['day-budget-reserve'].value;
   data.dayBudget = dayBudget;
 
-  const $daySpentTD = $('.day-spent-td');
-  const $daySpentInput = $('.day-spent-input');
+  const $daySpentTD = document.querySelectorAll('.day-spent-td');
+  const $daySpentInput = document.querySelectorAll('.day-spent-input');
   for (const key in data.daySpent) {
     if (data.daySpent[key] === '') {
       for (let i = 0; i < $daySpentTD.length; i++) {
@@ -164,7 +164,7 @@ function handleDayForm(event) {
   }
   getCurrentWeather(data.dayBudget.destination);
   populateDayBudget();
-  defaultDayBudgetValues();
+  defaultBudgetValues('#day-form');
   switchView('day-summary');
 }
 
@@ -199,7 +199,7 @@ function handleExtendedForm(event) {
     }
   }
   populateExtendedBudget();
-  defaultExtendedBudgetValues();
+  defaultBudgetValues('#extended-form');
   switchView('extended-summary');
 }
 
@@ -605,46 +605,11 @@ function handleSwap(event) {
   switchView(currentView);
 }
 
-function defaultDayBudgetValues() {
-  const $dayBudgetDestination = document.querySelector(
-    '#day-budget-destination'
-  );
-  const $dayBudgetTransport = document.querySelector('#day-budget-transport');
-  const $dayBudgetFood = document.querySelector('#day-budget-food');
-  const $dayBudgetActivities = document.querySelector('#day-budget-activities');
-  const $dayBudgetSouvenirs = document.querySelector('#day-budget-souvenirs');
-  const $dayBudgetReserve = document.querySelector('#day-budget-reserve');
-  $dayBudgetDestination.value = '';
-  $dayBudgetTransport.value = '';
-  $dayBudgetFood.value = '';
-  $dayBudgetActivities.value = '';
-  $dayBudgetSouvenirs.value = '';
-  $dayBudgetReserve.value = '';
-}
-
-function defaultExtendedBudgetValues() {
-  const $extendedBudgetDestination = document.querySelector(
-    '#extended-destination'
-  );
-  const $extendedBudgetTransport = document.querySelector(
-    '#extended-transport'
-  );
-  const $extendedBudgetLodging = document.querySelector('#extended-lodging');
-  const $extendedBudgetFood = document.querySelector('#extended-food');
-  const $extendedBudgetActivities = document.querySelector(
-    '#extended-activities'
-  );
-  const $extendedBudgetSouvenirs = document.querySelector(
-    '#extended-souvenirs'
-  );
-  const $extendedBudgetReserve = document.querySelector('#extended-reserve');
-  $extendedBudgetDestination.value = '';
-  $extendedBudgetLodging.value = '';
-  $extendedBudgetTransport.value = '';
-  $extendedBudgetFood.value = '';
-  $extendedBudgetActivities.value = '';
-  $extendedBudgetSouvenirs.value = '';
-  $extendedBudgetReserve.value = '';
+function defaultBudgetValues(tripId) {
+  const [$form] = document.querySelectorAll(tripId);
+  for (let i = 0; i < $form.length - 1; i++) {
+    $form[i].value = '';
+  }
 }
 
 function handleNavDayPlanner(event) {
