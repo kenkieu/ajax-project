@@ -113,6 +113,10 @@ th {
   padding: 0 2rem;
 }
 
+.image-resize {
+  width: 20%;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -273,7 +277,6 @@ th {
 
 .error-message {
   text-align: center;
-  padding: 3rem 1.5rem;
   font-size: 1.1rem;
   font-weight: 400;
 }

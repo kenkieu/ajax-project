@@ -227,20 +227,29 @@ function noContentError() {
   $cardSky.className = 'row card-sky';
   $cardSky.setAttribute('id', 'weather-error');
   const $errorColumn = document.createElement('div');
-  $errorColumn.className = 'column-full justify-center align-center';
-  const $errorMessage = document.createElement('h3');
-  $errorMessage.className = 'error-message';
+  $errorColumn.className = 'column-full justify-center align-center flex-wrap pad-one-rem';
+  const $errorImage = document.createElement('img');
+  $errorImage.setAttribute('src', '../images/sad-cloud.png');
+  $errorImage.classList.add('image-resize');
+  const $errorHeading = document.createElement('h4');
+  $errorHeading.className = 'w-100 text-center';
+  $errorHeading.textContent = 'ERROR';
+  const $errorMessage = document.createElement('p');
+  $errorMessage.className = 'error-message w-100';
   $errorMessage.textContent =
-    'Oops, something went wrong! Please verify that a valid City, State was entered.';
+  'Sorry, Bob could not find your request. Please verify that a valid City, State was entered.';
   $cardSky.appendChild($errorColumn);
+  $errorColumn.appendChild($errorHeading);
+  $errorColumn.appendChild($errorImage);
   $errorColumn.appendChild($errorMessage);
   return $cardSky;
 }
 
 function getForecastWeather(name) {
-  const $forecastWeatherCard = document.querySelector('#forecast-weather-card');
-  const $weatherError = document.querySelector('#weather-error');
-  const $extendedSpinner = document.querySelector('#extended-spinner');
+  const [$forecastWeatherCard] = $('#forecast-weather-card');
+  const [$weatherError] = $('#weather-error');
+  const [$extendedSpinner] = $('#extended-spinner');
+
   $extendedSpinner.classList.remove('hidden');
 
   fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${name}&country=US&key=40a3d45da7724864bea69f3762cab669&units=i&days=5`)
