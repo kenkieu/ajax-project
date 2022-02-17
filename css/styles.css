@@ -193,6 +193,10 @@ th {
   font-family: 'Raleway', sans-serif;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mb-zero {
   margin-bottom: 0;
 }
@@ -370,7 +374,6 @@ th {
 .error-container {
   padding: 2rem 0.75rem;
   text-align: center;
-  margin: auto;
 }
 
 @media screen and (min-width: 575px) {

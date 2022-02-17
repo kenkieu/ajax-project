@@ -234,7 +234,7 @@ function noContentError() {
   $errorImage.setAttribute('src', '../images/sad-cloud.png');
   $errorImage.classList.add('error-cloud');
   const $textDiv = document.createElement('div');
-  $textDiv.className = '';
+  $textDiv.className = 'm-auto';
   const $errorHeading = document.createElement('h4');
   $errorHeading.textContent = 'ERROR';
   const $errorMessage = document.createElement('p');
