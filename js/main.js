@@ -227,21 +227,25 @@ function noContentError() {
   $cardSky.className = 'row card-sky';
   $cardSky.setAttribute('id', 'weather-error');
   const $errorColumn = document.createElement('div');
-  $errorColumn.className = 'column-full justify-center align-center flex-wrap pad-one-rem';
+  $errorColumn.className = 'column-full grid grid-cols-2 error-container';
+  const $imageDiv = document.createElement('div');
+  $imageDiv.className = 'cloud-container';
   const $errorImage = document.createElement('img');
   $errorImage.setAttribute('src', '../images/sad-cloud.png');
-  $errorImage.classList.add('image-resize');
+  $errorImage.classList.add('error-cloud');
+  const $textDiv = document.createElement('div');
+  $textDiv.className = '';
   const $errorHeading = document.createElement('h4');
-  $errorHeading.className = 'w-100 text-center';
   $errorHeading.textContent = 'ERROR';
   const $errorMessage = document.createElement('p');
-  $errorMessage.className = 'error-message w-100';
-  $errorMessage.textContent =
-  'Sorry, Bob could not find your request. Please verify that a valid City, State was entered.';
+  $errorMessage.className = 'error-message';
+  $errorMessage.textContent = 'Sorry, Bob could not find your request. Please verify that a valid City, State was entered.';
   $cardSky.appendChild($errorColumn);
-  $errorColumn.appendChild($errorHeading);
-  $errorColumn.appendChild($errorImage);
-  $errorColumn.appendChild($errorMessage);
+  $errorColumn.appendChild($imageDiv);
+  $errorColumn.appendChild($textDiv);
+  $imageDiv.appendChild($errorImage);
+  $textDiv.appendChild($errorHeading);
+  $textDiv.appendChild($errorMessage);
   return $cardSky;
 }
 

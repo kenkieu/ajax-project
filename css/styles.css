@@ -113,8 +113,8 @@ th {
   padding: 0 2rem;
 }
 
-.image-resize {
-  width: 20%;
+.error-cloud {
+  width: 125px;
 }
 
 .w-100 {
@@ -276,9 +276,9 @@ th {
 }
 
 .error-message {
-  text-align: center;
   font-size: 1.1rem;
   font-weight: 400;
+  margin: 0;
 }
 
 .lds-hourglass {
@@ -350,6 +350,29 @@ th {
   padding: 1rem;
 }
 
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.cloud-container {
+  display: flex;
+  justify-content: center;
+}
+
+.error-container {
+  padding: 2rem 0.75rem;
+  text-align: center;
+  margin: auto;
+}
+
 @media screen and (min-width: 575px) {
   .font-scale {
     font-size: 1.5rem;
@@ -357,6 +380,24 @@ th {
 
   .btn {
     padding: 0.6rem 0.75rem;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .error-cloud {
+    width: 40%;
+  }
+
+  .cloud-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .error-container {
+    padding: 1.5rem, 0.5rem;
+    text-align: left;
   }
 }
 
