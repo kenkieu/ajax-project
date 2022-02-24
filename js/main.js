@@ -126,6 +126,12 @@ const $editExtendedSpentReserveInput = document.querySelector(
   '#edit-extended-spent-reserve-input'
 );
 
+const [$dayTransportSpent] = $('#day-transport-spent');
+const [$dayFoodSpent] = $('#day-food-spent');
+const [$dayActivitiesSpent] = $('#day-activities-spent');
+const [$daySouvenirsSpent] = $('#day-souvenirs-spent');
+const [$dayReserveSpent] = $('#day-reserve-spent');
+
 const $modalContainer = document.querySelector('#modal-container');
 
 function handleTripSelection(event) {
@@ -477,29 +483,20 @@ function populateExtendedBudget() {
 }
 
 function replaceDaySpent() {
-  const daySpent = {};
-  daySpent.transport = $daySpentTransportInput.value;
-  daySpent.food = $daySpentFoodInput.value;
-  daySpent.activities = $daySpentActivitiesInput.value;
-  daySpent.souvenirs = $daySpentSouvenirsInput.value;
-  daySpent.reserve = $daySpentReserveInput.value;
+  const daySpent = {
+    transport: $daySpentTransportInput.value,
+    food: $daySpentFoodInput.value,
+    activities: $daySpentActivitiesInput.value,
+    souvenirs: $daySpentSouvenirsInput.value,
+    reserve: $daySpentReserveInput.value
+  };
   data.daySpent = daySpent;
 
-  if (!(daySpent.transport === '')) {
-    $daySpentTransportInput.replaceWith($daySpentTransportInput.value);
-  }
-  if (!(daySpent.food === '')) {
-    $daySpentFoodInput.replaceWith($daySpentFoodInput.value);
-  }
-  if (!(daySpent.activities === '')) {
-    $daySpentActivitiesInput.replaceWith($daySpentActivitiesInput.value);
-  }
-  if (!(daySpent.souvenirs === '')) {
-    $daySpentSouvenirsInput.replaceWith($daySpentSouvenirsInput.value);
-  }
-  if (!(daySpent.reserve === '')) {
-    $daySpentReserveInput.replaceWith($daySpentReserveInput.value);
-  }
+  inputToValue($daySpentTransportInput, $daySpentTransportInput.value);
+  inputToValue($daySpentFoodInput, $daySpentFoodInput.value);
+  inputToValue($daySpentActivitiesInput, $daySpentActivitiesInput.value);
+  inputToValue($daySpentSouvenirsInput, $daySpentSouvenirsInput.value);
+  inputToValue($daySpentReserveInput, $daySpentReserveInput.value);
 }
 
 function replaceExtendedSpent() {
@@ -512,69 +509,35 @@ function replaceExtendedSpent() {
   extendedSpent.reserve = $extendedSpentReserveInput.value;
   data.extendedSpent = extendedSpent;
 
-  if (extendedSpent.transport !== '') {
-    $extendedSpentTransportInput.replaceWith(
-      $extendedSpentTransportInput.value
-    );
-  }
-  if (!(extendedSpent.lodging === '')) {
-    $extendedSpentLodgingInput.replaceWith($extendedSpentLodgingInput.value);
-  }
-  if (!(extendedSpent.food === '')) {
-    $extendedSpentFoodInput.replaceWith($extendedSpentFoodInput.value);
-  }
-  if (!(extendedSpent.activities === '')) {
-    $extendedSpentActivitiesInput.replaceWith(
-      $extendedSpentActivitiesInput.value
-    );
-  }
-  if (!(extendedSpent.souvenirs === '')) {
-    $extendedSpentSouvenirsInput.replaceWith(
-      $extendedSpentSouvenirsInput.value
-    );
-  }
-  if (!(extendedSpent.reserve === '')) {
-    $extendedSpentReserveInput.replaceWith($extendedSpentReserveInput.value);
+  inputToValue($extendedSpentTransportInput, $extendedSpentTransportInput.value);
+  inputToValue($extendedSpentLodgingInput, $extendedSpentLodgingInput.value);
+  inputToValue($extendedSpentFoodInput, $extendedSpentFoodInput.value);
+  inputToValue($extendedSpentActivitiesInput, $extendedSpentActivitiesInput.value);
+  inputToValue($extendedSpentSouvenirsInput, $extendedSpentSouvenirsInput.value);
+  inputToValue($extendedSpentReserveInput, $extendedSpentReserveInput.value);
+}
+
+function inputToValue(input, value) {
+  if (value !== '') {
+    input.replaceWith(value);
   }
 }
 
 function populateDaySpent() {
-  if (data.daySpent.transport !== '') {
-    $daySpentTransportInput.replaceWith(data.daySpent.transport);
-  }
-  if (data.daySpent.food !== '') {
-    $daySpentFoodInput.replaceWith(data.daySpent.food);
-  }
-  if (data.daySpent.activities !== '') {
-    $daySpentActivitiesInput.replaceWith(data.daySpent.activities);
-  }
-  if (data.daySpent.souvenirs !== '') {
-    $daySpentSouvenirsInput.replaceWith(data.daySpent.souvenirs);
-  }
-  if (data.daySpent.reserve !== '') {
-    $daySpentReserveInput.replaceWith(data.daySpent.reserve);
-  }
+  inputToValue($daySpentTransportInput, data.daySpent.transport);
+  inputToValue($daySpentFoodInput, data.daySpent.food);
+  inputToValue($daySpentActivitiesInput, data.daySpent.activities);
+  inputToValue($daySpentSouvenirsInput, data.daySpent.souvenirs);
+  inputToValue($daySpentReserveInput, data.daySpent.reserve);
 }
 
 function populateExtendedSpent() {
-  if (data.extendedSpent.transport !== '') {
-    $extendedSpentTransportInput.replaceWith(data.extendedSpent.transport);
-  }
-  if (data.extendedSpent.lodging !== '') {
-    $extendedSpentLodgingInput.replaceWith(data.extendedSpent.lodging);
-  }
-  if (data.extendedSpent.food !== '') {
-    $extendedSpentFoodInput.replaceWith(data.extendedSpent.food);
-  }
-  if (data.extendedSpent.activities !== '') {
-    $extendedSpentActivitiesInput.replaceWith(data.extendedSpent.activities);
-  }
-  if (data.extendedSpent.souvenirs !== '') {
-    $extendedSpentSouvenirsInput.replaceWith(data.extendedSpent.souvenirs);
-  }
-  if (data.extendedSpent.reserve !== '') {
-    $extendedSpentReserveInput.replaceWith(data.extendedSpent.reserve);
-  }
+  inputToValue($extendedSpentTransportInput, data.extendedSpent.transport);
+  inputToValue($extendedSpentLodgingInput, data.extendedSpent.lodging);
+  inputToValue($extendedSpentFoodInput, data.extendedSpent.food);
+  inputToValue($extendedSpentActivitiesInput, data.extendedSpent.activities);
+  inputToValue($extendedSpentSouvenirsInput, data.extendedSpent.souvenirs);
+  inputToValue($extendedSpentReserveInput, data.extendedSpent.reserve);
 }
 
 function handleDaySpentForm(event) {
@@ -735,11 +698,6 @@ function updateDaySummary() {
   const [$dayActivitiesBudget] = $('#day-activities-budget');
   const [$daySouvenirsBudget] = $('#day-souvenirs-budget');
   const [$dayReserveBudget] = $('#day-reserve-budget');
-  const [$dayTransportSpent] = $('#day-transport-spent');
-  const [$dayFoodSpent] = $('#day-food-spent');
-  const [$dayActivitiesSpent] = $('#day-activities-spent');
-  const [$daySouvenirsSpent] = $('#day-souvenirs-spent');
-  const [$dayReserveSpent] = $('#day-reserve-spent');
   const db = data.dayBudget;
   const ds = data.daySpent;
 
